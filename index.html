@@ -1139,7 +1139,7 @@
 <section id="hero" style="position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden;">
   <div class="hero-frame"></div>
   <div style="position:relative; z-index:3; display:flex; align-items:center; gap:4rem; width:100%; padding:0 8%; flex-wrap:wrap;">
-    <div class="hero-content" style="flex:1; min-width:280px;">
+   <div class="hero-content" style="flex:1; min-width:280px; text-align:left; align-items:flex-start;">
       <span class="hero-surtitre">Le Grand Spectacle de Noël</span>
       <h1 class="hero-titre">La Crèche <em>Vivante</em></h1>
       <p class="hero-accroche">Une nativité grandeur nature dans la majestueuse cathédrale de Bazas — animaux vivants, costumes d'époque et une mise en scène féerique pour toute la famille.</p>
@@ -1176,7 +1176,7 @@
     </div>
   </section>
 
-     <section style="background: linear-gradient(180deg, #0d0a04 0%, #080e1a 20%, #0d1525 50%, #080e1a 80%, #0d0a04 100%); border-top: 1px solid rgba(201,161,74,0.1); border-bottom: 1px solid rgba(201,161,74,0.1); padding: 2rem 0;">
+     <section style="background: linear-gradient(180deg, #080e1a 0%, #0d1525 50%, #080e1a 100%); border-top: 1px solid rgba(201,161,74,0.1); border-bottom: 1px solid rgba(201,161,74,0.1);">
     <div class="chiffres-grid">
       <div class="chiffre-item reveal"><div class="chiffre-nombre">+1000</div><div class="chiffre-label">Spectateurs par an</div></div>
       <div class="chiffre-item reveal"><div class="chiffre-nombre">Gratuit</div><div class="chiffre-label">Entrée libre</div></div>
@@ -1247,6 +1247,170 @@
           <a class="btn-secondary" onclick="showPage('spectacles')">Nos autres spectacles</a>
           <a class="btn-primary" onclick="showPage('contact')">Nous contacter</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE SOIRÉE PATRIMOINE
+═══════════════════════════════════════════ -->
+<style>
+  .page-patrimoine #hero {
+    background:
+      radial-gradient(ellipse 100% 70% at 50% 60%, rgba(20,60,30,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 25% 20%, rgba(201,161,74,0.07) 0%, transparent 50%),
+      linear-gradient(168deg, #080501 0%, #0a180c 50%, #0f2214 75%, #080501 100%);
+  }
+  .page-patrimoine .hero-content { align-items: flex-start !important; max-width: 580px; text-align: left !important; padding-top: 70px; }
+  .page-patrimoine .hero-accroche { text-align: left; max-width: 500px; }
+  .patrimoine-hero-img {
+    width: min(340px, 36vw);
+    border: 1px solid rgba(201,161,74,0.3);
+    overflow: hidden;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .patrimoine-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .patrimoine-infos-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; }
+  .patrimoine-galerie { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 3rem; }
+  .patrimoine-galerie-img { overflow: hidden; border: 1px solid rgba(201,161,74,0.2); aspect-ratio: 4/3; }
+  .patrimoine-galerie-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .patrimoine-galerie-img:hover img { transform: scale(1.05); }
+  .patrimoine-galerie-img.large { grid-column: span 2; aspect-ratio: 16/7; }
+  .etapes-grid { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; position: relative; }
+  .etapes-grid::before { content: ''; position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, rgba(201,161,74,0.4) 10%, rgba(201,161,74,0.4) 90%, transparent); }
+  .etape-item { display: flex; gap: 2.5rem; align-items: flex-start; padding: 1.8rem 0 1.8rem 4.5rem; border-bottom: 1px solid rgba(201,161,74,0.08); position: relative; transition: background 0.3s; }
+  .etape-item:last-child { border-bottom: none; }
+  .etape-item:hover { background: rgba(201,161,74,0.03); }
+  .etape-puce { position: absolute; left: 0.85rem; top: 2rem; width: 1.3rem; height: 1.3rem; border: 1px solid var(--or); background: var(--encre-2); display: flex; align-items: center; justify-content: center; font-size: 0.55rem; color: var(--or); flex-shrink: 0; }
+  .etape-contenu {}
+  .etape-titre { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--or-clair); margin-bottom: 0.4rem; }
+  .etape-texte { font-size: 1.05rem; line-height: 1.75; opacity: 0.72; }
+</style>
+
+<div class="page" id="page-patrimoine">
+
+  <section id="hero" style="position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden;">
+    <div class="hero-frame"></div>
+    <div style="position:relative; z-index:3; display:flex; align-items:center; gap:4rem; width:100%; padding:0 8%; flex-wrap:wrap;">
+      <div class="hero-content" style="flex:1; min-width:280px; text-align:left; align-items:flex-start;">
+        <span class="hero-surtitre">Une nuit dans le cœur du Bazadais</span>
+        <h1 class="hero-titre">Soirée <em>Patrimoine</em></h1>
+        <p class="hero-accroche" style="text-align:left;">Partez à la découverte des pierres et des mémoires de Bazas — un parcours nocturne dans la ville, ponctué de scénettes jouées au fil des siècles.</p>
+        <div class="hero-badge">Samedi 19 Septembre 2026 · 21h00</div>
+        <div class="hero-actions" style="margin-top:1.5rem;">
+          <a class="btn-secondary" href="#patrimoine-infos">Plus d'informations</a>
+        </div>
+      </div>
+      <div class="patrimoine-hero-img">
+        <img src="patrimoine.png" alt="Soirée Patrimoine Bazas" />
+      </div>
+    </div>
+  </section>
+
+  <section id="patrimoine-infos" style="background: linear-gradient(180deg, #080e1a 0%, #0a180c 100%);">
+    <div class="section-inner">
+      <div class="patrimoine-infos-grid">
+        <div class="reveal">
+          <span class="section-label">Le Parcours</span>
+          <h2 class="section-titre">Une ville, <span>mille histoires</span></h2>
+          <p style="font-size:1.1rem; line-height:1.9; opacity:0.8; margin-bottom:1.2rem;">Chaque année, les Troubadours du Troisième Millénaire vous convient à une déambulation nocturne à travers <em>les rues et monuments de Bazas</em>. Au détour d'une ruelle, d'une place ou d'un parvis, des comédiens en costumes d'époque ressuscitent les grandes heures de la cité.</p>
+          <p style="font-size:1.1rem; line-height:1.9; opacity:0.8; margin-bottom:1.2rem;">Ce n'est pas un spectacle assis — c'est une <em>expérience vivante</em>, un voyage dans le temps où le passé surgit là où on ne l'attend pas. Chaque étape du parcours révèle un fragment d'histoire, joué avec passion par la troupe bénévole.</p>
+          <p style="font-size:1.1rem; line-height:1.9; opacity:0.8; margin-bottom:2rem;">Cette édition exceptionnelle se déroulera au <em>château de Cazeneuve à Préchac</em>, cadre grandiose pour une nuit hors du temps.</p>
+          <div style="padding:1.4rem 1.8rem; border-left:3px solid var(--or); background:rgba(201,161,74,0.05); margin-bottom:2rem;">
+            <p style="font-style:italic; font-size:1.15rem; line-height:1.65; opacity:0.85;">« Quand les pierres reprennent vie et que l'histoire chuchote à chaque carrefour. »</p>
+          </div>
+        </div>
+        <div class="reveal" style="display:flex; flex-direction:column; gap:1rem;">
+          <div class="info-item"><div class="info-item-label">✦ Date</div><div class="info-item-val"><strong>Samedi 19 Septembre 2026</strong><br/>à partir de 21h00</div></div>
+          <div class="info-item"><div class="info-item-label">✦ Lieu</div><div class="info-item-val"><strong>Château de Cazeneuve</strong><br/>Préchac, Gironde (33)</div></div>
+          <div class="info-item"><div class="info-item-label">✦ Format</div><div class="info-item-val"><strong>Parcours déambulatoire</strong><br/>Scénettes jouées en extérieur</div></div>
+          <div class="info-item"><div class="info-item-label">✦ Tarif</div><div class="info-item-val"><strong>Entrée gratuite</strong><br/>Ouvert à tous, tout public</div></div>
+          <div class="info-item"><div class="info-item-label">✦ Tenue</div><div class="info-item-val">Prévoir des chaussures confortables<br/>et une tenue adaptée à la soirée</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #0a180c 0%, #080e1a 50%, #0a180c 100%); border-top: 1px solid rgba(201,161,74,0.1); border-bottom: 1px solid rgba(201,161,74,0.1); padding: 2rem 0;">
+    <div class="chiffres-grid">
+      <div class="chiffre-item reveal"><div class="chiffre-nombre" style="font-size:clamp(1.5rem,3vw,2.5rem);">Gratuit</div><div class="chiffre-label">Entrée libre</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre" style="font-size:clamp(1.5rem,3vw,2.5rem);">Nocturne</div><div class="chiffre-label">À partir de 21h00</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre" style="font-size:clamp(1.5rem,3vw,2.5rem);">Plein air</div><div class="chiffre-label">Dans un cadre exceptionnel</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre" style="font-size:clamp(1.5rem,3vw,2.5rem);">Vivant</div><div class="chiffre-label">Scénettes jouées en direct</div></div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #080e1a 0%, #0a180c 100%);">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal">
+        <span class="section-label">Le déroulé</span>
+        <h2 class="section-titre">Le parcours <span>en quelques étapes</span></h2>
+        <p style="font-size:1.05rem; opacity:0.6; font-style:italic; margin-top:0.5rem;">De la première scénette jusqu'au dénouement final</p>
+      </div>
+      <div class="etapes-grid reveal">
+        <div class="etape-item">
+          <div class="etape-puce">✦</div>
+          <div class="etape-contenu">
+            <div class="etape-titre">Le rassemblement</div>
+            <div class="etape-texte">Le public se réunit à l'entrée du château de Cazeneuve. L'atmosphère nocturne s'installe, les flambeaux s'allument et le voyage dans le temps peut commencer.</div>
+          </div>
+        </div>
+        <div class="etape-item">
+          <div class="etape-puce">✦</div>
+          <div class="etape-contenu">
+            <div class="etape-titre">Les scénettes historiques</div>
+            <div class="etape-texte">Au fil du parcours, des comédiens en costumes d'époque surgissent et jouent des scènes tirées de l'histoire du Bazadais — intrigues de cour, scènes de vie médiévale, personnages légendaires.</div>
+          </div>
+        </div>
+        <div class="etape-item">
+          <div class="etape-puce">✦</div>
+          <div class="etape-contenu">
+            <div class="etape-titre">La déambulation</div>
+            <div class="etape-texte">Entre chaque scénette, le groupe avance dans le cadre majestueux du château et de ses abords, guidé par les récits des Troubadours. Chaque pas est une page d'histoire tournée.</div>
+          </div>
+        </div>
+        <div class="etape-item">
+          <div class="etape-puce">✦</div>
+          <div class="etape-contenu">
+            <div class="etape-titre">Le dénouement</div>
+            <div class="etape-texte">Le parcours s'achève dans une mise en scène finale, moment fort qui rassemble toute la troupe et clôt cette nuit hors du commun dans un élan de partage et d'émotion.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #0a180c 0%, #080e1a 100%);">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal">
+        <span class="section-label">Galerie</span>
+        <h2 class="section-titre">La soirée <span>en images</span></h2>
+      </div>
+      <div class="patrimoine-galerie reveal">
+        <div class="patrimoine-galerie-img">
+          <img src="patrimoine2.png" alt="Soirée Patrimoine" />
+        </div>
+        <div class="patrimoine-galerie-img">
+          <img src="patrimoine3.png" alt="Soirée Patrimoine" />
+        </div>
+        <div class="patrimoine-galerie-img large">
+          <img src="patrimoine4.png" alt="Soirée Patrimoine" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #080e1a 0%, #080501 100%);">
+    <div class="section-inner reveal" style="text-align:center;">
+      <span class="section-label">Rendez-vous</span>
+      <h2 class="section-titre" style="margin-bottom:1.5rem;">Une nuit <span>inoubliable</span></h2>
+      <p style="font-size:1.1rem; opacity:0.7; max-width:580px; margin:0 auto 2.5rem; line-height:1.85;">Rejoignez-nous le 19 septembre au château de Cazeneuve pour une soirée où l'histoire prend vie sous les étoiles. Entrée libre, venez nombreux.</p>
+      <div style="display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap;">
+        <a class="btn-secondary" onclick="showPage('spectacles')">Nos autres spectacles</a>
+        <a class="btn-primary" onclick="showPage('contact')">Nous contacter</a>
       </div>
     </div>
   </section>
