@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Troubadours du Troisième Millénaire — Bazas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════
+       VARIABLES & BASE
+    ═══════════════════════════════════════════════ */
+    :root {
+      --or:        #c9a14a;
+      --or-clair:  #e8c97a;
+      --rouge:     #8b1a1a;
+      --rouge-sombre: #5c0f0f;
+      --parchemin: #f5ead6;
+      --encre:     #1a1208;
+      --encre-2:   #0d0a04;
+      --brun:      #4a3220;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--encre-2);
+      color: var(--parchemin);
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.35;
+    }
+
+    /* ═══════════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3.5rem; height: 70px;
+      background: linear-gradient(to bottom, rgba(8,5,1,0.98), rgba(8,5,1,0.88));
+      border-bottom: 1px solid rgba(201,161,74,0.25);
+      backdrop-filter: blur(10px);
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif; font-size: 0.8rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--or); text-decoration: none; cursor: pointer;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Cinzel', serif; font-size: 0.68rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--parchemin); text-decoration: none; opacity: 0.75;
+      transition: opacity 0.3s, color 0.3s;
+      position: relative; padding-bottom: 3px; cursor: pointer;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 1px; background: var(--or);
+      transform: scaleX(0); transition: transform 0.3s;
+      transform-origin: left;
+    }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--or-clair); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-cta {
+      font-family: 'Cinzel', serif; font-size: 0.65rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--encre-2); background: var(--or);
+      padding: 0.55rem 1.5rem; text-decoration: none; cursor: pointer;
+      border: 1px solid var(--or-clair); transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+    .nav-cta:hover { background: var(--or-clair); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,161,74,0.3); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-burger span { display: block; width: 24px; height: 1px; background: var(--or); transition: 0.3s; }
+    .nav-mobile {
+      display: none; position: fixed; inset: 70px 0 0; z-index: 99;
+      background: rgba(8,5,1,0.97); backdrop-filter: blur(12px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--parchemin); text-decoration: none;
+      transition: color 0.3s; cursor: pointer;
+    }
+    .nav-mobile a:hover { color: var(--or); }
+
+    /* ═══════════════════════════════════════════════
+       PAGES (SPA)
+    ═══════════════════════════════════════════════ */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ═══════════════════════════════════════════════
+       BOUTONS COMMUNS
+    ═══════════════════════════════════════════════ */
+    .btn-primary {
+      display: inline-block; font-family: 'Cinzel', serif; font-size: 0.75rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--encre-2); background: var(--or);
+      padding: 0.9rem 2.4rem; text-decoration: none;
+      border: 1px solid var(--or-clair); transition: all 0.3s; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--or-clair); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,161,74,0.35); }
+    .btn-secondary {
+      display: inline-block; font-family: 'Cinzel', serif; font-size: 0.75rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--or); background: transparent;
+      padding: 0.9rem 2.4rem; text-decoration: none;
+      border: 1px solid rgba(201,161,74,0.4); transition: all 0.3s; cursor: pointer;
+    }
+    .btn-secondary:hover { border-color: var(--or); background: rgba(201,161,74,0.07); transform: translateY(-2px); }
+    .btn-groupe { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+
+    /* ═══════════════════════════════════════════════
+       SECTIONS COMMUNES
+    ═══════════════════════════════════════════════ */
+    section { position: relative; z-index: 1; }
+    .section-inner { max-width: 1080px; margin: 0 auto; padding: 6rem 3rem; }
+    .section-label {
+      font-family: 'Cinzel', serif; font-size: 0.62rem;
+      letter-spacing: 0.5em; text-transform: uppercase;
+      color: var(--or); opacity: 0.75; margin-bottom: 0.75rem; display: block;
+    }
+    .section-titre {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: 1.5rem;
+    }
+    .section-titre span { color: var(--or-clair); }
+
+    /* PAGE HERO (pages secondaires) */
+    .page-hero {
+      position: relative; padding: 160px 3rem 80px;
+      text-align: center;
+      background: linear-gradient(170deg, #080501 0%, #1a1208 50%, #2a1608 100%);
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(139,26,26,0.18) 0%, transparent 60%);
+    }
+    .page-hero-inner { position: relative; z-index: 1; }
+    .page-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--or); opacity: 0.75; margin-bottom: 0.8rem; display: block; }
+    .page-titre { font-family: 'Cinzel Decorative', serif; font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.2rem; text-shadow: 0 0 60px rgba(201,161,74,0.2); }
+    .page-titre span { color: var(--or-clair); }
+    .page-sous { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.2rem; opacity: 0.7; max-width: 520px; margin: 0 auto; line-height: 1.6; }
+
+    /* ═══════════════════════════════════════════════
+       PAGE ACCUEIL — HERO
+    ═══════════════════════════════════════════════ */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 100% 70% at 50% 55%, rgba(139,26,26,0.2) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 35% at 75% 20%, rgba(201,161,74,0.06) 0%, transparent 50%),
+        linear-gradient(170deg, #080501 0%, #1a1208 45%, #2a1608 70%, #080501 100%);
+    }
+    .hero-illumination {
+      position: absolute; inset: 0; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0.055;
+    }
+    .hero-illumination svg { width: min(700px, 95vw); height: auto; }
+    .hero-frame {
+      position: absolute; inset: 80px 60px 40px; z-index: 2; pointer-events: none;
+      border: 1px solid rgba(201,161,74,0.18);
+    }
+    .hero-frame::before, .hero-frame::after {
+      content: ''; position: absolute; width: 32px; height: 32px;
+      border-color: var(--or); border-style: solid;
+    }
+    .hero-frame::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .hero-frame::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+    .hero-content {
+      position: relative; z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 1.6rem;
+      padding: 0 2rem;
+      animation: fadeUp 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(45px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-surtitre {
+      font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.5em;
+      text-transform: uppercase; color: var(--or); opacity: 0.8;
+    }
+    .hero-ornement {
+      display: flex; align-items: center; gap: 1.2rem;
+      color: var(--or); font-size: 1.1rem;
+    }
+    .hero-ornement span { display: block; height: 1px; width: 70px; background: var(--or); opacity: 0.4; }
+    h1.hero-titre {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.6rem, 7.5vw, 6rem);
+      font-weight: 900; line-height: 1.05;
+      color: var(--parchemin);
+      text-shadow: 0 0 100px rgba(201,161,74,0.22), 0 4px 24px rgba(0,0,0,0.9);
+      letter-spacing: 0.02em;
+    }
+    h1.hero-titre em {
+      display: block; font-style: italic;
+      color: var(--or-clair); font-size: 0.62em;
+      font-weight: 400; letter-spacing: 0.06em;
+    }
+    .hero-sous-titre {
+      font-family: 'EB Garamond', serif; font-style: italic;
+      font-size: clamp(1.05rem, 2.5vw, 1.38rem);
+      color: var(--parchemin); opacity: 0.72;
+      max-width: 540px; line-height: 1.65;
+    }
+    .hero-badge {
+      font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--or);
+      padding: 0.65rem 2.2rem;
+      border: 1px solid rgba(201,161,74,0.45);
+    }
+    .hero-actions {
+      display: flex; gap: 1.2rem; margin-top: 0.5rem;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
+      z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.35em;
+      color: var(--or); opacity: 0.4; text-transform: uppercase;
+      animation: bounce 2.8s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       PAGE ACCUEIL — PRÉSENTATION
+    ═══════════════════════════════════════════════ */
+    #presentation { background: linear-gradient(180deg, #0d0a04 0%, #1a1208 100%); }
+    .presentation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .presentation-texte p { font-size: 1.12rem; line-height: 1.9; color: var(--parchemin); opacity: 0.82; margin-bottom: 1.2rem; }
+    .presentation-texte p em { color: var(--or-clair); font-style: italic; }
+    .presentation-citation { margin-top: 2rem; padding: 1.4rem 1.8rem; border-left: 3px solid var(--or); background: rgba(201,161,74,0.05); }
+    .presentation-citation p { font-style: italic; font-size: 1.15rem; line-height: 1.7; opacity: 0.9 !important; }
+    .medaillon { position: relative; width: 340px; height: 420px; margin: 0 auto; }
+    .medaillon-inner {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #2e1a0a 0%, #1a0f05 50%, #3d2210 100%);
+      border: 1px solid rgba(201,161,74,0.3);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .medaillon-inner svg { width: 78%; height: 78%; opacity: 0.5; }
+    .medaillon::before { content: ''; position: absolute; inset: -14px; border: 1px solid rgba(201,161,74,0.15); pointer-events: none; }
+    .coin { position: absolute; width: 18px; height: 18px; border-color: var(--or); border-style: solid; opacity: 0.55; }
+    .coin-tl { top: -14px; left: -14px; border-width: 2px 0 0 2px; }
+    .coin-tr { top: -14px; right: -14px; border-width: 2px 2px 0 0; }
+    .coin-bl { bottom: -14px; left: -14px; border-width: 0 0 2px 2px; }
+    .coin-br { bottom: -14px; right: -14px; border-width: 0 2px 2px 0; }
+
+    /* ═══════════════════════════════════════════════
+       PAGE ACCUEIL — CHIFFRES
+    ═══════════════════════════════════════════════ */
+    #chiffres {
+      background: linear-gradient(180deg, #1a1208 0%, #0a0703 100%);
+      border-top: 1px solid rgba(201,161,74,0.1);
+      border-bottom: 1px solid rgba(201,161,74,0.1);
+    }
+    .chiffres-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+    .chiffre-item { padding: 3.5rem 2rem; text-align: center; border-right: 1px solid rgba(201,161,74,0.1); transition: background 0.3s; }
+    .chiffre-item:last-child { border-right: none; }
+    .chiffre-item:hover { background: rgba(201,161,74,0.04); }
+    .chiffre-nombre { font-family: 'Cinzel Decorative', serif; font-size: clamp(2.5rem, 5vw, 4.2rem); font-weight: 900; color: var(--or); line-height: 1; margin-bottom: 0.6rem; text-shadow: 0 0 50px rgba(201,161,74,0.3); }
+    .chiffre-label { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--parchemin); opacity: 0.5; }
+
+    /* ═══════════════════════════════════════════════
+       PAGE ACCUEIL — SPECTACLES CARDS
+    ═══════════════════════════════════════════════ */
+    #spectacles { background: linear-gradient(180deg, #0a0703 0%, #140e06 100%); }
+    .spectacles-header { text-align: center; margin-bottom: 3.5rem; }
+    .spectacles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; }
+    .spectacle-card {
+      position: relative; overflow: hidden;
+      aspect-ratio: 3/4; background: #1a1208; cursor: pointer;
+      text-decoration: none;
+    }
+    .spectacle-card-bg { position: absolute; inset: 0; transition: transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .spectacle-card:hover .spectacle-card-bg { transform: scale(1.06); }
+    .bg-rouge  { background: linear-gradient(155deg, #3d1208 0%, #1a0503 40%, #2e0f05 100%); }
+    .bg-bleu   { background: linear-gradient(155deg, #0a1a2e 0%, #050a15 40%, #0f1530 100%); }
+    .bg-vert   { background: linear-gradient(155deg, #0a200f 0%, #041208 40%, #102415 100%); }
+    .card-svg-deco { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.18; }
+    .card-svg-deco svg { width: 72%; height: 72%; }
+    .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.25) 55%, transparent 100%); }
+    .card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.8rem; transform: translateY(0.5rem); transition: transform 0.4s; }
+    .spectacle-card:hover .card-content { transform: translateY(-5px); }
+    .card-tag { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--or); opacity: 0.85; margin-bottom: 0.5rem; }
+    .card-titre { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.6rem; }
+    .card-desc { font-size: 0.9rem; line-height: 1.6; opacity: 0.6; font-style: italic; }
+    .card-lien { display: inline-block; margin-top: 1rem; font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--or); opacity: 0; transition: opacity 0.35s; border-bottom: 1px solid rgba(201,161,74,0.4); padding-bottom: 2px; }
+    .spectacle-card:hover .card-lien { opacity: 1; }
+
+    /* ═══════════════════════════════════════════════
+       PAGE ACCUEIL — HISTORIQUE APERÇU
+    ═══════════════════════════════════════════════ */
+    #historique-apercu { background: linear-gradient(180deg, #140e06 0%, #0d0a04 100%); }
+    .histo-frise { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid rgba(201,161,74,0.12); }
+    .histo-frise-item { padding: 2.5rem 2rem; border-right: 1px solid rgba(201,161,74,0.12); transition: background 0.3s; }
+    .histo-frise-item:last-child { border-right: none; }
+    .histo-frise-item:hover { background: rgba(201,161,74,0.04); }
+    .histo-annee { font-family: 'Cinzel Decorative', serif; font-size: 1.8rem; color: var(--or); opacity: 0.35; margin-bottom: 0.6rem; line-height: 1; }
+    .histo-titre { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--parchemin); margin-bottom: 0.6rem; opacity: 0.85; }
+    .histo-texte { font-size: 0.95rem; line-height: 1.75; opacity: 0.6; }
+    .histo-cta { text-align: center; margin-top: 3rem; }
+
+    /* ═══════════════════════════════════════════════
+       PAGE CHEMIN DES MÉMOIRES
+    ═══════════════════════════════════════════════ */
+    .page-chemin #hero {
+      background:
+        radial-gradient(ellipse 100% 70% at 50% 60%, rgba(139,26,26,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 75% 20%, rgba(201,161,74,0.07) 0%, transparent 50%),
+        linear-gradient(168deg, #080501 0%, #1f1007 50%, #2e1208 75%, #080501 100%);
+      align-items: flex-start;
+    }
+    .hero-affiche-zone {
+      position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
+      z-index: 2; pointer-events: none; width: min(320px, 35vw);
+    }
+.affiche-cadre {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(201,161,74,0.3);
+  display: flex;
+  align-items: stretch;
+}
+    .affiche-cadre::before { content: ''; position: absolute; inset: 8px; border: 1px solid rgba(201,161,74,0.15); }
+    .affiche-titre-deco { font-family: 'Cinzel Decorative', serif; font-size: clamp(1rem, 2.5vw, 1.5rem); font-weight: 900; color: var(--or-clair); line-height: 1.2; text-align: center; text-shadow: 0 0 30px rgba(201,161,74,0.4); }
+    .affiche-lieu { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--parchemin); opacity: 0.7; }
+    .affiche-dates { font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.15em; color: var(--or); font-weight: 600; }
+    .affiche-badge { background: var(--rouge); padding: 0.4rem 1rem; font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--parchemin); }
+    .affiche-svg { opacity: 0.3; }
+    .hero-anniv { display: inline-block; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--or-clair); background: rgba(139,26,26,0.35); border: 1px solid rgba(139,26,26,0.6); padding: 0.4rem 1.2rem; margin-bottom: 1.5rem; }
+    .hero-accroche { font-size: 1.15rem; line-height: 1.75; opacity: 0.75; max-width: 480px; margin-bottom: 2rem; }
+    .page-chemin .hero-content { align-items: flex-start; max-width: 600px; margin-left: 8%; text-align: left; padding-top: 70px; }
+    #synopsis { background: linear-gradient(180deg, #0d0a04 0%, #1a1208 100%); }
+    .synopsis-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; }
+    .synopsis-texte p { font-size: 1.12rem; line-height: 1.9; opacity: 0.82; margin-bottom: 1.2rem; }
+    .synopsis-texte em { color: var(--or-clair); font-style: italic; }
+    .synopsis-citation { margin: 2rem 0; padding: 1.4rem 1.8rem; border-left: 3px solid var(--or); background: rgba(201,161,74,0.05); }
+    .synopsis-citation p { font-style: italic; font-size: 1.18rem; line-height: 1.65; }
+    .infos-sidebar { display: flex; flex-direction: column; gap: 1rem; }
+    .info-item { background: rgba(201,161,74,0.05); border: 1px solid rgba(201,161,74,0.15); padding: 1.5rem; }
+    .info-item-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--or); opacity: 0.75; margin-bottom: 0.5rem; }
+    .info-item-val { font-size: 1.05rem; line-height: 1.55; opacity: 0.8; }
+    .info-item-val strong { color: var(--or-clair); }
+    #billetterie-chemin { background: linear-gradient(180deg, #0a0703 0%, #140e06 100%); }
+    .bill-inner { max-width: 860px; margin: 0 auto; }
+    .bill-header { text-align: center; margin-bottom: 3rem; }
+    .bill-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; margin-bottom: 2.5rem; }
+    .bill-card { border: 1px solid rgba(201,161,74,0.22); padding: 2.2rem 1.5rem; text-align: center; text-decoration: none; color: var(--parchemin); background: linear-gradient(145deg, #1a1208, #0d0a04); transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; display: block; position: relative; overflow: hidden; }
+    .bill-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 70% at 50% 0%, rgba(201,161,74,0.07), transparent 60%); opacity: 0; transition: opacity 0.35s; }
+    .bill-card:hover { border-color: rgba(201,161,74,0.65); transform: translateY(-5px); box-shadow: 0 20px 45px rgba(0,0,0,0.45), 0 0 35px rgba(201,161,74,0.08); }
+    .bill-card:hover::before { opacity: 1; }
+    .bill-jour { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--or); opacity: 0.75; margin-bottom: 0.6rem; }
+    .bill-num { font-family: 'Cinzel Decorative', serif; font-size: 3.2rem; font-weight: 900; line-height: 1; margin-bottom: 0.2rem; }
+    .bill-mois { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--or); margin-bottom: 1.5rem; }
+    .bill-sep { width: 36px; height: 1px; background: rgba(201,161,74,0.3); margin: 0 auto 1.5rem; }
+    .bill-btn { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; display: inline-block; color: var(--encre-2); background: var(--or); padding: 0.7rem 1.5rem; border: 1px solid var(--or-clair); transition: background 0.3s; width: 100%; }
+    .bill-card:hover .bill-btn { background: var(--or-clair); }
+    .bill-info { text-align: center; font-style: italic; opacity: 0.5; font-size: 0.95rem; }
+    .bill-badge { position: absolute; top: 0.8rem; right: 0.8rem; font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--rouge); color: var(--parchemin); padding: 0.2rem 0.5rem; }
+
+    /* ═══════════════════════════════════════════════
+       PAGE BILLETTERIE
+    ═══════════════════════════════════════════════ */
+    .tarifs-section { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 4rem 3rem; }
+    .tarifs-titre { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--or); opacity: 0.7; text-align: center; margin-bottom: 2rem; }
+    .tarifs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(201,161,74,0.15); margin-bottom: 3rem; }
+    .tarif-item { background: #110d06; padding: 1.8rem 1.5rem; text-align: center; }
+    .tarif-cat { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--or); opacity: 0.75; margin-bottom: 0.5rem; }
+    .tarif-prix { font-family: 'Cinzel Decorative', serif; font-size: 2rem; font-weight: 900; color: var(--parchemin); }
+    .tarif-info { font-size: 0.85rem; opacity: 0.45; margin-top: 0.2rem; }
+    .separateur { display: flex; align-items: center; gap: 1.2rem; color: var(--or); opacity: 0.35; margin-bottom: 3rem; }
+    .separateur-line { height: 1px; background: var(--or); flex: 1; }
+    .dates-titre { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; text-align: center; margin-bottom: 0.5rem; }
+    .dates-sous { font-style: italic; opacity: 0.6; text-align: center; margin-bottom: 3rem; font-size: 1.05rem; }
+    .dates-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .date-card {
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(201,161,74,0.25);
+      background: linear-gradient(145deg, #1a1208 0%, #0d0a04 100%);
+      padding: 2.5rem 2rem; text-align: center;
+      text-decoration: none; color: var(--parchemin);
+      transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s; cursor: pointer;
+    }
+    .date-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(201,161,74,0.08) 0%, transparent 60%); opacity: 0; transition: opacity 0.35s; }
+    .date-card:hover { border-color: rgba(201,161,74,0.7); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(201,161,74,0.1); }
+    .date-card:hover::before { opacity: 1; }
+    .date-card-inner { position: relative; z-index: 1; }
+    .date-jour { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--or); opacity: 0.75; margin-bottom: 0.8rem; }
+    .date-num { font-family: 'Cinzel Decorative', serif; font-size: 3.5rem; font-weight: 900; color: var(--parchemin); line-height: 1; margin-bottom: 0.2rem; text-shadow: 0 0 40px rgba(201,161,74,0.2); }
+    .date-mois { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--or); margin-bottom: 1.5rem; }
+    .date-separateur { width: 40px; height: 1px; background: rgba(201,161,74,0.3); margin: 0 auto 1.5rem; }
+    .date-heure { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.4rem; }
+    .date-heure strong { color: var(--or); opacity: 1; }
+    .date-info { font-size: 0.88rem; opacity: 0.5; font-style: italic; margin-bottom: 2rem; }
+    .date-btn { display: inline-block; width: 100%; font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--encre-2); background: var(--or); padding: 0.8rem 1.5rem; border: 1px solid var(--or-clair); transition: background 0.3s; }
+    .date-card:hover .date-btn { background: var(--or-clair); }
+    .date-badge { position: absolute; top: 1rem; right: 1rem; font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--rouge); color: var(--parchemin); padding: 0.25rem 0.6rem; opacity: 0.9; }
+    .infos-section { max-width: 900px; margin: 0 auto; padding: 0 3rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .info-bloc { background: rgba(201,161,74,0.04); border: 1px solid rgba(201,161,74,0.12); padding: 2rem; }
+    .info-bloc-titre { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--or); margin-bottom: 1rem; }
+    .info-bloc p { font-size: 0.98rem; line-height: 1.8; opacity: 0.7; }
+
+    /* ═══════════════════════════════════════════════
+       PAGE NOS SPECTACLES
+    ═══════════════════════════════════════════════ */
+    .spectacle-bloc {
+      max-width:1080px; margin:0 auto; padding:6rem 3rem;
+      display:grid; grid-template-columns:1fr 2fr; gap:5rem; align-items:start;
+      border-bottom:1px solid rgba(201,161,74,0.1);
+    }
+    .spectacle-bloc:last-of-type { border-bottom:none; }
+    .spectacle-bloc.reverse { grid-template-columns:2fr 1fr; }
+    .spectacle-bloc.reverse .spectacle-visuel { order:2; }
+    .spectacle-bloc.reverse .spectacle-info { order:1; }
+    .spectacle-visuel { position:relative; }
+    .spectacle-cadre {
+      background:linear-gradient(145deg,#2e1208,#1a0805);
+      border:1px solid rgba(201,161,74,0.28);
+      aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    .spectacle-cadre svg { width:70%; height:70%; opacity:0.35; }
+    .spectacle-cadre::before { content:''; position:absolute; inset:10px; border:1px solid rgba(201,161,74,0.12); pointer-events:none; }
+    .spectacle-tag-float { position:absolute; bottom:-1px; left:0; right:0; background:linear-gradient(to top,rgba(0,0,0,0.85),transparent); padding:2.5rem 1.5rem 1.5rem; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--or); opacity:0.8; }
+    .spectacle-num { font-family:'Cinzel Decorative',serif; font-size:5rem; font-weight:900; color:var(--or); opacity:0.06; position:absolute; top:1rem; left:1rem; line-height:1; }
+    .spectacle-info { display:flex; flex-direction:column; gap:1rem; }
+    .spectacle-info p { font-size:1.1rem; line-height:1.88; opacity:0.78; }
+    .spectacle-info em { color:var(--or-clair); font-style:italic; }
+    .spectacle-tags { display:flex; gap:0.6rem; flex-wrap:wrap; margin: 0.5rem 0; }
+    .tag { font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--or); border:1px solid rgba(201,161,74,0.35); padding:0.3rem 0.8rem; }
+
+    /* ═══════════════════════════════════════════════
+       PAGE HISTORIQUE
+    ═══════════════════════════════════════════════ */
+    #chronologie { background:linear-gradient(180deg,#0d0a04,#1a1208); }
+    .timeline { position:relative; padding-left:3rem; }
+    .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,transparent,rgba(201,161,74,0.4) 10%,rgba(201,161,74,0.4) 90%,transparent); }
+    .timeline-item { position:relative; padding:0 0 3.5rem 3rem; }
+    .timeline-item::before { content:'❧'; position:absolute; left:-0.7rem; top:0.2rem; color:var(--or); font-size:1.1rem; background:var(--encre-2); padding:0 3px; }
+    .timeline-annee { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--or); opacity:0.75; margin-bottom:0.5rem; display:block; }
+    .timeline-titre { font-family:'Cinzel Decorative',serif; font-size:1.2rem; font-weight:700; margin-bottom:0.8rem; }
+    .timeline-texte { font-size:1.08rem; line-height:1.88; opacity:0.75; }
+    .timeline-texte em { color:var(--or-clair); font-style:italic; }
+    .timeline-list { margin-top:0.8rem; padding-left:1rem; }
+    .timeline-list li { font-size:1rem; line-height:1.8; opacity:0.7; list-style:none; padding-left:1rem; position:relative; }
+    .timeline-list li::before { content:'·'; position:absolute; left:0; color:var(--or); }
+    #bureau { background:linear-gradient(180deg,#1a1208,#0d0a04); border-top:1px solid rgba(201,161,74,0.1); }
+    .bureau-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .bureau-card { background:rgba(201,161,74,0.04); border:1px solid rgba(201,161,74,0.14); padding:2rem; transition:background 0.3s; }
+    .bureau-card:hover { background:rgba(201,161,74,0.07); }
+    .bureau-role { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--or); opacity:0.7; margin-bottom:0.5rem; }
+    .bureau-nom { font-family:'Cinzel Decorative',serif; font-size:1.05rem; margin-bottom:0.3rem; }
+    .bureau-adj { font-size:0.88rem; opacity:0.5; font-style:italic; }
+    #rejoindre { background:linear-gradient(180deg,#0d0a04,#140e06); }
+    .rejoindre-inner { max-width:720px; margin:0 auto; text-align:center; }
+    .rejoindre-inner p { font-size:1.12rem; line-height:1.85; opacity:0.75; margin-bottom:1.5rem; }
+
+    /* ═══════════════════════════════════════════════
+       PAGE CONTACT
+    ═══════════════════════════════════════════════ */
+    .contact-section { position:relative; z-index:1; max-width:1080px; margin:0 auto; padding:6rem 3rem; display:grid; grid-template-columns:1fr 1.4fr; gap:5rem; align-items:start; }
+    .contact-infos { display:flex; flex-direction:column; gap:1.5rem; }
+    .contact-bloc { background:rgba(201,161,74,0.04); border:1px solid rgba(201,161,74,0.14); padding:1.8rem; }
+    .contact-bloc-label { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--or); opacity:0.75; margin-bottom:0.6rem; }
+    .contact-bloc p { font-size:1.02rem; line-height:1.75; opacity:0.75; }
+    .contact-bloc a { color:var(--or-clair); text-decoration:none; cursor:pointer; }
+    .contact-bloc a:hover { text-decoration:underline; }
+    .form-card { background:linear-gradient(145deg,rgba(201,161,74,0.04),rgba(0,0,0,0.2)); border:1px solid rgba(201,161,74,0.2); padding:3rem; }
+    .form-titre { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--or); opacity:0.75; margin-bottom:2rem; display:block; }
+    .form-group { margin-bottom:1.5rem; }
+    .form-label { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--or); opacity:0.7; display:block; margin-bottom:0.5rem; }
+    .form-input, .form-select, .form-textarea { width:100%; background:rgba(0,0,0,0.3); border:1px solid rgba(201,161,74,0.2); color:var(--parchemin); font-family:'EB Garamond',serif; font-size:1rem; padding:0.75rem 1rem; outline:none; transition:border-color 0.3s, background 0.3s; appearance:none; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color:rgba(201,161,74,0.6); background:rgba(201,161,74,0.04); }
+    .form-input::placeholder, .form-textarea::placeholder { opacity:0.35; font-style:italic; }
+    .form-textarea { resize:vertical; min-height:140px; }
+    .form-select option { background:#1a1208; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .form-submit { width:100%; font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--encre-2); background:var(--or); padding:1rem 2rem; border:1px solid var(--or-clair); cursor:pointer; transition:all 0.3s; margin-top:0.5rem; }
+    .form-submit:hover { background:var(--or-clair); transform:translateY(-2px); box-shadow:0 8px 28px rgba(201,161,74,0.35); }
+    .form-note { font-size:0.82rem; opacity:0.4; font-style:italic; text-align:center; margin-top:1rem; }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    footer {
+      background: #050402;
+      border-top: 1px solid rgba(201,161,74,0.1);
+      padding: 3.5rem 3rem; text-align: center;
+      position: relative; z-index: 1;
+    }
+    .footer-logo { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; color: var(--or); opacity: 0.55; margin-bottom: 1.2rem; }
+    .footer-liens { display: flex; justify-content: center; gap: 2.5rem; list-style: none; margin-bottom: 1.8rem; flex-wrap: wrap; }
+    .footer-liens a { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--parchemin); opacity: 0.38; text-decoration: none; transition: opacity 0.3s; cursor: pointer; }
+    .footer-liens a:hover { opacity: 0.75; }
+    .footer-copy { font-size: 0.82rem; opacity: 0.22; font-style: italic; }
+    .footer-reseaux { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.8rem; }
+    .footer-reseaux a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border: 1px solid rgba(201,161,74,0.3);
+  color: var(--parchemin); opacity: 0.5;
+  text-decoration: none; transition: opacity 0.3s, border-color 0.3s, transform 0.2s;
+}
+    .footer-reseaux a:hover { opacity: 1; border-color: var(--or); transform: translateY(-2px); }
+    .footer-reseaux svg { width: 20px; height: 20px; fill: currentColor; }
+    /* ═══════════════════════════════════════════════
+       REVEAL AU SCROLL
+    ═══════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 1000px) {
+      .hero-affiche-zone { display: none; }
+      .page-chemin .hero-content { margin-left: 0; text-align: center; align-items: center; padding: 0 2rem; }
+    }
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      .section-inner { padding: 4rem 1.5rem; }
+      .presentation-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .medaillon { width: 260px; height: 320px; }
+      .chiffres-grid { grid-template-columns: repeat(2,1fr); }
+      .spectacles-grid { grid-template-columns: 1fr; }
+      .spectacle-card { aspect-ratio: 16/9; }
+      .histo-frise { grid-template-columns: 1fr 1fr; }
+      .histo-frise-item:nth-child(2) { border-right: none; }
+      .histo-frise-item:nth-child(3) { border-top: 1px solid rgba(201,161,74,0.12); }
+      .hero-frame { inset: 80px 20px 40px; }
+      .synopsis-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .bill-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .tarifs-section, .infos-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .tarifs-grid { grid-template-columns: 1fr 1fr; }
+      .dates-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .infos-section { grid-template-columns: 1fr; }
+      .spectacle-bloc, .spectacle-bloc.reverse { grid-template-columns:1fr; gap:2.5rem; padding:4rem 1.5rem; }
+      .spectacle-bloc.reverse .spectacle-visuel, .spectacle-bloc.reverse .spectacle-info { order:unset; }
+      .spectacle-cadre { aspect-ratio:16/9; }
+      .bureau-grid { grid-template-columns:1fr 1fr; }
+      .timeline { padding-left:2rem; }
+      .contact-section { grid-template-columns:1fr; gap:3rem; padding:4rem 1.5rem; }
+      .form-row { grid-template-columns:1fr; }
+      .form-card { padding:2rem 1.5rem; }
+    }
+    @media (max-width: 560px) {
+      h1.hero-titre { font-size: 2.2rem; }
+      .chiffres-grid { grid-template-columns: 1fr 1fr; }
+      .histo-frise { grid-template-columns: 1fr; }
+      .histo-frise-item { border-right: none; border-bottom: 1px solid rgba(201,161,74,0.12); }
+      .tarifs-grid { grid-template-columns: 1fr; }
+      .page-hero { padding: 130px 1.5rem 60px; }
+      .bureau-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+  <a class="nav-logo" onclick="showPage('accueil')">Troubadours · Bazas</a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('spectacles')" data-page="spectacles">Nos Spectacles</a></li>
+    <li><a onclick="showPage('chemin')" data-page="chemin">Le Chemin des Mémoires</a></li>
+    <li><a onclick="showPage('creche')" data-page="creche">La Crèche vivante</a></li>
+    <li><a onclick="showPage('patrimoine')" data-page="patrimoine">Soirée patrimoine</a></li>
+    <li><a onclick="showPage('theatre')" data-page="theatre">Atelier théâtre</a></li>
+    <li><a onclick="showPage('historique')" data-page="historique">Historique</a></li>
+    <li><a onclick="showPage('contact')" data-page="contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" onclick="showPage('billetterie')">Billetterie</a>
+  <button class="nav-burger" aria-label="Menu" id="burger-btn">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a onclick="showPage('spectacles'); closeMobile()">Nos Spectacles</a>
+  <a onclick="showPage('chemin'); closeMobile()">Le Chemin des Mémoires</a>
+  <a onclick="showPage('creche'); closeMobile()">La Crèche vivante</a>
+  <a onclick="showPage('patrimoine'); closeMobile()">Soirée patrimoine</a>
+  <a onclick="showPage('theatre'); closeMobile()">Atelier théâtre</a>
+  <a onclick="showPage('historique'); closeMobile()">Historique</a>
+  <a onclick="showPage('billetterie'); closeMobile()">Billetterie</a>
+  <a onclick="showPage('contact'); closeMobile()">Contact</a>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE : ACCUEIL
+═══════════════════════════════════════════ -->
+<div class="page active" id="page-accueil">
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-illumination">
+      <svg viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="300" r="220" stroke="#c9a14a" stroke-width="0.5"/>
+        <circle cx="250" cy="300" r="175" stroke="#c9a14a" stroke-width="0.5"/>
+        <circle cx="250" cy="300" r="125" stroke="#c9a14a" stroke-width="1"/>
+        <circle cx="250" cy="300" r="65" stroke="#c9a14a" stroke-width="1"/>
+        <line x1="250" y1="80" x2="250" y2="520" stroke="#c9a14a" stroke-width="0.5"/>
+        <line x1="30" y1="300" x2="470" y2="300" stroke="#c9a14a" stroke-width="0.5"/>
+        <line x1="94" y1="94" x2="406" y2="506" stroke="#c9a14a" stroke-width="0.3"/>
+        <line x1="406" y1="94" x2="94" y2="506" stroke="#c9a14a" stroke-width="0.3"/>
+        <path d="M250 250 C250 225 236 212 230 218 C224 224 230 238 250 250 C270 238 276 224 270 218 C264 212 250 225 250 250Z" fill="#c9a14a"/>
+        <ellipse cx="250" cy="268" rx="12" ry="18" fill="#c9a14a"/>
+        <path d="M240 278 L260 278 L257 290 L243 290Z" fill="#c9a14a"/>
+      </svg>
+    </div>
+    <div class="hero-frame"></div>
+    <div class="hero-content">
+      <p class="hero-surtitre">Bazas · Sud-Gironde · Spectacle Vivant</p>
+      <div class="hero-ornement"><span></span> ✦ <span></span></div>
+      <h1 class="hero-titre">Troubadours<em>du Troisième Millénaire</em></h1>
+      <p class="hero-sous-titre">Une troupe entièrement bénévole qui fait vivre l'histoire du Bazadais à travers des spectacles Son et Lumière inoubliables, depuis l'an 2000.</p>
+      <div class="hero-badge">7 · 8 · 9 Août 2026 — Le Chemin des Mémoires</div>
+      <div class="hero-actions">
+        <a class="btn-primary" onclick="showPage('billetterie')">Réserver mes places</a>
+        <a class="btn-secondary" onclick="showPage('spectacles')">Découvrir nos spectacles</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <svg width="14" height="22" viewBox="0 0 14 22" fill="none">
+        <rect x="1" y="1" width="12" height="20" rx="6" stroke="#c9a14a" stroke-width="1" opacity="0.5"/>
+        <circle cx="7" cy="6" r="2" fill="#c9a14a" opacity="0.5"><animate attributeName="cy" values="6;14;6" dur="2s" repeatCount="indefinite"/></circle>
+      </svg>
+      Découvrir
+    </div>
+  </section>
+
+  <section id="presentation">
+    <div class="section-inner">
+      <div class="presentation-grid">
+        <div class="presentation-texte reveal">
+          <span class="section-label">L'association</span>
+          <h2 class="section-titre">Une aventure <span>humaine unique</span></h2>
+          <p>Fondée en <em>2007</em> à Bazas, l'association des Troubadours du Troisième Millénaire est bien plus qu'une troupe de spectacle : c'est une communauté de passionnés, tous bénévoles, qui consacrent leur énergie à faire vivre la mémoire du Bazadais.</p>
+          <p>Figurants, techniciens, décorateurs, costumiers, musiciens — des centaines de femmes et d'hommes unissent leur talent pour créer chaque soir la magie d'un <em>spectacle Son et Lumière</em> hors du commun. 700 personnages, des chevaux et attelages, des effets pyrotechniques et une scénographie somptueuse.</p>
+          <div class="presentation-citation"><p>« Une aventure humaine unique dans le Bazadais, portée par des bénévoles passionnés. »</p></div>
+          <div style="margin-top: 2rem;"><a class="btn-secondary" onclick="showPage('historique')">Notre histoire</a></div>
+        </div>
+        <div class="reveal" style="display:flex; justify-content:center;">
+          <div class="medaillon">
+            <div class="medaillon-inner">
+              <svg viewBox="0 0 200 240" fill="none">
+                <rect x="50" y="140" width="100" height="70" stroke="#c9a14a" stroke-width="1.2"/>
+                <rect x="70" y="160" width="25" height="50" stroke="#c9a14a" stroke-width="1"/>
+                <rect x="105" y="160" width="25" height="50" stroke="#c9a14a" stroke-width="1"/>
+                <rect x="40" y="110" width="20" height="35" stroke="#c9a14a" stroke-width="1"/>
+                <rect x="140" y="110" width="20" height="35" stroke="#c9a14a" stroke-width="1"/>
+                <rect x="85" y="100" width="30" height="45" stroke="#c9a14a" stroke-width="1.2"/>
+                <line x1="100" y1="30" x2="100" y2="100" stroke="#c9a14a" stroke-width="1.5"/>
+                <path d="M100 30 L125 42 L100 54Z" fill="#c9a14a" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="coin coin-tl"></div><div class="coin coin-tr"></div>
+            <div class="coin coin-bl"></div><div class="coin coin-br"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="chiffres">
+    <div class="chiffres-grid">
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">100</div><div class="chiffre-label">Bénévoles & figurants</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">10</div><div class="chiffre-label">Ans de Chemin des Mémoires</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">2500</div><div class="chiffre-label">Ans d'histoire revisités</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">3</div><div class="chiffre-label">Spectacles au répertoire</div></div>
+    </div>
+  </section>
+
+  <section id="spectacles">
+    <div class="section-inner">
+      <div class="spectacles-header reveal">
+        <span class="section-label">Nos créations</span>
+        <h2 class="section-titre">Trois spectacles, <span>un seul souffle</span></h2>
+      </div>
+      <div class="spectacles-grid">
+        <a class="spectacle-card" onclick="showPage('chemin')">
+          <div class="spectacle-card-bg bg-rouge"><div class="card-svg-deco"><svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="80" stroke="#c9a14a" stroke-width="0.8"/><circle cx="100" cy="100" r="55" stroke="#c9a14a" stroke-width="0.5"/><path d="M100 50 C110 70 130 80 130 100 C130 125 110 140 100 150 C90 140 70 125 70 100 C70 80 90 70 100 50Z" stroke="#c9a14a" stroke-width="1"/></svg></div></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-tag">Spectacle phare · 2016–2026</p>
+            <h3 class="card-titre">Le Chemin des Mémoires</h3>
+            <p class="card-desc">2 500 ans d'histoire du Bazadais en 1h45 de Son et Lumière. 700 personnages, chevaux et attelages.</p>
+            <span class="card-lien">Découvrir →</span>
+          </div>
+        </a>
+        <a class="spectacle-card" onclick="showPage('spectacles')">
+          <div class="spectacle-card-bg bg-bleu"><div class="card-svg-deco"><svg viewBox="0 0 200 200" fill="none"><path d="M100 30 L170 170 L30 170Z" stroke="#c9a14a" stroke-width="0.8"/><circle cx="100" cy="100" r="15" stroke="#c9a14a" stroke-width="1"/></svg></div></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-tag">Spectacle de Noël</p>
+            <h3 class="card-titre">La Crèche Vivante</h3>
+            <p class="card-desc">Une nativité grandeur nature avec acteurs, animaux et décors somptueux pour vivre la magie de Noël.</p>
+            <span class="card-lien">Découvrir →</span>
+          </div>
+        </a>
+        <a class="spectacle-card" onclick="showPage('spectacles')">
+          <div class="spectacle-card-bg bg-vert"><div class="card-svg-deco"><svg viewBox="0 0 200 200" fill="none"><rect x="30" y="80" width="140" height="90" stroke="#c9a14a" stroke-width="0.8"/><rect x="85" y="125" width="30" height="45" stroke="#c9a14a" stroke-width="1"/></svg></div></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-tag">Événement patrimonial</p>
+            <h3 class="card-titre">Soirée du Patrimoine</h3>
+            <p class="card-desc">Une soirée hors du commun pour mettre en lumière le patrimoine historique du Bazadais.</p>
+            <span class="card-lien">Découvrir →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="historique-apercu">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom: 3.5rem;" class="reveal">
+        <span class="section-label">Une longue aventure</span>
+        <h2 class="section-titre">Depuis l'an <span>2000</span></h2>
+      </div>
+      <div class="histo-frise">
+        <div class="histo-frise-item reveal"><div class="histo-annee">2000</div><div class="histo-titre">Les premières lueurs</div><p class="histo-texte">Un groupe d'amis passionnés crée les premiers spectacles à Bazas.</p></div>
+        <div class="histo-frise-item reveal"><div class="histo-annee">2007</div><div class="histo-titre">Naissance de l'association</div><p class="histo-texte">Création officielle de l'association loi 1901.</p></div>
+        <div class="histo-frise-item reveal"><div class="histo-annee">2016</div><div class="histo-titre">Le Chemin des Mémoires</div><p class="histo-texte">700 personnages, des chevaux, une fresque de 2 500 ans d'histoire.</p></div>
+        <div class="histo-frise-item reveal"><div class="histo-annee">2026</div><div class="histo-titre">10 ans de féérie</div><p class="histo-texte">Trois soirées exceptionnelles pour célébrer cet anniversaire.</p></div>
+      </div>
+      <div class="histo-cta reveal"><a class="btn-secondary" onclick="showPage('historique')">Lire l'histoire complète</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════
+
+     PAGE : LE CHEMIN DES MÉMOIRES
+═══════════════════════════════════════════ -->
+<div class="page page-chemin" id="page-chemin">
+
+  <section id="hero-chemin" style="position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; overflow:hidden;">
+    <div class="hero-bg" style="background: radial-gradient(ellipse 100% 70% at 50% 60%, rgba(139,26,26,0.22) 0%, transparent 60%), linear-gradient(168deg, #080501 0%, #1f1007 50%, #2e1208 75%, #080501 100%);"></div>
+    <div class="hero-affiche-zone">
+  <div class="affiche-cadre">
+    <img src="Affiche26.png" alt="Affiche Le Chemin des Mémoires 2026"
+         style="width:100%; height:100%; object-fit:cover; display:block;" />
+  </div>
+</div>
+    <div class="hero-frame"></div>
+    <div class="hero-content" style="align-items:flex-start; max-width:500px; margin-left:8%; text-align:left; padding-top:60px;">
+      <span class="hero-surtitre"><br><br>Le Grand Spectacle du Sud-Gironde</span>
+      <h1 class="hero-titre">Le Chemin<br/>des Mémoires<em> - Spectacle Son et Lumière -</em></h1>
+      <div class="hero-actions">
+        <a class="btn-primary" onclick="showPage('billetterie')">Réserver mes places</a>
+        <a class="btn-secondary" href="#synopsis-chemin">Découvrir le spectacle</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="synopsis-chemin" style="background: linear-gradient(180deg, #0d0a04 0%, #1a1208 100%);">
+    <div class="section-inner">
+      <div class="synopsis-grid">
+        <div class="synopsis-texte reveal">
+          <span class="section-label">Le spectacle</span>
+          <h2 class="section-titre">2 500 ans d'histoire, <span>une seule nuit</span></h2>
+          <p>Août 1914. La France appelle ses enfants pour défendre la mère patrie. Pour <em>Jean</em>, enfant du pays, meunier du moulin de la Glory, c'est l'heure du départ.</p>
+          <p>Au soir des adieux avec sa mère, cette femme de la terre, raconteuse d'histoires… l'instant est aux souvenirs. <em>« Raconte moi, une dernière fois, l'histoire de ma cité, de mon pays : le Bazadais. »</em></p>
+          <p><em>Richard Cœur de Lion</em>, <em>Catherine de Médicis</em>, <em>Louis XIV</em> composeront entre autres ce voyage dans le temps. Accompagnez-les dans cette quête, entre croisades et guerres de religions, moissons et fêtes des corporations.</p>
+          <div class="synopsis-citation"><p>« Jean, souviens-toi et regarde… »</p></div>
+        </div>
+        <div class="infos-sidebar reveal">
+          <div class="info-item"><div class="info-item-label">Dates</div><div class="info-item-val"><strong>7, 8 et 9 Août 2026</strong><br/>Spectacle à 22h00</div></div>
+          <div class="info-item"><div class="info-item-label">Lieu</div><div class="info-item-val">Site de la Brèche<br/><strong>Bazas</strong>, Gironde (33)</div></div>
+          <div class="info-item"><div class="info-item-label">Sur place dès 19h</div><div class="info-item-val">Animations médiévales<br/>Restauration sur place</div></div>
+          <div class="info-item"><div class="info-item-label">Tarifs</div><div class="info-item-val">Adulte : <strong>15 €</strong><br/>Réduit : <strong>8 €</strong><br/>Moins de 5 ans : <strong>Gratuit</strong></div></div>
+          <a class="btn-primary" onclick="showPage('billetterie')" style="text-align:center; display:block;">Réserver mes places</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="chiffres-chemin" style="background: linear-gradient(180deg, #1a1208 0%, #0a0703 100%); border-top: 1px solid rgba(201,161,74,0.1); border-bottom: 1px solid rgba(201,161,74,0.1);">
+    <div class="chiffres-grid">
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">700</div><div class="chiffre-label">personnages</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">1h45</div><div class="chiffre-label">De spectacle</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">2500</div><div class="chiffre-label">Ans d'histoire revisités</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">10</div><div class="chiffre-label">Ans de féérie</div></div>
+    </div>
+  </section>
+
+  <section id="billetterie-chemin" style="background: linear-gradient(180deg, #0a0703 0%, #140e06 100%);">
+    <div class="section-inner">
+      <div class="bill-inner">
+        <div class="bill-header reveal">
+          <span class="section-label">Réservation en ligne · HelloAsso</span>
+          <h2 class="section-titre">Choisissez <span>votre soirée</span></h2>
+          <p style="opacity:0.6; font-style:italic; font-size:1.05rem;">Animations & restauration dès 19h — Spectacle à 22h00</p>
+        </div>
+        <div class="bill-grid">
+          <a href="https://www.helloasso.com/associations/troubadours-du-troisieme-millenaire/evenements/le-chemin-des-memoires-vendredi-07-aout-26" target="_blank" rel="noopener" class="bill-card reveal">
+            <div class="bill-jour">Vendredi</div><div class="bill-num">07</div><div class="bill-mois">Août 2026</div><div class="bill-sep"></div><div class="bill-btn">Réserver →</div>
+          </a>
+          <a href="https://www.helloasso.com/associations/troubadours-du-troisieme-millenaire/evenements/le-chemin-des-memoires-samedi-08-aout-26" target="_blank" rel="noopener" class="bill-card reveal">
+            <div class="bill-jour">Samedi</div><div class="bill-num">08</div><div class="bill-mois">Août 2026</div><div class="bill-sep"></div><div class="bill-btn">Réserver →</div>
+          </a>
+          <a href="https://www.helloasso.com/associations/troubadours-du-troisieme-millenaire/evenements/le-chemin-des-memoires-dimanche-09-aout-26" target="_blank" rel="noopener" class="bill-card reveal">
+            <div class="bill-jour">Dimanche</div><div class="bill-num">09</div><div class="bill-mois">Août 2026</div><div class="bill-sep"></div><div class="bill-btn">Réserver →</div>
+          </a>
+        </div>
+        <p class="bill-info reveal">Réservation sur HelloAsso · Paiement sécurisé · Ouverture dans un nouvel onglet</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE : BILLETTERIE
+═══════════════════════════════════════════ -->
+<div class="page" id="page-billetterie">
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-label">Réservation en ligne</span>
+      <h1 class="page-titre">Billetterie <span>2026</span></h1>
+      <p class="page-sous">Le Chemin des Mémoires · Site de la Brèche, Bazas · Animations dès 19h, spectacle à 22h</p>
+    </div>
+  </div>
+
+  <div class="tarifs-section">
+    <div class="tarifs-titre reveal">✦ &nbsp; Tarifs &nbsp; ✦</div>
+    <div class="tarifs-grid reveal">
+      <div class="tarif-item"><div class="tarif-cat">Tarif plein</div><div class="tarif-prix">15 €</div><div class="tarif-info">Adulte</div></div>
+      <div class="tarif-item"><div class="tarif-cat">Tarif réduit</div><div class="tarif-prix">8 €</div><div class="tarif-info">Sur justificatif</div></div>
+      <div class="tarif-item"><div class="tarif-cat">Moins de 5 ans</div><div class="tarif-prix">Gratuit</div><div class="tarif-info">Entrée libre</div></div>
+    </div>
+    <div class="separateur reveal"><div class="separateur-line"></div>✦<div class="separateur-line"></div></div>
+    <h2 class="dates-titre reveal">Choisissez votre soirée</h2>
+    <p class="dates-sous reveal">Trois représentations exceptionnelles · Août 2026</p>
+    <div class="dates-grid">
+      <a href="https://www.helloasso.com/associations/troubadours-du-troisieme-millenaire/evenements/le-chemin-des-memoires-vendredi-07-aout-26" target="_blank" rel="noopener" class="date-card reveal">
+        <div class="date-card-inner"><div class="date-jour">Vendredi</div><div class="date-num">07</div><div class="date-mois">Août 2026</div><div class="date-separateur"></div><div class="date-heure">Spectacle à <strong>22h00</strong></div><div class="date-info">Animations & restauration dès 19h</div><div class="date-btn">Réserver →</div></div>
+      </a>
+      <a href="https://www.helloasso.com/associations/troubadours-du-troisieme-millenaire/evenements/le-chemin-des-memoires-samedi-08-aout-26" target="_blank" rel="noopener" class="date-card reveal">
+        <div class="date-card-inner"><div class="date-jour">Samedi</div><div class="date-num">08</div><div class="date-mois">Août 2026</div><div class="date-separateur"></div><div class="date-heure">Spectacle à <strong>22h00</strong></div><div class="date-info">Animations & restauration dès 19h</div><div class="date-btn">Réserver →</div></div>
+      </a>
+      <a href="https://www.helloasso.com/associations/troubadours-du-troisieme-millenaire/evenements/le-chemin-des-memoires-dimanche-09-aout-26" target="_blank" rel="noopener" class="date-card reveal">
+        <div class="date-card-inner"><div class="date-jour">Dimanche</div><div class="date-num">09</div><div class="date-mois">Août 2026</div><div class="date-separateur"></div><div class="date-heure">Spectacle à <strong>22h00</strong></div><div class="date-info">Animations & restauration dès 19h</div><div class="date-btn">Réserver →</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="infos-section">
+    <div class="info-bloc reveal"><div class="info-bloc-titre">✦ Lieu & accès</div><p>Site de la Brèche<br/>33430 Bazas, Gironde<br/><br/>Parking gratuit sur place. Prévoir des vêtements chauds pour la soirée. <br><br> Votre billet vous permet d'assister aux animations et au spectacle</p></div>
+    <div class="info-bloc reveal"><div class="info-bloc-titre">✦ Sur place</div><p>Restauration et animations médiévales dès 19h.<br/> - Le spectacle débute à 22h et dure environ 1h45.<br/>
+
+- En cas de pluie, le spectacle sera maintenu<br/>
+- Placement libre sur le théâtre de verdure : vous pouvez amener couverture, chaises pliantes, ...)<br/>
+- Emplacements prévus pour les PMR<br/>
+- Animaux non admis<br/>
+- Billet non échangeable et non remboursable</p></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE : NOS SPECTACLES
+═══════════════════════════════════════════ -->
+<div class="page" id="page-spectacles">
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-label">Les créations de la troupe</span>
+      <h1 class="page-titre">Nos <span>Spectacles</span></h1>
+      <p class="page-sous">Trois créations, une seule passion : faire vivre l'histoire et la magie du Bazadais à travers le spectacle vivant.</p>
+    </div>
+  </div>
+
+  <div id="chemin-spec" class="spectacle-bloc reveal">
+    <div class="spectacle-visuel">
+      <div class="spectacle-cadre" style="background:linear-gradient(145deg,#3d1208,#1a0503);">
+        <div class="spectacle-num">I</div>
+        <svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="80" stroke="#c9a14a" stroke-width="0.8"/><circle cx="100" cy="100" r="55" stroke="#c9a14a" stroke-width="0.5"/><path d="M100 50 C112 68 135 78 135 100 C135 128 112 145 100 155 C88 145 65 128 65 100 C65 78 88 68 100 50Z" stroke="#c9a14a" stroke-width="1"/></svg>
+        <div class="spectacle-tag-float">Spectacle phare · Son & Lumière</div>
+      </div>
+    </div>
+    <div class="spectacle-info">
+      <span class="section-label">Spectacle I</span>
+      <h2 class="section-titre">Le Chemin <span>des Mémoires</span></h2>
+      <div class="spectacle-tags"><span class="tag">Son & Lumière</span><span class="tag">2016 – 2026</span><span class="tag">700 personnages</span><span class="tag">1h45</span></div>
+      <p>Le grand spectacle historique de la troupe. Sur le site de la Brèche à Bazas, 700 bénévoles font revivre <em>2 500 ans d'histoire du Bazadais</em> à travers une fresque nocturne inoubliable.</p>
+      <p>De la conquête romaine à 1942, en passant par Richard Cœur de Lion, Catherine de Médicis et Louis XIV : chaque époque prend vie dans un mélange de lumières, de musiques et de costumes d'époque. En 2026, le spectacle célèbre son <em>10e anniversaire</em> les 7, 8 et 9 août.</p>
+      <div class="btn-groupe">
+        <a class="btn-secondary" onclick="showPage('chemin')">En savoir plus</a>
+        <a class="btn-primary" onclick="showPage('billetterie')">Réserver</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="creche" class="spectacle-bloc reverse reveal">
+    <div class="spectacle-info">
+      <span class="section-label">Spectacle II</span>
+      <h2 class="section-titre">La Crèche <span>Vivante</span></h2>
+      <div class="spectacle-tags"><span class="tag">Spectacle de Noël</span><span class="tag">Animaux vivants</span><span class="tag">Tout public</span></div>
+      <p>Chaque année à l'approche des fêtes, les Troubadours proposent une <em>Crèche Vivante</em> hors du commun : une nativité grandeur nature avec acteurs, animaux et décors soigneusement reconstitués.</p>
+      <p>Un moment de magie et de partage, accessible à tous les publics, qui plonge les familles dans l'ambiance de la Bethléem d'antan.</p>
+      <div class="btn-groupe"><a class="btn-secondary" onclick="showPage('creche')">Plus d'informations</a></div>
+    </div>
+    <div class="spectacle-visuel">
+      <div class="spectacle-cadre" style="background:linear-gradient(145deg,#0a1a2e,#050a15);">
+        <div class="spectacle-num">II</div>
+        <svg viewBox="0 0 200 200" fill="none"><path d="M100 30 L170 170 L30 170Z" stroke="#c9a14a" stroke-width="0.8"/><circle cx="100" cy="95" r="14" stroke="#c9a14a" stroke-width="1"/></svg>
+        <div class="spectacle-tag-float">Spectacle de Noël · Tradition</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="patrimoine" class="spectacle-bloc reveal">
+    <div class="spectacle-visuel">
+      <div class="spectacle-cadre" style="background:linear-gradient(145deg,#0a200f,#041208);">
+        <div class="spectacle-num">III</div>
+        <svg viewBox="0 0 200 200" fill="none"><rect x="30" y="90" width="140" height="80" stroke="#c9a14a" stroke-width="0.8"/><rect x="85" y="130" width="30" height="40" stroke="#c9a14a" stroke-width="1"/></svg>
+        <div class="spectacle-tag-float">Événement patrimonial</div>
+      </div>
+    </div>
+    <div class="spectacle-info">
+      <span class="section-label">Spectacle III</span>
+      <h2 class="section-titre">Soirée du <span>Patrimoine</span></h2>
+      <div class="spectacle-tags"><span class="tag">Patrimoine</span><span class="tag">Événement</span><span class="tag">Histoire vivante</span></div>
+      <p>Dans le cadre des Journées du Patrimoine ou lors d'occasions spéciales, les Troubadours proposent des <em>soirées événementielles</em> qui mettent en lumière le riche patrimoine du Bazadais.</p>
+      <p>Entre animations historiques, reconstitutions et éclairages nocturnes, ces soirées offrent une manière unique de découvrir les trésors de cette région.</p>
+      <div class="btn-groupe"><a class="btn-secondary" onclick="showPage('patrimoine')">Plus d'informations</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE : HISTORIQUE
+═══════════════════════════════════════════ -->
+<div class="page" id="page-historique">
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-label">Notre parcours</span>
+      <h1 class="page-titre">Une histoire <span>de passion</span></h1>
+      <p class="page-sous">Depuis l'an 2000, des femmes et des hommes bénévoles font vivre l'histoire du Bazadais à travers des spectacles vivants inoubliables.</p>
+    </div>
+  </div>
+
+  <section id="chronologie">
+    <div class="section-inner">
+      <div style="max-width:800px; margin:0 auto;">
+        <span class="section-label reveal">Chronologie</span>
+        <h2 class="section-titre reveal">Au commencement… <span>un groupe d'amis</span></h2>
+        <p style="font-size:1.08rem; line-height:1.85; opacity:0.72; margin-bottom:4rem;" class="reveal">Les piliers d'une longue aventure collective, née de la passion pour l'histoire et le spectacle vivant dans le Bazadais.</p>
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <span class="timeline-annee">2000 — Les premières lueurs</span>
+            <h3 class="timeline-titre">Les spectacles des premiers jours</h3>
+            <div class="timeline-texte">
+              <p>Un groupe d'amis passionnés décide de faire revivre l'histoire de leur terroir. C'est le début d'une longue aventure humaine et artistique.</p>
+              <ul class="timeline-list">
+                <li>2000 · <em>La légende de St Velzer</em> — Bazas</li>
+                <li>2002 · <em>Les plaisirs de l'île enchantée</em> — Bazas</li>
+                <li>2003 · <em>Catherine de Pontallec sous les tourbillons de la Révolution</em> — Bazas & Château de la Trave, Préchac</li>
+                <li>2004 · <em>1576 : Les sœurs Montoises contre la grande réforme de l'Histoire</em> — Bazas & Château de Villandraut</li>
+                <li>2005 · <em>Laure Carême et les souvenirs de la grande guerre</em> — Bazas</li>
+                <li>2006 · <em>Les gens de champagne</em> — Bazas</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <span class="timeline-annee">2007 — Un tournant fondateur</span>
+            <h3 class="timeline-titre">Naissance de l'association</h3>
+            <div class="timeline-texte">
+              <p>Création officielle de l'association <em>« Troubadours du Troisième Millénaire »</em>, association loi 1901, dont la vocation est de produire et de réaliser des spectacles vivants de type Son et Lumière, mobilisant volontaires et bénévoles.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <span class="timeline-annee">2016 — La consécration</span>
+            <h3 class="timeline-titre">Le Chemin des Mémoires</h3>
+            <div class="timeline-texte">
+              <p>Naissance du grand spectacle historique de la troupe. <em>100 figurants</em>, des chevaux et attelages, une mise en scène somptueuse sur le site de la Brèche à Bazas. De la conquête romaine à 1942, une fresque de 2 500 ans d'histoire.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <span class="timeline-annee">2026 — Dixième anniversaire</span>
+            <h3 class="timeline-titre">10 ans de féérie avec vous</h3>
+            <div class="timeline-texte">
+              <p>En cette dixième saison du <em>Chemin des Mémoires</em>, les Troubadours célèbrent une décennie d'émerveillement partagé. Trois soirées exceptionnelles les <em>7, 8 et 9 août 2026</em> sur le site de la Brèche.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bureau">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom:3.5rem;" class="reveal">
+        <span class="section-label">L'équipe dirigeante</span>
+        <h2 class="section-titre">Le Bureau <span>de l'association</span></h2>
+      </div>
+      <div class="bureau-grid">
+        <div class="bureau-card reveal"><div class="bureau-role">Président · Écriture / Mise en scène</div><div class="bureau-nom">Romain Espagnet</div></div>
+        <div class="bureau-card reveal"><div class="bureau-role">Trésorier</div><div class="bureau-nom">Christophe Allain</div><div class="bureau-adj">Adjoint : Philippe Natario</div></div>
+        <div class="bureau-card reveal"><div class="bureau-role">Secrétaire</div><div class="bureau-nom">Marie-Hélène Couthures</div><div class="bureau-adj">Adjointe : Nadège Montagne</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rejoindre">
+    <div class="section-inner">
+      <div class="rejoindre-inner reveal">
+        <span class="section-label">Rejoindre la troupe</span>
+        <h2 class="section-titre" style="text-align:center;">Faites partie de <span>l'aventure</span></h2>
+        <p>Les Troubadours du Troisième Millénaire sont une troupe entièrement bénévole. Qu'il s'agisse d'être figurant, technicien, décorateur ou costumier — toutes les bonnes volontés sont les bienvenues.</p>
+        <a class="btn-primary" onclick="showPage('contact')">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE : CONTACT
+═══════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-label">Rejoignez-nous</span>
+      <h1 class="page-titre">Contact & <span>Adhésion</span></h1>
+      <p class="page-sous">Une question, une envie de rejoindre la troupe ou d'organiser un événement ? Nous vous répondons avec plaisir.</p>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <div class="contact-infos reveal">
+      <span class="section-label">Nous trouver</span>
+      <h2 class="section-titre">Informations <span>pratiques</span></h2>
+      <div class="contact-bloc"><div class="contact-bloc-label">✦ L'association</div><p>Troubadours du Troisième Millénaire<br/>Association loi 1901<br/>Bazas, Gironde (33)</p></div>
+      <div class="contact-bloc"><div class="contact-bloc-label">✦ Rejoindre la troupe</div><p>Vous souhaitez participer en tant que :<br>- figurant, <br>- technicien, <br>- décorateur <br>ou costumier ? <br><br>Contactez-nous via le formulaire, nous vous recontacterons.</p></div>
+    </div>
+    <div class="form-card reveal">
+      <span class="form-titre">✦ &nbsp; Envoyez-nous un message &nbsp; ✦</span>
+      <form action="https://formspree.io/f/mqegnorp" method="POST">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label" for="prenom">Prénom</label><input class="form-input" type="text" id="prenom" name="prenom" placeholder="Votre prénom" required></div>
+          <div class="form-group"><label class="form-label" for="nom">Nom</label><input class="form-input" type="text" id="nom" name="nom" placeholder="Votre nom" required></div>
+        </div>
+        <div class="form-group"><label class="form-label" for="email">Adresse e-mail</label><input class="form-input" type="email" id="email" name="email" placeholder="votre@email.fr" required></div>
+        <div class="form-group">
+          <label class="form-label" for="sujet">Sujet</label>
+          <select class="form-select form-input" id="sujet" name="sujet">
+            <option value="" disabled selected>Choisissez un sujet…</option>
+            <option value="billetterie">Billetterie & réservation</option>
+            <option value="rejoindre">Rejoindre la troupe</option>
+            <option value="groupes">Réservation groupe</option>
+            <option value="presse">Presse & partenariats</option>
+            <option value="autre">Autre demande</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label" for="message">Message</label><textarea class="form-textarea" id="message" name="message" placeholder="Votre message…" required></textarea></div>
+        <button type="submit" class="form-submit">Envoyer le message</button>
+        <p class="form-note">Nous vous répondrons dans les meilleurs délais.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script>
+  // ── Navigation SPA ──
+  function showPage(name) {
+    // Cacher toutes les pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Afficher la bonne
+    const target = document.getElementById('page-' + name);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Mettre à jour les liens actifs
+    document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
+      a.classList.toggle('active', a.dataset.page === name);
+    });
+    // Relancer les révélations
+    setTimeout(initReveal, 100);
+  }
+
+  // ── Burger menu ──
+  document.getElementById('burger-btn').addEventListener('click', function() {
+    document.getElementById('nav-mobile').classList.toggle('open');
+  });
+  function closeMobile() {
+    document.getElementById('nav-mobile').classList.remove('open');
+  }
+
+  // ── Reveal au scroll ──
+  function initReveal() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => { e.target.classList.add('visible'); }, i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.page.active .reveal:not(.visible)').forEach(el => observer.observe(el));
+  }
+
+  // Lancer au chargement
+  initReveal();
+</script>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER UNIQUE — commun à toutes les pages
+═══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-logo">Troubadours du Troisième Millénaire</div>
+    <ul class="footer-liens">
+      <li><a onclick="showPage('accueil')">Accueil</a></li>
+      <li><a onclick="showPage('spectacles')">Nos Spectacles</a></li>
+      <li><a onclick="showPage('chemin')">Le Chemin des Mémoires</a></li>
+      <li><a onclick="showPage('creche')">La Crèche vivante</a></li>
+      <li><a onclick="showPage('patrimoine')">Soirée patrimoine</a></li>
+      <li><a onclick="showPage('theatre')">Atelier théâtre</a></li>
+      <li><a onclick="showPage('historique')">Historique</a></li>
+      <li><a onclick="showPage('billetterie')">Billetterie</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+    <p style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--or); opacity:0.5; margin-bottom:1rem;">Réseaux sociaux</p>
+<div class="footer-reseaux">
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/troubadours_bazas/" target="_blank" title="Instagram">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+  </a>
+  <!-- Facebook -->
+  <a href="https://www.facebook.com/troubadours3" target="_blank" title="Facebook">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+  </a>
+</div>
+    <p class="footer-copy">© 2026 Association Troubadours du Troisième Millénaire · Bazas · Gironde</p>
+    <p class="footer-copy">Site internet créé par <a href="https://www.instagram.com/alban_btps/" target="_blank" style="text-decoration: none; color: rgb(52, 129, 237);">Alban BONTEMPS</a></p>
+  </footer>
+
+</body>
+</html>
