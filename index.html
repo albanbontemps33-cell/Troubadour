@@ -280,7 +280,7 @@
     .chiffre-item { padding: 3.5rem 2rem; text-align: center; border-right: 1px solid rgba(201,161,74,0.1); transition: background 0.3s; }
     .chiffre-item:last-child { border-right: none; }
     .chiffre-item:hover { background: rgba(201,161,74,0.04); }
-    .chiffre-nombre { font-family: 'Cinzel Decorative', serif; font-size: clamp(2.5rem, 5vw, 4.2rem); font-weight: 900; color: var(--or); line-height: 1; margin-bottom: 0.6rem; text-shadow: 0 0 50px rgba(201,161,74,0.3); }
+    .chiffre-nombre { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 900; color: var(--or); line-height: 1; margin-bottom: 0.6rem; text-shadow: 0 0 50px rgba(201,161,74,0.3); }
     .chiffre-label { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--parchemin); opacity: 0.5; }
 
     /* ═══════════════════════════════════════════════
@@ -548,16 +548,16 @@
         radial-gradient(ellipse 60% 40% at 25% 20%, rgba(201,161,74,0.06) 0%, transparent 50%),
         linear-gradient(168deg, #080501 0%, #080e1a 50%, #0d1525 75%, #080501 100%);
     }
-    .page-creche .hero-content { align-items: center !important; max-width: 700px; margin: 0 auto; text-align: center !important; padding-top: 70px; }
+    .page-creche .hero-content { align-items: flex-start !important; max-width: 560px; text-align: left !important; padding-top: 70px; }
     .creche-hero-img {
-      position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
-      z-index: 2; width: min(300px, 32vw);
-      border: 1px solid rgba(201,161,74,0.3);
-      overflow: hidden;
-    }
+  width: min(400px, 40vw);
+  border: 1px solid rgba(201,161,74,0.3);
+  overflow: hidden;
+  margin-left: auto;
+}
     .creche-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .creche-infos-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; }
-    .page-creche .hero-accroche { text-align: center; max-width: 600px; }
+    .page-creche .hero-accroche { text-align: left; max-width: 480px; }
     .creche-galerie { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 3rem; }
     .creche-galerie-img { overflow: hidden; border: 1px solid rgba(201,161,74,0.2); aspect-ratio: 4/3; }
     .creche-galerie-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
@@ -1136,22 +1136,22 @@
 ═══════════════════════════════════════════ -->
 <div class="page page-creche" id="page-creche">
 
-  <section id="hero" style="position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-    <div class="hero-frame"></div>
-    <div style="position:relative; z-index:3; display:flex; align-items:center; gap:4rem; max-width:1080px; margin:0 auto; padding:0 3rem; flex-wrap:wrap; justify-content:center;">
-      <div class="hero-content" style="flex:1; min-width:280px;">
-        <span class="hero-surtitre">Le Grand Spectacle de Noël</span>
-        <h1 class="hero-titre">La Crèche <em>Vivante</em></h1>
-        <p class="hero-accroche">Une nativité grandeur nature dans la majestueuse cathédrale de Bazas — animaux vivants, costumes d'époque et une mise en scène féerique pour toute la famille.</p>
-        <div class="hero-actions">
-          <a class="btn-secondary" href="#creche-infos">Découvrir le spectacle</a>
-        </div>
-      </div>
-      <div class="creche-hero-img" style="position:static; transform:none; flex-shrink:0;">
-        <img src="image-creche.png" alt="La Crèche Vivante de Bazas" />
+<section id="hero" style="position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden;">
+  <div class="hero-frame"></div>
+  <div style="position:relative; z-index:3; display:flex; align-items:center; gap:4rem; width:100%; padding:0 8%; flex-wrap:wrap;">
+    <div class="hero-content" style="flex:1; min-width:280px;">
+      <span class="hero-surtitre">Le Grand Spectacle de Noël</span>
+      <h1 class="hero-titre">La Crèche <em>Vivante</em></h1>
+      <p class="hero-accroche">Une nativité grandeur nature dans la majestueuse cathédrale de Bazas — animaux vivants, costumes d'époque et une mise en scène féerique pour toute la famille.</p>
+      <div class="hero-actions">
+        <a class="btn-secondary" href="#creche-infos">Découvrir le spectacle</a>
       </div>
     </div>
-  </section>
+    <div class="creche-hero-img" style="position:static; transform:none; flex-shrink:0;">
+      <img src="image-creche.png" alt="La Crèche Vivante de Bazas" />
+    </div>
+  </div>
+</section>
 
   <section id="creche-infos" style="background: linear-gradient(180deg, #080e1a 0%, #0d0a04 100%);">
     <div class="section-inner">
@@ -1176,7 +1176,7 @@
     </div>
   </section>
 
-  <section style="background: linear-gradient(180deg, #223f5d 0%, #000000 100%); border-top: 1px solid rgba(94, 75, 178, 0.1); border-bottom: 1px solid rgba(74, 97, 201, 0.1);">
+     <section style="background: linear-gradient(180deg, #0d0a04 0%, #080e1a 20%, #0d1525 50%, #080e1a 80%, #0d0a04 100%); border-top: 1px solid rgba(201,161,74,0.1); border-bottom: 1px solid rgba(201,161,74,0.1); padding: 2rem 0;">
     <div class="chiffres-grid">
       <div class="chiffre-item reveal"><div class="chiffre-nombre">+1000</div><div class="chiffre-label">Spectateurs par an</div></div>
       <div class="chiffre-item reveal"><div class="chiffre-nombre">Gratuit</div><div class="chiffre-label">Entrée libre</div></div>
