@@ -446,7 +446,18 @@
     }
     .spectacle-cadre svg { width:70%; height:70%; opacity:0.35; }
     .spectacle-cadre::before { content:''; position:absolute; inset:10px; border:1px solid rgba(201,161,74,0.12); pointer-events:none; }
-    .spectacle-tag-float { position:absolute; bottom:-1px; left:0; right:0; background:linear-gradient(to top,rgba(0,0,0,0.85),transparent); padding:2.5rem 1.5rem 1.5rem; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--or); opacity:0.8; }
+    .spectacle-tag-float {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.2rem 1.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--parchemin);
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+  text-align: center;
+}
     .spectacle-num { font-family:'Cinzel Decorative',serif; font-size:5rem; font-weight:900; color:var(--or); opacity:0.06; position:absolute; top:1rem; left:1rem; line-height:1; }
     .spectacle-info { display:flex; flex-direction:column; gap:1rem; }
     .spectacle-info p { font-size:1.1rem; line-height:1.88; opacity:0.78; }
@@ -528,6 +539,43 @@
 }
     .footer-reseaux a:hover { opacity: 1; border-color: var(--or); transform: translateY(-2px); }
     .footer-reseaux svg { width: 20px; height: 20px; fill: currentColor; }
+    /* ═══════════════════════════════════════════════
+       PAGE CRÈCHE VIVANTE
+    ═══════════════════════════════════════════════ */
+    .page-creche #hero {
+      background:
+        radial-gradient(ellipse 100% 70% at 50% 60%, rgba(10,30,60,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 25% 20%, rgba(201,161,74,0.06) 0%, transparent 50%),
+        linear-gradient(168deg, #080501 0%, #080e1a 50%, #0d1525 75%, #080501 100%);
+    }
+    .page-creche .hero-content { align-items: center !important; max-width: 700px; margin: 0 auto; text-align: center !important; padding-top: 70px; }
+    .creche-hero-img {
+      position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
+      z-index: 2; width: min(300px, 32vw);
+      border: 1px solid rgba(201,161,74,0.3);
+      overflow: hidden;
+    }
+    .creche-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .creche-infos-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; }
+    .page-creche .hero-accroche { text-align: center; max-width: 600px; }
+    .creche-galerie { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 3rem; }
+    .creche-galerie-img { overflow: hidden; border: 1px solid rgba(201,161,74,0.2); aspect-ratio: 4/3; }
+    .creche-galerie-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .creche-galerie-img:hover img { transform: scale(1.05); }
+    .creche-galerie-img.large { grid-column: span 2; aspect-ratio: 16/7; }
+    .seances-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2rem; }
+    .seance-card { border: 1px solid rgba(201,161,74,0.22); padding: 2rem 1.5rem; text-align: center; background: linear-gradient(145deg, #0d1525, #080e1a); transition: border-color 0.3s, transform 0.3s; }
+    .seance-card:hover { border-color: rgba(201,161,74,0.6); transform: translateY(-4px); }
+    .seance-heure { font-family: 'Cinzel Decorative', serif; font-size: 2.2rem; font-weight: 900; color: var(--or-clair); line-height: 1; margin-bottom: 0.3rem; }
+    .seance-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--or); opacity: 0.7; margin-bottom: 1rem; }
+    .seance-sep { width: 32px; height: 1px; background: rgba(201,161,74,0.3); margin: 0 auto 1rem; }
+    .seance-info { font-size: 0.9rem; opacity: 0.55; font-style: italic; }
+    .creche-chiffres { display: grid; grid-template-columns: repeat(3, 1fr); background: rgba(201,161,74,0.04); border: 1px solid rgba(201,161,74,0.12); margin-top: 3rem; }
+    .creche-chiffre { padding: 2rem; text-align: center; border-right: 1px solid rgba(201,161,74,0.1); }
+    .creche-chiffre:last-child { border-right: none; }
+    .creche-chiffre-nb { font-family: 'Cinzel Decorative', serif; font-size: 2.2rem; font-weight: 900; color: var(--or-clair); }
+    .creche-chiffre-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.55; margin-top: 0.3rem; }
+
     /* ═══════════════════════════════════════════════
        REVEAL AU SCROLL
     ═══════════════════════════════════════════════ */
@@ -669,23 +717,15 @@
           <div style="margin-top: 2rem;"><a class="btn-secondary" onclick="showPage('historique')">Notre histoire</a></div>
         </div>
         <div class="reveal" style="display:flex; justify-content:center;">
-          <div class="medaillon">
-            <div class="medaillon-inner">
-              <svg viewBox="0 0 200 240" fill="none">
-                <rect x="50" y="140" width="100" height="70" stroke="#c9a14a" stroke-width="1.2"/>
-                <rect x="70" y="160" width="25" height="50" stroke="#c9a14a" stroke-width="1"/>
-                <rect x="105" y="160" width="25" height="50" stroke="#c9a14a" stroke-width="1"/>
-                <rect x="40" y="110" width="20" height="35" stroke="#c9a14a" stroke-width="1"/>
-                <rect x="140" y="110" width="20" height="35" stroke="#c9a14a" stroke-width="1"/>
-                <rect x="85" y="100" width="30" height="45" stroke="#c9a14a" stroke-width="1.2"/>
-                <line x1="100" y1="30" x2="100" y2="100" stroke="#c9a14a" stroke-width="1.5"/>
-                <path d="M100 30 L125 42 L100 54Z" fill="#c9a14a" opacity="0.6"/>
-              </svg>
-            </div>
-            <div class="coin coin-tl"></div><div class="coin coin-tr"></div>
-            <div class="coin coin-bl"></div><div class="coin coin-br"></div>
-          </div>
-        </div>
+  <div class="medaillon">
+    <div class="medaillon-inner" style="padding:0; overflow:hidden;">
+      <img src="bataille.jpg" alt="La bataille"
+           style="width:100%; height:100%; object-fit:cover; display:block;" />
+    </div>
+    <div class="coin coin-tl"></div><div class="coin coin-tr"></div>
+    <div class="coin coin-bl"></div><div class="coin coin-br"></div>
+  </div>
+</div>
       </div>
     </div>
   </section>
@@ -900,13 +940,13 @@
   </div>
 
   <div id="chemin-spec" class="spectacle-bloc reveal">
-    <div class="spectacle-visuel">
-      <div class="spectacle-cadre" style="background:linear-gradient(145deg,#3d1208,#1a0503);">
-        <div class="spectacle-num">I</div>
-        <svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="80" stroke="#c9a14a" stroke-width="0.8"/><circle cx="100" cy="100" r="55" stroke="#c9a14a" stroke-width="0.5"/><path d="M100 50 C112 68 135 78 135 100 C135 128 112 145 100 155 C88 145 65 128 65 100 C65 78 88 68 100 50Z" stroke="#c9a14a" stroke-width="1"/></svg>
-        <div class="spectacle-tag-float">Spectacle phare · Son & Lumière</div>
-      </div>
-    </div>
+   <div class="spectacle-visuel">
+  <div class="spectacle-cadre" style="padding:0; overflow:hidden;">
+    <img src="Chemin.jpg" alt="Le Chemin des Mémoires"
+         style="width:100%; height:100%; object-fit:cover; display:block;" />
+    <div class="spectacle-tag-float">Spectacle phare · Son & Lumière</div>
+  </div>
+</div>
     <div class="spectacle-info">
       <span class="section-label">Spectacle I</span>
       <h2 class="section-titre">Le Chemin <span>des Mémoires</span></h2>
@@ -929,23 +969,23 @@
       <p>Un moment de magie et de partage, accessible à tous les publics, qui plonge les familles dans l'ambiance de la Bethléem d'antan.</p>
       <div class="btn-groupe"><a class="btn-secondary" onclick="showPage('creche')">Plus d'informations</a></div>
     </div>
-    <div class="spectacle-visuel">
-      <div class="spectacle-cadre" style="background:linear-gradient(145deg,#0a1a2e,#050a15);">
-        <div class="spectacle-num">II</div>
-        <svg viewBox="0 0 200 200" fill="none"><path d="M100 30 L170 170 L30 170Z" stroke="#c9a14a" stroke-width="0.8"/><circle cx="100" cy="95" r="14" stroke="#c9a14a" stroke-width="1"/></svg>
-        <div class="spectacle-tag-float">Spectacle de Noël · Tradition</div>
-      </div>
-    </div>
+<div class="spectacle-visuel">
+  <div class="spectacle-cadre" style="padding:0; overflow:hidden;">
+    <img src="image-creche.png" alt="La Crèche Vivante"
+         style="width:100%; height:100%; object-fit:cover; display:block;" />
+    <div class="spectacle-tag-float">Spectacle de Noël · Tradition</div>
+  </div>
+</div>
   </div>
 
   <div id="patrimoine" class="spectacle-bloc reveal">
     <div class="spectacle-visuel">
-      <div class="spectacle-cadre" style="background:linear-gradient(145deg,#0a200f,#041208);">
-        <div class="spectacle-num">III</div>
-        <svg viewBox="0 0 200 200" fill="none"><rect x="30" y="90" width="140" height="80" stroke="#c9a14a" stroke-width="0.8"/><rect x="85" y="130" width="30" height="40" stroke="#c9a14a" stroke-width="1"/></svg>
-        <div class="spectacle-tag-float">Événement patrimonial</div>
-      </div>
-    </div>
+  <div class="spectacle-cadre" style="padding:0; overflow:hidden;">
+    <img src="patrimoine.png" alt="Soirée du Patrimoine"
+         style="width:100%; height:100%; object-fit:cover; display:block;" />
+    <div class="spectacle-tag-float">Événement patrimonial</div>
+  </div>
+</div>
     <div class="spectacle-info">
       <span class="section-label">Spectacle III</span>
       <h2 class="section-titre">Soirée du <span>Patrimoine</span></h2>
@@ -1089,6 +1129,128 @@
       </form>
     </div>
   </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE CRÈCHE VIVANTE
+═══════════════════════════════════════════ -->
+<div class="page page-creche" id="page-creche">
+
+  <section id="hero" style="position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+    <div class="hero-frame"></div>
+    <div style="position:relative; z-index:3; display:flex; align-items:center; gap:4rem; max-width:1080px; margin:0 auto; padding:0 3rem; flex-wrap:wrap; justify-content:center;">
+      <div class="hero-content" style="flex:1; min-width:280px;">
+        <span class="hero-surtitre">Le Grand Spectacle de Noël</span>
+        <h1 class="hero-titre">La Crèche <em>Vivante</em></h1>
+        <p class="hero-accroche">Une nativité grandeur nature dans la majestueuse cathédrale de Bazas — animaux vivants, costumes d'époque et une mise en scène féerique pour toute la famille.</p>
+        <div class="hero-actions">
+          <a class="btn-secondary" href="#creche-infos">Découvrir le spectacle</a>
+        </div>
+      </div>
+      <div class="creche-hero-img" style="position:static; transform:none; flex-shrink:0;">
+        <img src="image-creche.png" alt="La Crèche Vivante de Bazas" />
+      </div>
+    </div>
+  </section>
+
+  <section id="creche-infos" style="background: linear-gradient(180deg, #080e1a 0%, #0d0a04 100%);">
+    <div class="section-inner">
+      <div class="creche-infos-grid">
+        <div class="reveal">
+          <span class="section-label">Le Spectacle</span>
+          <h2 class="section-titre">Unique <span>dans la région</span></h2>
+          <p style="font-size:1.1rem; line-height:1.9; opacity:0.8; margin-bottom:1.2rem;">Depuis <em>2008</em>, les Troubadours du Troisième Millénaire font revivre chaque année la naissance de l'Enfant Roi dans l'écrin de la cathédrale Saint-Jean-Baptiste de Bazas.</p>
+          <p style="font-size:1.1rem; line-height:1.9; opacity:0.8; margin-bottom:1.2rem;">Organisée lors du <em>marché de Noël de Bazas</em>, cette évocation poétique et féerique enchante chaque année un public venu de plus en plus nombreux. Animaux vivants, acteurs en costumes d'époque et décors soignés plongent les familles dans l'ambiance de la Bethléem d'antan.</p>
+          <p style="font-size:1.1rem; line-height:1.9; opacity:0.8; margin-bottom:2rem;">Ce spectacle peut également être joué dans d'autres collectivités ou structures, <em>à la demande</em>.</p>
+          <div style="padding:1.4rem 1.8rem; border-left:3px solid var(--or); background:rgba(201,161,74,0.05); margin-bottom:2rem;">
+            <p style="font-style:italic; font-size:1.15rem; line-height:1.65; opacity:0.85;">« Une évocation poétique et féerique de la naissance de l'Enfant Roi dans une cathédrale qui flamboie. »</p>
+          </div>
+        </div>
+        <div class="reveal" style="display:flex; flex-direction:column; gap:1rem;">
+          <div class="info-item"><div class="info-item-label">✦ Lieu</div><div class="info-item-val"><strong>Cathédrale Saint-Jean-Baptiste</strong><br/>Bazas, Gironde (33)</div></div>
+          <div class="info-item"><div class="info-item-label">✦ Durée</div><div class="info-item-val"><strong>40 à 45 minutes</strong> par représentation</div></div>
+          <div class="info-item"><div class="info-item-label">✦ Tarif</div><div class="info-item-val"><strong>Entrée gratuite</strong><br/>Spectacle familial, tout public</div></div>
+          <div class="info-item"><div class="info-item-label">✦ En tournée</div><div class="info-item-val">Le spectacle peut être joué dans d'autres communes ou structures — <a onclick="showPage('contact')" style="color:var(--or-clair); cursor:pointer;">contactez-nous</a></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #223f5d 0%, #000000 100%); border-top: 1px solid rgba(94, 75, 178, 0.1); border-bottom: 1px solid rgba(74, 97, 201, 0.1);">
+    <div class="chiffres-grid">
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">+1000</div><div class="chiffre-label">Spectateurs par an</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">Gratuit</div><div class="chiffre-label">Entrée libre</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">Depuis 2008</div><div class="chiffre-label">Une tradition à Bazas</div></div>
+      <div class="chiffre-item reveal"><div class="chiffre-nombre">40 minutes</div><div class="chiffre-label">De spectacle féerique</div></div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #0d0a04 0%, #080e1a 100%);">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal">
+        <span class="section-label">Programme</span>
+        <h2 class="section-titre">Les <span>trois représentations</span></h2>
+        <p style="font-size:1.05rem; opacity:0.6; font-style:italic; margin-top:0.5rem;">Trois séances le même dimanche — choisissez la vôtre</p>
+      </div>
+      <div class="seances-grid reveal">
+        <div class="seance-card">
+          <div class="seance-heure">16h00</div>
+          <div class="seance-label">Première représentation</div>
+          <div class="seance-sep"></div>
+          <div class="seance-info">Durée : 40 à 45 min<br/>Entrée libre</div>
+        </div>
+        <div class="seance-card">
+          <div class="seance-heure">17h00</div>
+          <div class="seance-label">Deuxième représentation</div>
+          <div class="seance-sep"></div>
+          <div class="seance-info">Durée : 40 à 45 min<br/>Entrée libre</div>
+        </div>
+        <div class="seance-card">
+          <div class="seance-heure">18h00</div>
+          <div class="seance-label">Troisième représentation</div>
+          <div class="seance-sep"></div>
+          <div class="seance-info">Durée : 40 à 45 min<br/>Entrée libre</div>
+        </div>
+      </div>
+      <p style="text-align:center; font-style:italic; opacity:0.45; font-size:0.95rem; margin-top:2rem;" class="reveal">Dans le cadre du marché de Noël de Bazas · Cathédrale Saint-Jean-Baptiste</p>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #080e1a 0%, #0d0a04 100%);">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal">
+        <span class="section-label">Galerie</span>
+        <h2 class="section-titre">Le spectacle <span>en images</span></h2>
+      </div>
+
+      <div class="creche-galerie">
+        <div class="creche-galerie-img">
+          <img src="creche2.png" alt="La Crèche Vivante" />
+        </div>
+        <div class="creche-galerie-img">
+          <img src="creche3.png" alt="La Crèche Vivante" />
+        </div>
+        <div class="creche-galerie-img large">
+          <img src="creche4.png" alt="La Crèche Vivante" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #0d0a04 0%, #080501 100%);">
+    <div class="section-inner reveal" style="text-align:center;">
+      <div class="reveal">
+        <span class="section-label">Chaque année</span>
+        <h2 class="section-titre" style="margin-bottom:1.5rem;">Vivez la <span>magie de Noël</span></h2>
+        <p style="font-size:1.1rem; opacity:0.7; max-width:580px; margin:0 auto 2.5rem; line-height:1.85;">Un moment de partage unique, accessible à tous, qui plonge familles et enfants dans l'ambiance féerique de la Bethléem d'antan.</p>
+        <div style="display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap;">
+          <a class="btn-secondary" onclick="showPage('spectacles')">Nos autres spectacles</a>
+          <a class="btn-primary" onclick="showPage('contact')">Nous contacter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
 <!-- ═══════════════════════════════════════════
