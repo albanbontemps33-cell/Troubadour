@@ -588,15 +588,54 @@
     /* ═══════════════════════════════════════════════
        RESPONSIVE
     ═══════════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — TABLETTE (≤ 1000px)
+    ═══════════════════════════════════════════════ */
     @media (max-width: 1000px) {
+      /* Chemin des mémoires hero */
       .hero-affiche-zone { display: none; }
       .page-chemin .hero-content { margin-left: 0; text-align: center; align-items: center; padding: 0 2rem; }
+
+      /* Crèche hero : image passe en dessous */
+      .creche-hero-img { width: min(400px, 70vw); margin: 2rem auto 0; position: static !important; transform: none !important; }
+      .page-creche .hero-content { max-width: 100%; text-align: center !important; align-items: center !important; }
+      .page-creche .hero-accroche { text-align: center !important; }
+
+      /* Patrimoine hero */
+      .patrimoine-hero-img { width: min(400px, 70vw); margin: 2rem auto 0; }
+      .page-patrimoine .hero-content { max-width: 100%; text-align: center !important; align-items: center !important; }
+      .page-patrimoine .hero-accroche { text-align: center !important; }
+
+      /* Théâtre hero */
+      .theatre-hero-img { width: min(300px, 70vw); margin: 2rem auto 0; }
+      .page-theatre .hero-content { max-width: 100%; text-align: center !important; align-items: center !important; }
+      .page-theatre .hero-accroche { text-align: center !important; }
+
+      /* Grilles nouvelles pages */
+      .creche-infos-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+      .patrimoine-infos-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+      .valeurs-grid { grid-template-columns: 1fr !important; }
     }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — MOBILE (≤ 900px)
+    ═══════════════════════════════════════════════ */
     @media (max-width: 900px) {
       nav { padding: 0 1.5rem; }
       .nav-links, .nav-cta { display: none; }
       .nav-burger { display: flex; }
       .section-inner { padding: 4rem 1.5rem; }
+
+      /* Hero flex → colonne sur mobile */
+      #hero > div[style*="display:flex"],
+      #hero > div[style*="display: flex"] {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 0 1.5rem !important;
+      }
+
+      /* Accueil */
       .presentation-grid { grid-template-columns: 1fr; gap: 3rem; }
       .medaillon { width: 260px; height: 320px; }
       .chiffres-grid { grid-template-columns: repeat(2,1fr); }
@@ -606,6 +645,8 @@
       .histo-frise-item:nth-child(2) { border-right: none; }
       .histo-frise-item:nth-child(3) { border-top: 1px solid rgba(201,161,74,0.12); }
       .hero-frame { inset: 80px 20px 40px; }
+
+      /* Chemin des mémoires */
       .synopsis-grid { grid-template-columns: 1fr; gap: 3rem; }
       .bill-grid { grid-template-columns: 1fr; gap: 1rem; }
       .tarifs-section, .infos-section { padding-left: 1.5rem; padding-right: 1.5rem; }
@@ -615,12 +656,44 @@
       .spectacle-bloc, .spectacle-bloc.reverse { grid-template-columns:1fr; gap:2.5rem; padding:4rem 1.5rem; }
       .spectacle-bloc.reverse .spectacle-visuel, .spectacle-bloc.reverse .spectacle-info { order:unset; }
       .spectacle-cadre { aspect-ratio:16/9; }
+
+      /* Historique */
       .bureau-grid { grid-template-columns:1fr 1fr; }
       .timeline { padding-left:2rem; }
+
+      /* Contact */
       .contact-section { grid-template-columns:1fr; gap:3rem; padding:4rem 1.5rem; }
       .form-row { grid-template-columns:1fr; }
       .form-card { padding:2rem 1.5rem; }
+
+      /* Crèche */
+      .creche-infos-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .seances-grid { grid-template-columns: 1fr !important; gap: 1rem; }
+      .creche-galerie { grid-template-columns: 1fr !important; }
+      .creche-galerie-img.large { grid-column: span 1 !important; aspect-ratio: 4/3 !important; }
+      .creche-hero-img { width: 85vw !important; max-width: 380px; }
+
+      /* Patrimoine */
+      .patrimoine-infos-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .patrimoine-galerie { grid-template-columns: 1fr !important; }
+      .patrimoine-galerie-img.large { grid-column: span 1 !important; aspect-ratio: 4/3 !important; }
+      .patrimoine-hero-img { width: 85vw !important; max-width: 380px; }
+      .etape-item { padding-left: 3rem; gap: 1rem; }
+
+      /* Théâtre */
+      .theatre-hero-img { width: 85vw !important; max-width: 320px; }
+      .valeurs-grid { grid-template-columns: 1fr !important; }
+      .carrousel-item { width: 140px; }
+
+      /* Boutons hero */
+      .hero-actions { flex-direction: column; align-items: center; gap: 0.8rem; }
+      .hero-actions a { width: 100%; max-width: 300px; text-align: center; }
+      .btn-groupe { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — PETIT MOBILE (≤ 560px)
+    ═══════════════════════════════════════════════ */
     @media (max-width: 560px) {
       h1.hero-titre { font-size: 2.2rem; }
       .chiffres-grid { grid-template-columns: 1fr 1fr; }
@@ -629,6 +702,14 @@
       .tarifs-grid { grid-template-columns: 1fr; }
       .page-hero { padding: 130px 1.5rem 60px; }
       .bureau-grid { grid-template-columns:1fr; }
+      .section-inner { padding: 3rem 1.2rem; }
+      .hero-badge { font-size: 0.6rem; padding: 0.5rem 1rem; letter-spacing: 0.1em; }
+      .carrousel-item { width: 120px; }
+      .seances-grid { grid-template-columns: 1fr !important; }
+      .valeurs-grid { grid-template-columns: 1fr !important; }
+
+      /* Supprime le hover carrousel sur tactile — remplace par touch */
+      .carrousel-track { animation-duration: 25s; }
     }
   </style>
 </head>
@@ -1418,6 +1499,190 @@
 </div>
 
 <!-- ═══════════════════════════════════════════
+     PAGE ATELIER THÉÂTRE
+═══════════════════════════════════════════ -->
+<style>
+  .page-theatre #hero {
+    background:
+      radial-gradient(ellipse 100% 70% at 50% 60%, rgba(80,10,60,0.45) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 75% 20%, rgba(201,161,74,0.06) 0%, transparent 50%),
+      linear-gradient(168deg, #080501 0%, #1a0520 50%, #280830 75%, #080501 100%);
+  }
+  .page-theatre #hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
+    background: linear-gradient(to bottom, transparent, #0d0514);
+    z-index: 2; pointer-events: none;
+  }
+  .page-theatre .hero-content { align-items: flex-start !important; max-width: 580px; text-align: left !important; padding-top: 70px; }
+  .page-theatre .hero-accroche { text-align: left; max-width: 500px; }
+  .theatre-hero-img {
+    width: min(340px, 36vw);
+    border: 1px solid rgba(201,161,74,0.3);
+    overflow: hidden; margin-left: auto; flex-shrink: 0;
+  }
+  .theatre-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Carrousel infini */
+  .carrousel-wrapper {
+    overflow: hidden; position: relative; padding: 2rem 0;
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    cursor: grab;
+  }
+  .carrousel-wrapper.paused .carrousel-track { animation-play-state: paused; }
+  .carrousel-track {
+    display: flex; gap: 1.5rem; width: max-content;
+    animation: scroll-infini 35s linear infinite;
+  }
+  @keyframes scroll-infini {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .carrousel-item {
+    width: 200px; flex-shrink: 0;
+    border: 1px solid rgba(201,161,74,0.25);
+    overflow: hidden; aspect-ratio: 3/4; background: #1a0520;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .carrousel-item:hover { border-color: rgba(201,161,74,0.7); transform: translateY(-6px); }
+  .carrousel-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Valeurs */
+  .valeurs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+  .valeur-card { background: rgba(201,161,74,0.04); border: 1px solid rgba(201,161,74,0.14); padding: 2rem 1.8rem; transition: background 0.3s, border-color 0.3s; }
+  .valeur-card:hover { background: rgba(201,161,74,0.07); border-color: rgba(201,161,74,0.35); }
+  .valeur-icone { font-size: 1.4rem; color: var(--or); margin-bottom: 0.8rem; }
+  .valeur-titre { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--or-clair); margin-bottom: 0.6rem; }
+  .valeur-texte { font-size: 1rem; line-height: 1.75; opacity: 0.65; }
+
+  @media (max-width: 900px) {
+    .theatre-hero-img { width: 85vw !important; max-width: 320px; margin: 2rem auto 0; }
+    .page-theatre .hero-content { max-width: 100%; text-align: center !important; align-items: center !important; }
+    .page-theatre .hero-accroche { text-align: center !important; }
+    .valeurs-grid { grid-template-columns: 1fr !important; }
+    .carrousel-item { width: 140px; }
+    .carrousel-item:hover { transform: none; }
+  }
+  @media (max-width: 560px) {
+    .carrousel-item { width: 110px; }
+    .carrousel-track { animation-duration: 22s; }
+  }
+</style>
+
+<div class="page page-theatre" id="page-theatre">
+
+  <section id="hero" style="position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden;">
+    <div class="hero-frame"></div>
+    <div style="position:relative; z-index:3; display:flex; align-items:center; gap:4rem; width:100%; padding:0 8%; flex-wrap:wrap;">
+      <div class="hero-content" style="flex:1; min-width:280px; text-align:left; align-items:flex-start;">
+        <span class="hero-surtitre">La troupe dans la troupe</span>
+        <h1 class="hero-titre">Atelier <em>Théâtre</em></h1>
+        <p class="hero-accroche" style="text-align:left;">Née au sein des Troubadours du Troisième Millénaire, cette troupe de comédiens bénévoles crée, joue et fait vivre le théâtre à Bazas — des planches du Chemin des Mémoires aux scènes de la Salle des Conférences.</p>
+        <div class="hero-actions" style="margin-top:1.5rem;">
+          <a class="btn-secondary" href="#theatre-infos">Découvrir l'atelier</a>
+        </div>
+      </div>
+      <div class="theatre-hero-img">
+        <img src="theatre.png" alt="Atelier Théâtre — Troubadours de Bazas" />
+      </div>
+    </div>
+  </section>
+
+  <section id="theatre-infos" style="background: linear-gradient(180deg, #0d0514 0%, #1a0520 100%);">
+    <div class="section-inner">
+      <div style="display:grid; grid-template-columns:3fr 2fr; gap:5rem; align-items:start;" class="reveal">
+        <div>
+          <span class="section-label">L'Atelier</span>
+          <h2 class="section-titre">Une troupe <span>passionnée</span></h2>
+          <p style="font-size:1.1rem; line-height:1.9; opacity:0.8; margin-bottom:1.2rem;">Fondé en <em>2010</em> sous la direction d'André Desmoulins, l'Atelier Théâtre des Troubadours rassemble une vingtaine de comédiens amateurs animés par une même passion : donner vie à des histoires sur scène.</p>
+          <p style="font-size:1.1rem; line-height:1.9; opacity:0.8; margin-bottom:1.2rem;">La troupe propose chaque année des <em>créations originales</em> — pièces de théâtre, sketches, saynètes — jouées en salle ou intégrées aux grands spectacles de l'association. Elle participe notamment aux soirées du <em>Chemin des Mémoires</em>, apportant sa touche théâtrale au cœur du spectacle Son et Lumière.</p>
+          <p style="font-size:1.1rem; line-height:1.9; opacity:0.8; margin-bottom:2rem;">Ouvert à tous, l'atelier est bien plus qu'une troupe : c'est un espace de création collective, de partage et de dépassement de soi, où chacun trouve sa place sur les planches.</p>
+          <div style="padding:1.4rem 1.8rem; border-left:3px solid var(--or); background:rgba(201,161,74,0.05);">
+            <p style="font-style:italic; font-size:1.15rem; line-height:1.65; opacity:0.85;">« Le théâtre, c'est l'art de faire croire que la vie est plus belle, plus drôle ou plus émouvante qu'elle ne l'est vraiment. »</p>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div class="info-item"><div class="info-item-label">✦ Fondé en</div><div class="info-item-val"><strong>2010</strong><br/>Plus de 15 ans de créations</div></div>
+          <div class="info-item"><div class="info-item-label">✦ Direction</div><div class="info-item-val"><strong>André Desmoulins</strong><br/>Metteur en scène</div></div>
+          <div class="info-item"><div class="info-item-label">✦ La troupe</div><div class="info-item-val"><strong>Une vingtaine de comédiens</strong><br/>Tous bénévoles</div></div>
+          <div class="info-item"><div class="info-item-label">✦ Tarif</div><div class="info-item-val"><strong>Entrée au chapeau</strong><br/>Prix libre, selon votre cœur</div></div>
+          <div class="info-item"><div class="info-item-label">✦ Rejoindre</div><div class="info-item-val">Vous souhaitez monter sur scène ? <a onclick="showPage('contact')" style="color:var(--or-clair); cursor:pointer;">Contactez-nous</a></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #1a0520 0%, #0d0514 100%); border-top:1px solid rgba(201,161,74,0.1);">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal">
+        <span class="section-label">Notre identité</span>
+        <h2 class="section-titre">Ce qui nous <span>anime</span></h2>
+      </div>
+      <div class="valeurs-grid reveal">
+        <div class="valeur-card">
+          <div class="valeur-icone">✦</div>
+          <div class="valeur-titre">Créations originales</div>
+          <div class="valeur-texte">Chaque spectacle est une œuvre nouvelle, écrite et mise en scène pour les Troubadours. Pas de pièces toutes faites — seulement de l'inédit.</div>
+        </div>
+        <div class="valeur-card">
+          <div class="valeur-icone">✦</div>
+          <div class="valeur-titre">Bénévolat & passion</div>
+          <div class="valeur-texte">Comédiens, techniciens, costumiers — tous bénévoles, tous passionnés. L'atelier vit grâce à l'énergie de ceux qui y croient.</div>
+        </div>
+        <div class="valeur-card">
+          <div class="valeur-icone">✦</div>
+          <div class="valeur-titre">Théâtre pour tous</div>
+          <div class="valeur-texte">Des spectacles accessibles, une entrée au chapeau, des salles ouvertes à tous. Le théâtre ne doit pas avoir de barrière.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #0d0514 0%, #1a0520 100%); padding:5rem 0;">
+    <div style="text-align:center; margin-bottom:3rem; padding:0 1.5rem;" class="reveal">
+      <span class="section-label">Nos spectacles</span>
+      <h2 class="section-titre">Les affiches <span>de la troupe</span></h2>
+      <p style="font-size:1.05rem; opacity:0.6; font-style:italic; margin-top:0.5rem;">Touchez et glissez pour explorer</p>
+    </div>
+    <div class="carrousel-wrapper reveal" id="carrouselWrapper">
+      <div class="carrousel-track" id="carrouselTrack">
+        <div class="carrousel-item"><img src="theatre.png"  alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre2.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre3.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre4.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre5.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre6.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre7.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre8.png" alt="Spectacle Théâtre" /></div>
+        <!-- Duplication pour l'effet infini -->
+        <div class="carrousel-item"><img src="theatre.png"  alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre2.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre3.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre4.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre5.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre6.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre7.png" alt="Spectacle Théâtre" /></div>
+        <div class="carrousel-item"><img src="theatre8.png" alt="Spectacle Théâtre" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(180deg, #1a0520 0%, #080501 100%);">
+    <div class="section-inner reveal" style="text-align:center;">
+      <span class="section-label">Rejoignez-nous</span>
+      <h2 class="section-titre" style="margin-bottom:1.5rem;">Montez sur <span>les planches</span></h2>
+      <p style="font-size:1.1rem; opacity:0.7; max-width:580px; margin:0 auto 2.5rem; line-height:1.85;">Vous rêvez de théâtre ? L'Atelier est ouvert à tous, sans condition. Venez vivre l'aventure de la scène au sein d'une troupe chaleureuse et passionnée.</p>
+      <div style="display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap;">
+        <a class="btn-secondary" onclick="showPage('spectacles')">Nos autres spectacles</a>
+        <a class="btn-primary" onclick="showPage('contact')">Nous rejoindre</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
      JAVASCRIPT
 ═══════════════════════════════════════════ -->
 <script>
@@ -1462,6 +1727,61 @@
 
   // Lancer au chargement
   initReveal();
+</script>
+
+<script>
+  // ── Carrousel tactile + souris ──
+  (function() {
+    const wrapper = document.getElementById('carrouselWrapper');
+    const track   = document.getElementById('carrouselTrack');
+    if (!wrapper || !track) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let currentOffset = 0;
+    let animFrame;
+
+    // Pause au survol souris (desktop)
+    wrapper.addEventListener('mouseenter', () => wrapper.classList.add('paused'));
+    wrapper.addEventListener('mouseleave', () => {
+      if (!isDragging) wrapper.classList.remove('paused');
+    });
+
+    // Drag souris
+    wrapper.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.pageX;
+      wrapper.classList.add('paused');
+      wrapper.style.cursor = 'grabbing';
+    });
+    window.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      wrapper.classList.remove('paused');
+      wrapper.style.cursor = 'grab';
+    });
+    wrapper.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const dx = e.pageX - startX;
+      track.style.animationDelay = (dx * 0.08) + 'ms';
+    });
+
+    // Touch mobile
+    let touchStartX = 0;
+    wrapper.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      wrapper.classList.add('paused');
+    }, { passive: true });
+    wrapper.addEventListener('touchend', () => {
+      setTimeout(() => wrapper.classList.remove('paused'), 800);
+    }, { passive: true });
+    wrapper.addEventListener('touchmove', (e) => {
+      const dx = e.touches[0].clientX - touchStartX;
+      track.style.animationDelay = (dx * 0.1) + 'ms';
+    }, { passive: true });
+  })();
 </script>
 
 <!-- ═══════════════════════════════════════════
