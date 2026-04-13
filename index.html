@@ -615,6 +615,9 @@
       .creche-infos-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
       .patrimoine-infos-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
       .valeurs-grid { grid-template-columns: 1fr !important; }
+
+      /* Theatre infos grid */
+      #theatre-infos .section-inner > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
     }
 
     /* ═══════════════════════════════════════════════
@@ -632,7 +635,7 @@
         flex-direction: column !important;
         align-items: center !important;
         text-align: center !important;
-        padding: 0 1.5rem !important;
+        padding: 8rem 1.5rem 2rem !important;
       }
 
       /* Accueil */
@@ -644,7 +647,7 @@
       .histo-frise { grid-template-columns: 1fr 1fr; }
       .histo-frise-item:nth-child(2) { border-right: none; }
       .histo-frise-item:nth-child(3) { border-top: 1px solid rgba(201,161,74,0.12); }
-      .hero-frame { inset: 80px 20px 40px; }
+      .hero-frame { inset: 70px 12px 40px; }
 
       /* Chemin des mémoires */
       .synopsis-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -671,19 +674,23 @@
       .seances-grid { grid-template-columns: 1fr !important; gap: 1rem; }
       .creche-galerie { grid-template-columns: 1fr !important; }
       .creche-galerie-img.large { grid-column: span 1 !important; aspect-ratio: 4/3 !important; }
-      .creche-hero-img { width: 85vw !important; max-width: 380px; }
+      .creche-hero-img { width: 90vw !important; max-width: 380px; border-radius: 2px; }
 
-      /* Patrimoine */
+      /* Patrimoine — image contenue dans le flux */
       .patrimoine-infos-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
       .patrimoine-galerie { grid-template-columns: 1fr !important; }
       .patrimoine-galerie-img.large { grid-column: span 1 !important; aspect-ratio: 4/3 !important; }
-      .patrimoine-hero-img { width: 85vw !important; max-width: 380px; }
+      .patrimoine-hero-img { width: 90vw !important; max-width: 380px; border-radius: 2px; }
       .etape-item { padding-left: 3rem; gap: 1rem; }
 
-      /* Théâtre */
-      .theatre-hero-img { width: 85vw !important; max-width: 320px; }
+      /* Théâtre — image contenue + grille texte en colonne */
+      .theatre-hero-img { width: 90vw !important; max-width: 360px; border-radius: 2px; }
       .valeurs-grid { grid-template-columns: 1fr !important; }
       .carrousel-item { width: 140px; }
+      #theatre-infos .section-inner > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
+
+      /* Surtitre hero — évite débordement */
+      .hero-surtitre { font-size: 0.58rem !important; letter-spacing: 0.25em !important; word-break: break-word; }
 
       /* Boutons hero */
       .hero-actions { flex-direction: column; align-items: center; gap: 0.8rem; }
@@ -707,6 +714,18 @@
       .carrousel-item { width: 120px; }
       .seances-grid { grid-template-columns: 1fr !important; }
       .valeurs-grid { grid-template-columns: 1fr !important; }
+
+      /* Chemin : cacher l'affiche sur mobile, centrer le hero */
+      .page-chemin .hero-affiche-zone { display: none !important; }
+      .page-chemin #hero { align-items: center !important; justify-content: center !important; }
+      .page-chemin .hero-content { margin-left: 0 !important; text-align: center !important; align-items: center !important; padding-top: 100px !important; }
+
+      /* Patrimoine & Théâtre : image après le texte, pleine largeur */
+      .patrimoine-hero-img { width: 100% !important; max-width: 100% !important; margin: 1.5rem 0 0 !important; }
+      .theatre-hero-img { width: 100% !important; max-width: 100% !important; margin: 1.5rem 0 0 !important; }
+
+      /* Surtitre hero */
+      .hero-surtitre { font-size: 0.55rem !important; letter-spacing: 0.2em !important; }
 
       /* Supprime le hover carrousel sur tactile — remplace par touch */
       .carrousel-track { animation-duration: 25s; }
@@ -828,7 +847,7 @@
       </div>
       <div class="spectacles-grid">
         <a class="spectacle-card" onclick="showPage('chemin')">
-          <div class="spectacle-card-bg" style="background-image:url('course.jpg'); background-size:cover; background-position:70% center;"></div>
+          <div class="spectacle-card-bg" style="background-image:url('course.png'); background-size:cover; background-position:70% center;"></div>
           <div class="card-overlay"></div>
           <div class="card-content">
             <p class="card-tag">Spectacle phare · 2016–2026</p>
