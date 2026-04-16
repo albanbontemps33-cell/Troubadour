@@ -659,6 +659,7 @@
       .nav-links, .nav-cta { display: none; }
       .nav-burger { display: flex; }
       .section-inner { padding: 4rem 1.5rem; }
+      body { overflow-x: hidden; }
 
       /* Hero flex → colonne sur mobile */
       #hero > div[style*="display:flex"],
@@ -692,7 +693,9 @@
       .spectacle-bloc .spectacle-info { order: 1; }
       .spectacle-bloc.reverse .spectacle-visuel { order: 2; }
       .spectacle-bloc.reverse .spectacle-info { order: 1; }
-      .spectacle-cadre { aspect-ratio:16/9; }
+      .spectacle-cadre { aspect-ratio:16/9; width:100%; max-width:100%; overflow:hidden; }
+      .spectacle-cadre img { width:100% !important; height:100% !important; max-width:100% !important; object-fit:cover !important; display:block !important; }
+      .spectacle-visuel { width:100%; max-width:100%; overflow:hidden; }
 
       /* Historique */
       .bureau-grid { grid-template-columns:1fr 1fr; }
@@ -729,7 +732,7 @@
       /* Surtitre hero — évite débordement */
       .hero-surtitre { font-size: 0.58rem !important; letter-spacing: 0.25em !important; word-break: break-word; }
 
-      /* Fix global hero flex containers with images — prevent overflow on mobile */
+      /* Fix global hero flex containers avec images — forcer colonne + contraindre images */
       .page-creche section[id="hero"] > div,
       .page-patrimoine section[id="hero"] > div,
       .page-theatre section[id="hero"] > div {
@@ -745,11 +748,37 @@
         align-items: center !important;
         flex: unset !important;
         width: 100% !important;
+        min-width: unset !important;
       }
       .page-creche .hero-accroche,
       .page-patrimoine .hero-accroche,
       .page-theatre .hero-accroche {
         text-align: center !important;
+      }
+      /* Images hero contenues dans leur boîte */
+      .creche-hero-img,
+      .patrimoine-hero-img,
+      .theatre-hero-img {
+        width: 85vw !important;
+        max-width: 340px !important;
+        flex-shrink: 0 !important;
+        margin: 0 auto !important;
+        overflow: hidden !important;
+      }
+      .creche-hero-img img,
+      .patrimoine-hero-img img,
+      .theatre-hero-img img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        display: block !important;
+        object-fit: cover !important;
+      }
+      /* Empêcher overflow sur toutes les sections hero */
+      .page-creche section[id="hero"],
+      .page-patrimoine section[id="hero"],
+      .page-theatre section[id="hero"] {
+        overflow: hidden !important;
       }
 
       /* Boutons hero */
