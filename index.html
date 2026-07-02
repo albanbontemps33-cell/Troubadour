@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Troubadours du Troisième Millénaire — Bazas</title>
+
+  <!-- ═══ SEO ═══
+       🔴 SITE_BASE_URL sert aux liens canoniques et aux balises de partage (Open Graph / Twitter).
+       Remplacez-le par l'adresse réelle du site (adresse GitHub Pages actuelle, ou nom de domaine une fois acheté) —
+       cette valeur est aussi définie dans le script de routage en bas de page (variable SITE_BASE_URL), pensez à la changer aux deux endroits. -->
+  <meta name="description" content="Troupe bénévole de spectacle vivant à Bazas (Gironde). Spectacles Son et Lumière, crèche vivante, soirée patrimoine et atelier théâtre depuis l'an 2000.">
+  <link rel="canonical" href="https://albanbontemps33-cell.github.io/Troubadour/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Troubadours du Troisième Millénaire">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Troubadours du Troisième Millénaire — Spectacles Son et Lumière à Bazas">
+  <meta property="og:description" content="Troupe bénévole de spectacle vivant à Bazas (Gironde). Spectacles Son et Lumière, crèche vivante, soirée patrimoine et atelier théâtre depuis l'an 2000.">
+  <meta property="og:url" content="https://albanbontemps33-cell.github.io/Troubadour/">
+  <meta property="og:image" content="https://albanbontemps33-cell.github.io/Troubadour/Affiche26.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Troubadours du Troisième Millénaire — Spectacles Son et Lumière à Bazas">
+  <meta name="twitter:description" content="Troupe bénévole de spectacle vivant à Bazas (Gironde). Spectacles Son et Lumière, crèche vivante, soirée patrimoine et atelier théâtre depuis l'an 2000.">
+  <meta name="twitter:image" content="https://albanbontemps33-cell.github.io/Troubadour/Affiche26.png">
+
   <link rel="icon" type="image/png" href="data:image/png;base64,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">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -821,8 +842,42 @@
       /* Supprime le hover carrousel sur tactile — remplace par touch */
       .carrousel-track { animation-duration: 25s; }
     }
+
+    /* ═══ Bandeau de consentement cookies (RGPD) ═══ */
+    #cookie-banner {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 999;
+      background: #0a0a08; border-top: 1px solid rgba(201,161,74,0.35);
+      padding: 1.2rem 1.5rem; display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: center; gap: 1.2rem;
+      transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.4);
+    }
+    #cookie-banner.show { transform: translateY(0); }
+    #cookie-banner p {
+      margin: 0; color: rgba(245,240,230,0.85); font-family: 'EB Garamond', serif;
+      font-size: 0.92rem; max-width: 640px; text-align: center; line-height: 1.5;
+    }
+    #cookie-banner .cookie-actions { display: flex; gap: 0.7rem; flex-shrink: 0; }
+    #cookie-banner button {
+      font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.65rem 1.3rem; cursor: pointer;
+      border-radius: 1px; transition: all 0.3s ease;
+    }
+    #cookie-accept {
+      background: var(--or); color: #14100a; border: 1px solid var(--or);
+    }
+    #cookie-accept:hover { background: #dcb15e; }
+    #cookie-refuse {
+      background: transparent; color: rgba(245,240,230,0.7); border: 1px solid rgba(201,161,74,0.35);
+    }
+    #cookie-refuse:hover { border-color: var(--or); color: var(--or); }
+    @media (max-width: 560px) {
+      #cookie-banner { padding: 1rem; }
+      #cookie-banner p { font-size: 0.82rem; }
+    }
   </style>
 </head>
+
 <body>
 
 <!-- ═══ NAVIGATION ═══ -->
@@ -1859,15 +1914,51 @@
      JAVASCRIPT
 ═══════════════════════════════════════════ -->
 <script>
-  // ── Navigation SPA ──
-  function showPage(name) {
+  // ── SEO / Titres par page ──
+  // 🔴 SITE_BASE_URL : à remplacer par l'adresse réelle du site (identique à celle mise dans le <head>).
+  const SITE_BASE_URL = "https://albanbontemps33-cell.github.io/Troubadour";
+
+  const PAGE_META = {
+    accueil:     { title: "Troubadours du Troisième Millénaire — Spectacles Son et Lumière à Bazas", desc: "Troupe bénévole de spectacle vivant à Bazas (Gironde). Spectacles Son et Lumière, crèche vivante, soirée patrimoine et atelier théâtre depuis l'an 2000." },
+    spectacles:  { title: "Nos Spectacles — Troubadours du Troisième Millénaire, Bazas", desc: "Découvrez tous les spectacles des Troubadours du Troisième Millénaire : Le Chemin des Mémoires, la Crèche Vivante, la Soirée Patrimoine et l'Atelier Théâtre." },
+    chemin:      { title: "Le Chemin des Mémoires — Spectacle Son et Lumière | Troubadours de Bazas", desc: "Le Chemin des Mémoires : 2500 ans d'histoire du Bazadais en une nuit. Spectacle Son et Lumière les 7, 8 et 9 août 2026 à Bazas, Gironde." },
+    creche:      { title: "La Crèche Vivante — Spectacle de Noël à Bazas | Troubadours", desc: "La Crèche Vivante : une nativité grandeur nature dans la cathédrale de Bazas. Spectacle féerique et gratuit, chaque année depuis 2008." },
+    patrimoine:  { title: "Soirée Patrimoine — Parcours nocturne à Bazas | Troubadours", desc: "Soirée Patrimoine : parcours nocturne et scénettes historiques dans les rues de Bazas. Une expérience gratuite et immersive." },
+    theatre:     { title: "Atelier Théâtre — Troubadours du Troisième Millénaire, Bazas", desc: "L'Atelier Théâtre des Troubadours du Troisième Millénaire : une troupe de comédiens bénévoles à Bazas." },
+    historique:  { title: "Historique de la troupe — Troubadours du Troisième Millénaire", desc: "L'histoire de l'association Troubadours du Troisième Millénaire, née en 2000 à Bazas, et de ses spectacles bénévoles." },
+    billetterie: { title: "Billetterie 2026 — Le Chemin des Mémoires | Troubadours de Bazas", desc: "Réservez vos places pour Le Chemin des Mémoires, les 7, 8 et 9 août 2026 à Bazas. Réservation en ligne sécurisée via HelloAsso." },
+    contact:     { title: "Contact & Adhésion — Troubadours du Troisième Millénaire", desc: "Contactez les Troubadours du Troisième Millénaire ou rejoignez la troupe bénévole de Bazas, Gironde." },
+  };
+
+  function updateMetaTags(name) {
+    const meta = PAGE_META[name] || PAGE_META.accueil;
+    document.title = meta.title;
+    const url = SITE_BASE_URL + '/' + (name === 'accueil' ? '' : '#' + name);
+    const setAttr = (selector, attr, val) => {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute(attr, val);
+    };
+    setAttr('meta[name="description"]', 'content', meta.desc);
+    setAttr('link[rel="canonical"]', 'href', url);
+    setAttr('meta[property="og:title"]', 'content', meta.title);
+    setAttr('meta[property="og:description"]', 'content', meta.desc);
+    setAttr('meta[property="og:url"]', 'content', url);
+    setAttr('meta[name="twitter:title"]', 'content', meta.title);
+    setAttr('meta[name="twitter:description"]', 'content', meta.desc);
+  }
+
+  // ── Navigation SPA (avec URL par page) ──
+  function showPage(name, opts) {
+    opts = opts || {};
+    if (!PAGE_META[name]) name = 'accueil';
+
     // Cacher toutes les pages
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     // Afficher la bonne
     const target = document.getElementById('page-' + name);
     if (target) {
       target.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: opts.skipScroll ? 'auto' : 'smooth' });
     }
     // Mettre à jour les liens actifs (nav desktop)
     document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
@@ -1879,7 +1970,33 @@
     });
     // Relancer les révélations
     setTimeout(initReveal, 100);
+
+    // Titre + balises SEO
+    updateMetaTags(name);
+
+    // Mettre à jour l'URL (#chemin, #creche...) sans recharger la page
+    if (!opts.skipHistory) {
+      const hash = '#' + name;
+      if (location.hash !== hash) {
+        history.pushState({ page: name }, '', hash);
+      }
+    }
+
+    // Suivi de la visite virtuelle de page (si Google Analytics est chargé)
+    if (window.gaLoaded && typeof gtag === 'function') {
+      gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: '/#' + name
+      });
+    }
   }
+
+  // Bouton retour / avance du navigateur
+  window.addEventListener('popstate', () => {
+    const name = (location.hash || '#accueil').slice(1) || 'accueil';
+    showPage(name, { skipHistory: true });
+  });
 
   // ── Burger menu ──
   document.getElementById('burger-btn').addEventListener('click', function() {
@@ -1902,9 +2019,13 @@
     document.querySelectorAll('.page.active .reveal:not(.visible)').forEach(el => observer.observe(el));
   }
 
-  // Lancer au chargement
-  initReveal();
+  // ── Lecture de l'URL au chargement (permet les liens directs, ex: site.fr/#chemin) ──
+  (function initRouting() {
+    const initial = (location.hash || '#accueil').slice(1) || 'accueil';
+    showPage(initial, { skipHistory: true, skipScroll: true });
+  })();
 </script>
+
 
 <script>
   // ── Carrousel tactile + souris ──
@@ -1995,7 +2116,73 @@
 </div>
     <p class="footer-copy">© 2026 Association Troubadours du Troisième Millénaire · Bazas · Gironde</p>
     <p class="footer-copy">Site internet créé par <a href="https://www.instagram.com/alban_btps/" target="_blank" style="text-decoration: none; color: rgb(52, 129, 237);">Alban BONTEMPS</a></p>
+    <p class="footer-copy"><a href="#" onclick="reopenCookieBanner(); return false;" style="text-decoration: underline; color: inherit; opacity: 0.6;">Gérer les cookies</a></p>
   </footer>
+
+  <!-- ═══ Bandeau de consentement cookies (RGPD) ═══ -->
+  <div id="cookie-banner">
+    <p>
+      Ce site utilise Google Analytics pour mesurer sa fréquentation de façon anonyme.
+      Ces données nous aident à améliorer le site. Vous pouvez accepter ou refuser librement.
+    </p>
+    <div class="cookie-actions">
+      <button id="cookie-refuse" onclick="setCookieConsent('refused')">Refuser</button>
+      <button id="cookie-accept" onclick="setCookieConsent('accepted')">Accepter</button>
+    </div>
+  </div>
+
+  <script>
+    // ── Google Analytics (chargé uniquement après consentement — conforme RGPD) ──
+    // 🔴 Remplacez GA_MEASUREMENT_ID par votre identifiant de mesure Google Analytics 4.
+    // Pour l'obtenir : analytics.google.com → Admin → Flux de données → votre flux Web → "ID de mesure" (commence par "G-").
+    const GA_MEASUREMENT_ID = 'G-W5115P4D88';
+    const GA_CONSENT_KEY = 'troubadours_cookie_consent';
+
+    function loadGoogleAnalytics() {
+      if (window.gaLoaded) return;
+      if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID.indexOf('XXXX') !== -1) {
+        console.warn('Google Analytics : identifiant GA_MEASUREMENT_ID non configuré.');
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+      script.async = true;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      gtag('js', new Date());
+      // send_page_view désactivé : le site étant une SPA, chaque page virtuelle est
+      // suivie manuellement dans showPage() au moment du changement de page.
+      gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
+      window.gaLoaded = true;
+
+      gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: location.hash ? '/' + location.hash : '/'
+      });
+    }
+
+    function setCookieConsent(value) {
+      localStorage.setItem(GA_CONSENT_KEY, value);
+      document.getElementById('cookie-banner').classList.remove('show');
+      if (value === 'accepted') loadGoogleAnalytics();
+    }
+
+    function reopenCookieBanner() {
+      document.getElementById('cookie-banner').classList.add('show');
+    }
+
+    (function initCookieConsent() {
+      const consent = localStorage.getItem(GA_CONSENT_KEY);
+      if (consent === 'accepted') {
+        loadGoogleAnalytics();
+      } else if (consent !== 'refused') {
+        document.getElementById('cookie-banner').classList.add('show');
+      }
+    })();
+  </script>
 
 </body>
 </html>
