@@ -264,7 +264,7 @@
       flex-wrap: wrap; justify-content: center;
     }
     .hero-scroll {
-      position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
+      position: absolute; bottom: 3.8rem; left: 50%; transform: translateX(-50%);
       z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
       font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.35em;
       color: var(--or); opacity: 0.4; text-transform: uppercase;
@@ -711,6 +711,8 @@
       .seances-grid { grid-template-columns: 1fr !important; gap: 1rem; }
       .creche-galerie { grid-template-columns: 1fr !important; }
       .creche-galerie-img.large { grid-column: span 1 !important; aspect-ratio: 4/3 !important; }
+      .chemin-galerie { grid-template-columns: 1fr !important; }
+      .chemin-galerie-img.large { grid-column: span 1 !important; aspect-ratio: 4/3 !important; }
       .creche-hero-img { width: 90vw !important; max-width: 380px; border-radius: 2px; overflow: hidden !important; }
       .creche-hero-img img { width: 100% !important; height: auto !important; max-width: 100% !important; display: block !important; }
 
@@ -1078,21 +1080,27 @@
         <span class="section-label">Galerie</span>
         <h2 class="section-titre">Le spectacle <span>en images</span></h2>
       </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;" class="reveal">
-        <div style="overflow:hidden; border:1px solid rgba(201,161,74,0.2); aspect-ratio:4/3;">
-          <img src="chemin2.png" alt="Le Chemin des Mémoires" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+      <div class="chemin-galerie reveal">
+        <div class="chemin-galerie-img">
+          <img src="chemin2.png" alt="Le Chemin des Mémoires" />
         </div>
-        <div style="overflow:hidden; border:1px solid rgba(201,161,74,0.2); aspect-ratio:4/3;">
-          <img src="chemin3.png" alt="Le Chemin des Mémoires" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <div class="chemin-galerie-img">
+          <img src="chemin3.png" alt="Le Chemin des Mémoires" />
         </div>
-        <div style="overflow:hidden; border:1px solid rgba(201,161,74,0.2); aspect-ratio:4/3;">
-          <img src="chemin4.png" alt="Le Chemin des Mémoires" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <div class="chemin-galerie-img">
+          <img src="chemin4.png" alt="Le Chemin des Mémoires" />
         </div>
-        <div style="overflow:hidden; border:1px solid rgba(201,161,74,0.2); aspect-ratio:4/3;">
-          <img src="chemin5.png" alt="Le Chemin des Mémoires" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <div class="chemin-galerie-img">
+          <img src="chemin5.png" alt="Le Chemin des Mémoires" />
         </div>
-        <div style="overflow:hidden; border:1px solid rgba(201,161,74,0.2); aspect-ratio:16/7; grid-column:span 2;">
-          <img src="chemin6.png" alt="Le Chemin des Mémoires" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <div class="chemin-galerie-img">
+          <img src="artifice.png" alt="Le Chemin des Mémoires — Feu d'artifice" />
+        </div>
+        <div class="chemin-galerie-img">
+          <img src="feu.png" alt="Le Chemin des Mémoires — Scène de feu" />
+        </div>
+        <div class="chemin-galerie-img large">
+          <img src="chemin6.png" alt="Le Chemin des Mémoires" />
         </div>
       </div>
     </div>
@@ -1399,7 +1407,7 @@
     </div>
   </section>
 
-     <section style="background: linear-gradient(180deg, #080e1a 0%, #0d1525 50%, #080e1a 100%); border-top: 1px solid rgba(201,161,74,0.1); border-bottom: 1px solid rgba(201,161,74,0.1);">
+     <section style="background: #0d0a04; border-top: 1px solid rgba(201,161,74,0.1); border-bottom: 1px solid rgba(201,161,74,0.1);">
     <div class="chiffres-grid">
       <div class="chiffre-item reveal"><div class="chiffre-nombre">+1000</div><div class="chiffre-label">Spectateurs par an</div></div>
       <div class="chiffre-item reveal"><div class="chiffre-nombre">Gratuit</div><div class="chiffre-label">Entrée libre</div></div>
@@ -1502,6 +1510,11 @@
   .patrimoine-galerie-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
   .patrimoine-galerie-img:hover img { transform: scale(1.05); }
   .patrimoine-galerie-img.large { grid-column: span 2; aspect-ratio: 16/7; }
+  .chemin-galerie { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .chemin-galerie-img { overflow: hidden; border: 1px solid rgba(201,161,74,0.2); aspect-ratio: 4/3; }
+  .chemin-galerie-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .chemin-galerie-img:hover img { transform: scale(1.05); }
+  .chemin-galerie-img.large { grid-column: span 2; aspect-ratio: 16/7; }
   .etapes-grid { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; position: relative; }
   .etapes-grid::before { content: ''; position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, rgba(201,161,74,0.4) 10%, rgba(201,161,74,0.4) 90%, transparent); }
   .etape-item { display: flex; gap: 2.5rem; align-items: flex-start; padding: 1.8rem 0 1.8rem 4.5rem; border-bottom: 1px solid rgba(201,161,74,0.08); position: relative; transition: background 0.3s; }
@@ -1557,7 +1570,7 @@
     </div>
   </section>
 
-  <section style="background: linear-gradient(180deg, #0a180c 0%, #080e1a 50%, #0a180c 100%); border-top: 1px solid rgba(201,161,74,0.1); border-bottom: 1px solid rgba(201,161,74,0.1); padding: 2rem 0;">
+  <section style="background: linear-gradient(180deg, #0a180c 0%, #080e1a 100%); border-top: 1px solid rgba(201,161,74,0.1); border-bottom: 1px solid rgba(201,161,74,0.1); padding: 2rem 0;">
     <div class="chiffres-grid">
       <div class="chiffre-item reveal"><div class="chiffre-nombre" style="font-size:clamp(1.5rem,3vw,2.5rem);">Gratuit</div><div class="chiffre-label">Entrée libre</div></div>
       <div class="chiffre-item reveal"><div class="chiffre-nombre" style="font-size:clamp(1.5rem,3vw,2.5rem);">Nocturne</div><div class="chiffre-label">À partir de 21h00</div></div>
