@@ -421,7 +421,8 @@
 
     /* ═══ FAQ (accordéon, présent sur chaque page de spectacle) ═══ */
     .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.9rem; }
-    .faq-item { background: rgba(201,161,74,0.05); border: 1px solid rgba(201,161,74,0.15); }
+    .faq-item { background: rgba(201,161,74,0.05); border: 1px solid rgba(201,161,74,0.15); transition: border-color 0.35s ease; }
+    .faq-item[open] { border-color: rgba(201,161,74,0.4); }
     .faq-item summary {
       list-style: none; cursor: pointer; padding: 1.3rem 3rem 1.3rem 1.6rem; position: relative;
       font-family: 'Cinzel', serif; font-size: 0.95rem; letter-spacing: 0.01em;
@@ -429,11 +430,17 @@
     }
     .faq-item summary::-webkit-details-marker { display: none; }
     .faq-item summary::after {
-      content: '+'; position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%);
-      color: var(--or); font-size: 1.3rem; font-family: 'EB Garamond', serif; transition: transform 0.3s ease;
+      content: '+'; position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%) rotate(0deg);
+      color: var(--or); font-size: 1.3rem; font-family: 'EB Garamond', serif;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
-    .faq-item[open] summary::after { content: '−'; }
-    .faq-item p { padding: 0 1.6rem 1.4rem; margin: 0; font-size: 0.98rem; line-height: 1.75; opacity: 0.8; }
+    .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+    .faq-item p {
+      padding: 0 1.6rem 1.4rem; margin: 0; font-size: 0.98rem; line-height: 1.75; opacity: 0.8;
+      overflow: hidden; box-sizing: content-box;
+      transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease, transform 0.35s ease;
+    }
+
 
     #billetterie-chemin { background: linear-gradient(180deg, #0a0703 0%, #140e06 100%); }
     .bill-inner { max-width: 860px; margin: 0 auto; }
@@ -1188,7 +1195,7 @@
       <div class="faq-list">
         <details class="faq-item reveal">
           <summary>Que se passe-t-il en cas de pluie ?</summary>
-          <p>Le spectacle se joue en extérieur. En cas de fortes intempéries, il peut être annulé ou reporté ; l'information est alors communiquée au plus tôt sur nos réseaux et par affichage sur place. Conservez votre billet, il reste valable pour une date de report.</p>
+          <p>Le spectacle est maintenu même en cas de pluie. Pensez simplement à prévoir une tenue adaptée à la météo du soir.</p>
         </details>
         <details class="faq-item reveal">
           <summary>Faut-il réserver à l'avance ?</summary>
@@ -1196,7 +1203,7 @@
         </details>
         <details class="faq-item reveal">
           <summary>Où se garer et le site est-il accessible PMR ?</summary>
-          <p>Un parking est disponible à proximité du site de la Brèche, avec fléchage le soir du spectacle. Le site est accessible aux personnes à mobilité réduite ; n'hésitez pas à nous contacter avant votre venue pour toute question spécifique.</p>
+          <p>Il n'y a pas de parking dédié, mais plusieurs parkings sont disponibles à proximité du site de la Brèche. Des emplacements PMR sont prévus, le site est accessible aux personnes à mobilité réduite.</p>
         </details>
         <details class="faq-item reveal">
           <summary>Quelle tenue prévoir ?</summary>
@@ -1789,7 +1796,7 @@
         </details>
         <details class="faq-item reveal">
           <summary>Combien de temps dure le parcours ?</summary>
-          <p>Comptez environ 1h30 à 2h pour suivre l'ensemble du parcours nocturne à travers les rues de Bazas, à un rythme tranquille.</p>
+          <p>La durée varie d'une édition à l'autre selon le nombre de scénettes et le rythme du groupe. Prévoyez votre soirée sans contrainte horaire stricte, et suivez le parcours à votre rythme.</p>
         </details>
         <details class="faq-item reveal">
           <summary>Le parcours est-il accessible aux poussettes et aux personnes à mobilité réduite ?</summary>
@@ -2019,7 +2026,7 @@
       <div class="faq-list">
         <details class="faq-item reveal">
           <summary>Qu'est-ce que « l'entrée au chapeau » ?</summary>
-          <p>Il n'y a pas de tarif fixe : vous participez librement, à la fin de la représentation, selon vos moyens et votre plaisir. C'est ce qui permet aux spectacles de rester accessibles à tous.</p>
+          <p>Il n'y a pas de tarif fixe : vous participez librement, à la fin de la représentation, selon vos moyens et votre plaisir. C'est le principe pour toutes les représentations de l'Atelier Théâtre, et c'est ce qui permet aux spectacles de rester accessibles à tous.</p>
         </details>
         <details class="faq-item reveal">
           <summary>Faut-il réserver ses places ?</summary>
@@ -2165,7 +2172,67 @@
     const initial = (location.hash || '#accueil').slice(1) || 'accueil';
     showPage(initial, { skipHistory: true, skipScroll: true });
   })();
+
+  // ── FAQ : accordéon animé et exclusif (une seule question ouverte à la fois par liste) ──
+  function openFaqItem(details) {
+    const answer = details.querySelector('p');
+    details.setAttribute('open', '');
+    answer.style.maxHeight = '0px';
+    answer.style.opacity = '0';
+    answer.style.transform = 'translateY(-6px)';
+    // Force le navigateur à prendre en compte l'état de départ avant d'animer
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        answer.style.opacity = '0.8';
+        answer.style.transform = 'translateY(0)';
+      });
+    });
+    answer.addEventListener('transitionend', function handler(e) {
+      if (e.propertyName !== 'max-height') return;
+      answer.style.maxHeight = 'none';
+      answer.removeEventListener('transitionend', handler);
+    });
+  }
+
+  function closeFaqItem(details) {
+    const answer = details.querySelector('p');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        answer.style.maxHeight = '0px';
+        answer.style.opacity = '0';
+        answer.style.transform = 'translateY(-6px)';
+      });
+    });
+    answer.addEventListener('transitionend', function handler(e) {
+      if (e.propertyName !== 'max-height') return;
+      details.removeAttribute('open');
+      answer.removeEventListener('transitionend', handler);
+    });
+  }
+
+  document.querySelectorAll('.faq-item').forEach(details => {
+    const summary = details.querySelector('summary');
+    summary.addEventListener('click', (e) => {
+      e.preventDefault(); // on gère l'ouverture nous-mêmes pour pouvoir l'animer
+      const list = details.closest('.faq-list');
+      const isOpen = details.hasAttribute('open');
+
+      // Ferme toutes les autres questions ouvertes de la même FAQ
+      list.querySelectorAll('.faq-item[open]').forEach(other => {
+        if (other !== details) closeFaqItem(other);
+      });
+
+      if (isOpen) {
+        closeFaqItem(details);
+      } else {
+        openFaqItem(details);
+      }
+    });
+  });
 </script>
+
 
 
 <script>
