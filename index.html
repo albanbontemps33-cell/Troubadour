@@ -443,6 +443,23 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   .nav-links a.nav-cta{padding:.7rem 1.1rem}
 }
 
+/* ═══ Correctifs mobile : hero de l'accueil et menu ═══ */
+.hero-badge{max-width:100%}
+@media (max-width:1000px){
+  .hero-split .hero-inner,.hero-center .hero-inner{grid-template-columns:minmax(0,1fr)}
+  .hero-center .hero-content{max-width:100%;width:100%}
+}
+@media (max-width:900px){
+  .hero-inner{padding:0 1.6rem}
+  .hero-center .hero-inner{gap:0}
+  .nav-mobile li{width:100%;text-align:center}
+}
+@media (max-width:560px){
+  .hero-titre{font-size:clamp(1.9rem,8.4vw,2.6rem)}
+  .hero-sous{font-size:1.05rem}
+  .hero-inner{padding:0 1.4rem}
+}
+
 .page{display:none}.page.active{display:block}
 [id]{scroll-margin-top:90px}
 </style>
