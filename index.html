@@ -291,7 +291,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 /* filet doré qui se trace */
 .js .faq-a-inner::before{content:'';display:block;height:1px;margin:0 1.6rem;background:linear-gradient(90deg,transparent,var(--or),transparent);transform:scaleX(0);transition:transform .35s}
 /* tige du parchemin enroulé */
-.js .faq-a-inner::after{content:'';display:block;height:6px;margin:0 1.6rem 1rem;border-radius:3px;background:linear-gradient(180deg,#f0d58f,#9c7a30 55%,#3d2c0e);box-shadow:0 3px 8px rgba(0,0,0,.45);opacity:0;transform:scaleX(.55);transition:opacity .3s,transform .5s}
+.js .faq-a-inner::after{content:'';display:block;height:1px;margin:0 1.6rem 1.1rem;background:linear-gradient(90deg,transparent,rgba(201,161,74,.7),transparent);opacity:0;transform:scaleX(.55);transition:opacity .3s,transform .5s}
 /* texte : se déroule de haut en bas */
 .js .faq-a-inner p{opacity:0;transform:translateY(-10px);clip-path:inset(0 0 100% 0);transition:opacity .3s,transform .4s,clip-path .4s}
 
@@ -303,7 +303,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 .js .faq-item.open .faq-a{grid-template-rows:1fr}
 .js .faq-item.open .faq-a-inner{visibility:visible;transition:visibility 0s}
 .js .faq-item.open .faq-a-inner::before{transform:scaleX(1);transition:transform 1s cubic-bezier(.22,1,.36,1) .12s}
-.js .faq-item.open .faq-a-inner::after{opacity:.75;transform:scaleX(1);transition:opacity .6s .35s,transform .9s cubic-bezier(.22,1,.36,1) .35s}
+.js .faq-item.open .faq-a-inner::after{opacity:.9;transform:scaleX(1);transition:opacity .6s .35s,transform .9s cubic-bezier(.22,1,.36,1) .35s}
 .js .faq-item.open .faq-a-inner p{opacity:.92;transform:none;clip-path:inset(0 0 0 0);transition:opacity .7s .2s,transform .9s cubic-bezier(.22,1,.36,1) .15s,clip-path 1s cubic-bezier(.22,1,.36,1) .15s}
 
 /* Page FAQ : onglets par spectacle */
