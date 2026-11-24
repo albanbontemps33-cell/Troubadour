@@ -460,6 +460,50 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   .hero-inner{padding:0 1.4rem}
 }
 
+/* ═══ Mobile : repères de sections, sommaire collant, « Lire la suite », aération ═══ */
+.subnav{display:none}
+.rm-btn{display:none}
+section[data-chip],div[data-chip]{scroll-margin-top:132px}
+@keyframes rmIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+
+@media (max-width:900px){
+  /* Sommaire collant */
+  .subnav{display:block;position:sticky;top:70px;z-index:60;background:rgba(8,5,1,.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,161,74,.3);box-shadow:0 8px 20px rgba(0,0,0,.5)}
+  .subnav-in{display:flex;gap:.55rem;overflow-x:auto;padding:.7rem 1rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .subnav-in::-webkit-scrollbar{display:none}
+  .subnav-chip{flex:0 0 auto;font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--parchemin);background:transparent;border:1px solid rgba(201,161,74,.35);padding:.6rem 1rem;cursor:pointer;white-space:nowrap;transition:background .3s,color .3s,border-color .3s}
+  .subnav-chip.on{background:var(--or);color:var(--encre-2);border-color:var(--or-clair)}
+
+  /* Séparation nette entre les sections : filet doré + losange, fond alterné */
+  .sec{border-top:1px solid rgba(201,161,74,.32)}
+  .sec::before{content:'';position:absolute;top:-6px;left:50%;width:10px;height:10px;transform:translateX(-50%) rotate(45deg);background:var(--encre-2);border:1px solid var(--or);z-index:3}
+  .sec.alt{background:linear-gradient(rgba(201,161,74,.06),rgba(201,161,74,.02)),linear-gradient(180deg,var(--bg2),var(--bg1))}
+  .sec.line{border-top-width:1px}
+
+  /* Titres de section plus lisibles */
+  .label{display:flex;align-items:center;gap:.8rem;font-size:.72rem;letter-spacing:.3em;opacity:1;margin-bottom:.9rem}
+  .label::before{content:'';flex:0 0 26px;height:1px;background:var(--or)}
+  .head .label,.center .label,.page-hero .label{justify-content:center}
+  .head .label::after,.center .label::after,.page-hero .label::after{content:'';flex:0 0 26px;height:1px;background:var(--or)}
+  .titre{font-size:clamp(1.6rem,6.6vw,2.2rem);line-height:1.2;margin-bottom:1.3rem}
+  .head{margin-bottom:2.4rem}
+
+  /* Texte plus aéré */
+  .txt,.bloc-info p{font-size:1.08rem;line-height:1.85}
+  .txt{margin-bottom:1.4rem}
+
+  /* « Lire la suite » */
+  .js .rm:not(.open) .rm-more{display:none}
+  .js .rm.open .rm-more{animation:rmIn .6s cubic-bezier(.16,1,.3,1)}
+  .js .rm .rm-btn{display:inline-flex;align-items:center;gap:.7rem;font-family:'Cinzel',serif;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--or-clair);background:rgba(201,161,74,.06);border:1px solid rgba(201,161,74,.5);padding:.8rem 1.3rem;margin:.3rem 0 1.5rem;cursor:pointer}
+  .rm-btn::after{content:'↓';font-size:.9rem;transition:transform .4s}
+  .rm.open .rm-btn::after{transform:rotate(180deg)}
+}
+@media (max-width:560px){
+  .inner{padding:4.2rem 1.4rem}
+  .page-hero{padding:130px 1.4rem 56px}
+}
+
 .page{display:none}.page.active{display:block}
 [id]{scroll-margin-top:90px}
 </style>
@@ -515,7 +559,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   </div></div>
 </section>
 
-<section class="sec"><div class="inner">
+<section data-chip="L'association" class="sec"><div class="inner">
   <div class="two even">
     <div class="reveal">
       <span class="label">L'association</span>
@@ -531,7 +575,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 
 <section class="stats-wrap"><div class="stats"><div class="stat reveal"><div class="stat-n">100</div><div class="stat-l">Bénévoles</div></div><div class="stat reveal"><div class="stat-n">700</div><div class="stat-l">Personnages</div></div><div class="stat reveal"><div class="stat-n">2500</div><div class="stat-l">Ans d'histoire revisités</div></div><div class="stat reveal"><div class="stat-n">4</div><div class="stat-l">Spectacles au répertoire</div></div></div></section>
 
-<section class="sec"><div class="inner">
+<section data-chip="Agenda" class="sec"><div class="inner">
   <div class="head reveal"><span class="label">Agenda</span><h2 class="titre">Prochain <span>rendez-vous</span></h2></div>
   <div data-next-event>
     <article class="event-card"><div class="event-body"><h3>La Crèche vivante</h3><p class="event-when">Dimanche 13 décembre 2026</p><p>Séances à 16h, 17h et 18h · Cathédrale Saint-Jean-Baptiste, Bazas · Entrée gratuite</p></div><a class="btn-secondary" href="#creche">En savoir plus</a></article>
@@ -539,7 +583,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   <div class="center reveal" style="margin-top:2rem"><a class="btn-secondary" href="#agenda">Voir tout l'agenda</a></div>
 </div></section>
 
-<section class="sec alt"><div class="inner">
+<section data-chip="Spectacles" class="sec alt"><div class="inner">
   <div class="head reveal"><span class="label">Nos créations</span><h2 class="titre">Quatre spectacles, <span>un seul souffle</span></h2></div>
   <div class="cards">
     <a class="spectacle-card reveal" href="#chemin"><img src="course.jpg" alt="" loading="lazy" decoding="async" style="object-position:70% center"><span class="card-overlay"></span><span class="card-content"><span class="card-tag">Spectacle phare · Son et Lumière</span><h3 class="card-titre">Le Chemin des Mémoires</h3><p class="card-desc">2 500 ans d'histoire du Bazadais en 1h30. 100 bénévoles, plus de 700 personnages, chevaux et attelages.</p><span class="card-lien">Découvrir →</span></span></a>
@@ -549,7 +593,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   </div>
 </div></section>
 
-<section class="sec"><div class="inner">
+<section data-chip="Histoire" class="sec"><div class="inner">
   <div class="head reveal"><span class="label">Une longue aventure</span><h2 class="titre">Depuis l'an <span>2000</span></h2></div>
   <div class="frise">
     <div class="frise-item reveal"><div class="frise-an">2000</div><div class="frise-t">Les premières lueurs</div><p class="frise-p">Un groupe d'amis passionnés crée les premiers spectacles à Bazas.</p></div>
@@ -569,7 +613,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 </div></section>
 
 <section class="sec">
-  <div class="bloc reveal">
+  <div data-chip="Le Chemin" class="bloc reveal">
     <div class="bloc-visuel"><div class="bloc-cadre"><img src="Chemin.jpg" alt="Le Chemin des Mémoires" loading="lazy" decoding="async"><div class="bloc-tag">Spectacle phare · Son &amp; Lumière</div></div></div>
     <div class="bloc-info">
       <span class="label">Spectacle I</span>
@@ -580,7 +624,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
       <div class="btn-groupe"><a class="btn-primary" href="#chemin">Découvrir le spectacle</a></div>
     </div>
   </div>
-  <div class="bloc reverse reveal">
+  <div data-chip="La Crèche" class="bloc reverse reveal">
     <div class="bloc-info">
       <span class="label">Spectacle II</span>
       <h2 class="titre">La Crèche <span>Vivante</span></h2>
@@ -591,7 +635,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
     </div>
     <div class="bloc-visuel"><div class="bloc-cadre"><img src="image-creche.png" alt="La Crèche Vivante" loading="lazy" decoding="async"><div class="bloc-tag">Spectacle de Noël · Tradition</div></div></div>
   </div>
-  <div class="bloc reveal">
+  <div data-chip="Patrimoine" class="bloc reveal">
     <div class="bloc-visuel"><div class="bloc-cadre"><img src="patrimoine.png" alt="Soirée du Patrimoine" loading="lazy" decoding="async"><div class="bloc-tag">Événement patrimonial</div></div></div>
     <div class="bloc-info">
       <span class="label">Spectacle III</span>
@@ -602,7 +646,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
       <div class="btn-groupe"><a class="btn-primary" href="#patrimoine">Découvrir la soirée</a></div>
     </div>
   </div>
-  <div class="bloc reverse reveal">
+  <div data-chip="Théâtre" class="bloc reverse reveal">
     <div class="bloc-info">
       <span class="label">Spectacle IV</span>
       <h2 class="titre">Atelier <span>Théâtre</span></h2>
@@ -631,7 +675,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   </div>
 </section>
 
-<section class="sec" id="synopsis"><div class="inner"><div class="two">
+<section data-chip="Le spectacle" class="sec" id="synopsis"><div class="inner"><div class="two">
   <div class="reveal">
     <span class="label">Le spectacle</span>
     <h2 class="titre">2 500 ans d'histoire, <span>une seule nuit</span></h2>
@@ -650,16 +694,16 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 </div></div></section>
 <section class="stats-wrap"><div class="stats"><div class="stat reveal"><div class="stat-n">700</div><div class="stat-l">Personnages</div></div><div class="stat reveal"><div class="stat-n">100</div><div class="stat-l">Bénévoles</div></div><div class="stat reveal"><div class="stat-n">1h30</div><div class="stat-l">De spectacle</div></div><div class="stat reveal"><div class="stat-n">2500</div><div class="stat-l">Ans d'histoire revisités</div></div></div></section>
 
-<section class="sec" id="prochaine-edition"><div class="inner">
+<section data-chip="Prochaine édition" class="sec" id="prochaine-edition"><div class="inner">
   <div class="head reveal"><span class="label">Réservation en ligne · HelloAsso</span><h2 class="titre">La prochaine <span>édition</span></h2></div>
   <div class="reveal" data-spectacle-status="chemin"><div class="status"><span class="status-label">Prochaine édition</span><h3>Dates à annoncer</h3><p>Les prochaines dates seront publiées ici et sur nos réseaux sociaux.</p></div></div>
   <p class="note center reveal" style="margin-top:1.5rem">La réservation se fait en ligne via HelloAsso (paiement sécurisé, billet envoyé par e-mail). Le lien sera publié ici dès l'ouverture de la billetterie.</p>
 </div></section>
-<section class="sec"><div class="inner">
+<section data-chip="Photos" class="sec"><div class="inner">
   <div class="head reveal"><span class="label">Galerie</span><h2 class="titre">Le spectacle <span>en images</span></h2></div>
   <div class="galerie reveal"><figure><img src="chemin2.png" alt="Scène du Chemin des Mémoires" loading="lazy" decoding="async"></figure><figure><img src="chemin3.png" alt="Scène du Chemin des Mémoires" loading="lazy" decoding="async"></figure><figure><img src="chemin4.png" alt="Scène du Chemin des Mémoires" loading="lazy" decoding="async"></figure><figure><img src="chemin5.png" alt="Scène du Chemin des Mémoires" loading="lazy" decoding="async"></figure><figure><img src="artifice.png" alt="Feu d'artifice du Chemin des Mémoires" loading="lazy" decoding="async"></figure><figure><img src="feu.png" alt="Scène de feu du Chemin des Mémoires" loading="lazy" decoding="async"></figure><figure class="large"><img src="chemin6.png" alt="Tableau du Chemin des Mémoires" loading="lazy" decoding="async"></figure></div>
 </div></section>
-<section class="sec alt"><div class="inner">
+<section data-chip="Questions" class="sec alt"><div class="inner">
   <div class="head reveal"><span class="label">Questions fréquentes</span><h2 class="titre">Bien préparer <span>sa soirée</span></h2></div>
   <div class="faq">
   <div class="faq-item reveal"><button class="faq-q" type="button" id="faq-q1" aria-expanded="false" aria-controls="faq-a1"><span class="faq-q-t">Que se passe-t-il en cas de pluie ?</span><span class="faq-orn" aria-hidden="true">✦</span></button><div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1"><div class="faq-a-inner"><p>Le spectacle est maintenu même en cas de pluie. Pensez simplement à prévoir une tenue adaptée à la météo du soir.</p></div></div></div>
@@ -690,7 +734,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   </div>
 </section>
 
-<section class="sec" id="le-spectacle"><div class="inner"><div class="two">
+<section data-chip="Le spectacle" class="sec" id="le-spectacle"><div class="inner"><div class="two">
   <div class="reveal">
     <span class="label">Le spectacle</span>
     <h2 class="titre">Unique <span>dans la région</span></h2>
@@ -708,17 +752,17 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 </div></div></section>
 <section class="stats-wrap"><div class="stats"><div class="stat reveal"><div class="stat-n">+1000</div><div class="stat-l">Spectateurs par an</div></div><div class="stat reveal"><div class="stat-n sm">Gratuit</div><div class="stat-l">Entrée libre</div></div><div class="stat reveal"><div class="stat-n">2008</div><div class="stat-l">Une tradition à Bazas</div></div><div class="stat reveal"><div class="stat-n sm">40 min</div><div class="stat-l">De spectacle féerique</div></div></div></section>
 
-<section class="sec alt"><div class="inner">
+<section data-chip="Séances" class="sec alt"><div class="inner">
   <div class="head reveal"><span class="label">Programme</span><h2 class="titre">Les <span>trois représentations</span></h2>
   <p class="note">Trois séances le même jour — choisissez la vôtre, sans réservation</p></div>
   <div class="reveal" data-spectacle-status="creche"><div class="status"><span class="status-label">Prochaine date</span><h3>Dimanche 13 décembre 2026</h3><p>Séances à 16h, 17h et 18h<br>Cathédrale Saint-Jean-Baptiste, Bazas<br><em>Entrée gratuite · sans réservation</em></p></div></div>
   <p class="note center reveal" style="margin-top:2rem">Dans le cadre du marché de Noël de Bazas · Cathédrale Saint-Jean-Baptiste</p>
 </div></section>
-<section class="sec"><div class="inner">
+<section data-chip="Photos" class="sec"><div class="inner">
   <div class="head reveal"><span class="label">Galerie</span><h2 class="titre">Le spectacle <span>en images</span></h2></div>
   <div class="galerie reveal"><figure><img src="creche2.png" alt="La Crèche Vivante de Bazas" loading="lazy" decoding="async"></figure><figure><img src="creche3.png" alt="La Crèche Vivante de Bazas" loading="lazy" decoding="async"></figure><figure class="large"><img src="creche4.png" alt="La Crèche Vivante de Bazas" loading="lazy" decoding="async"></figure></div>
 </div></section>
-<section class="sec alt"><div class="inner">
+<section data-chip="Questions" class="sec alt"><div class="inner">
   <div class="head reveal"><span class="label">Questions fréquentes</span><h2 class="titre">Bien préparer <span>votre venue</span></h2></div>
   <div class="faq">
   <div class="faq-item reveal"><button class="faq-q" type="button" id="faq-q9" aria-expanded="false" aria-controls="faq-a9"><span class="faq-q-t">Faut-il réserver ses places ?</span><span class="faq-orn" aria-hidden="true">✦</span></button><div class="faq-a" id="faq-a9" role="region" aria-labelledby="faq-q9"><div class="faq-a-inner"><p>Non, il n'y a pas de réservation. Il suffit de se présenter à l'heure de la séance choisie devant les portes de la cathédrale : une fois celles-ci ouvertes, prenez place à l'intérieur pour profiter du spectacle.</p></div></div></div>
@@ -751,7 +795,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   </div>
 </section>
 
-<section class="sec" id="le-parcours"><div class="inner"><div class="two">
+<section data-chip="Le parcours" class="sec" id="le-parcours"><div class="inner"><div class="two">
   <div class="reveal">
     <span class="label">Le parcours</span>
     <h2 class="titre">Un lieu, <span>mille histoires</span></h2>
@@ -770,12 +814,12 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 </div></div></section>
 <section class="stats-wrap"><div class="stats"><div class="stat reveal"><div class="stat-n sm">Gratuit</div><div class="stat-l">Entrée libre</div></div><div class="stat reveal"><div class="stat-n sm">Nocturne</div><div class="stat-l">À partir de 21h00</div></div><div class="stat reveal"><div class="stat-n sm">Plein air</div><div class="stat-l">Dans un cadre exceptionnel</div></div><div class="stat reveal"><div class="stat-n sm">Vivant</div><div class="stat-l">Scénettes jouées en direct</div></div></div></section>
 
-<section class="sec"><div class="inner">
+<section data-chip="Prochaine édition" class="sec"><div class="inner">
   <div class="head reveal"><span class="label">Prochaine édition</span><h2 class="titre">Le prochain <span>rendez-vous</span></h2></div>
   <div class="reveal" data-spectacle-status="patrimoine"><div class="status"><span class="status-label">Prochaine édition</span><h3>Dates à annoncer</h3><p>Les prochaines dates seront publiées ici et sur nos réseaux sociaux.</p></div></div>
 </div></section>
 
-<section class="sec alt"><div class="inner">
+<section data-chip="Déroulé" class="sec alt"><div class="inner">
   <div class="head reveal"><span class="label">Le déroulé</span><h2 class="titre">Le parcours <span>en quelques étapes</span></h2><p class="note">De la première scénette jusqu'au dénouement final</p></div>
   <div class="etapes reveal">
     <div class="etape"><div class="etape-puce">✦</div><div class="etape-t">Le rassemblement</div><p>Le public se réunit à l'entrée du lieu de la soirée. L'atmosphère nocturne s'installe, les flambeaux s'allument et le voyage dans le temps peut commencer.</p></div>
@@ -784,11 +828,11 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
     <div class="etape"><div class="etape-puce">✦</div><div class="etape-t">Le dénouement</div><p>Le parcours s'achève dans une mise en scène finale, moment fort qui rassemble toute la troupe et clôt cette nuit hors du commun dans un élan de partage et d'émotion.</p></div>
   </div>
 </div></section>
-<section class="sec"><div class="inner">
+<section data-chip="Photos" class="sec"><div class="inner">
   <div class="head reveal"><span class="label">Galerie</span><h2 class="titre">La soirée <span>en images</span></h2></div>
   <div class="galerie reveal"><figure><img src="patrimoine2.png" alt="Soirée Patrimoine" loading="lazy" decoding="async"></figure><figure><img src="patrimoine3.png" alt="Soirée Patrimoine" loading="lazy" decoding="async"></figure><figure class="large"><img src="patrimoine4.png" alt="Soirée Patrimoine" loading="lazy" decoding="async"></figure></div>
 </div></section>
-<section class="sec"><div class="inner">
+<section data-chip="Questions" class="sec"><div class="inner">
   <div class="head reveal"><span class="label">Questions fréquentes</span><h2 class="titre">Bien préparer <span>votre soirée</span></h2></div>
   <div class="faq">
   <div class="faq-item reveal"><button class="faq-q" type="button" id="faq-q13" aria-expanded="false" aria-controls="faq-a13"><span class="faq-q-t">Faut-il réserver ses places ?</span><span class="faq-orn" aria-hidden="true">✦</span></button><div class="faq-a" id="faq-a13" role="region" aria-labelledby="faq-q13"><div class="faq-a-inner"><p>Non, l'entrée est libre et gratuite, sans réservation, dans la limite des places disponibles le long du parcours.</p></div></div></div>
@@ -821,7 +865,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   </div>
 </section>
 
-<section class="sec" id="l-atelier"><div class="inner"><div class="two">
+<section data-chip="L'atelier" class="sec" id="l-atelier"><div class="inner"><div class="two">
   <div class="reveal">
     <span class="label">L'atelier</span>
     <h2 class="titre">Une troupe <span>passionnée</span></h2>
@@ -839,12 +883,12 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   </div>
 </div></div></section>
 
-<section class="sec alt line"><div class="inner">
+<section data-chip="Prochaines dates" class="sec alt line"><div class="inner">
   <div class="head reveal"><span class="label">Prochaines représentations</span><h2 class="titre">Voir l'atelier <span>sur scène</span></h2></div>
   <div class="reveal" data-spectacle-status="theatre"><div class="status"><span class="status-label">Prochaine date</span><h3>Dates à annoncer</h3><p>Les représentations sont annoncées sur nos réseaux sociaux.</p></div></div>
 </div></section>
 
-<section class="sec line"><div class="inner">
+<section data-chip="Identité" class="sec line"><div class="inner">
   <div class="head reveal"><span class="label">Notre identité</span><h2 class="titre">Ce qui nous <span>anime</span></h2></div>
   <div class="valeurs reveal">
     <div class="valeur"><div class="valeur-i">✦</div><div class="valeur-t">Créations originales</div><p>Chaque spectacle est une œuvre nouvelle, écrite et mise en scène pour les Troubadours. Pas de pièces toutes faites — seulement de l'inédit.</p></div>
@@ -853,11 +897,11 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   </div>
 </div></section>
 
-<section class="sec alt"><div style="padding:5rem 0 3rem">
+<section data-chip="Affiches" class="sec alt"><div style="padding:5rem 0 3rem">
   <div class="head reveal"><span class="label">Nos spectacles</span><h2 class="titre">Les affiches <span>de la troupe</span></h2><p class="note">Faites défiler pour explorer</p></div>
   <div class="carousel reveal" tabindex="0" aria-label="Affiches des spectacles de l'Atelier Théâtre"><div class="carousel-item"><img src="theatre.png" alt="Affiche d'un spectacle de l'Atelier Théâtre" loading="lazy" decoding="async" draggable="false"></div><div class="carousel-item"><img src="theatre2.png" alt="Affiche d'un spectacle de l'Atelier Théâtre" loading="lazy" decoding="async" draggable="false"></div><div class="carousel-item"><img src="theatre3.png" alt="Affiche d'un spectacle de l'Atelier Théâtre" loading="lazy" decoding="async" draggable="false"></div><div class="carousel-item"><img src="theatre4.png" alt="Affiche d'un spectacle de l'Atelier Théâtre" loading="lazy" decoding="async" draggable="false"></div><div class="carousel-item"><img src="theatre5.png" alt="Affiche d'un spectacle de l'Atelier Théâtre" loading="lazy" decoding="async" draggable="false"></div><div class="carousel-item"><img src="theatre6.png" alt="Affiche d'un spectacle de l'Atelier Théâtre" loading="lazy" decoding="async" draggable="false"></div><div class="carousel-item"><img src="theatre7.png" alt="Affiche d'un spectacle de l'Atelier Théâtre" loading="lazy" decoding="async" draggable="false"></div><div class="carousel-item"><img src="theatre8.png" alt="Affiche d'un spectacle de l'Atelier Théâtre" loading="lazy" decoding="async" draggable="false"></div></div>
 </div></section>
-<section class="sec"><div class="inner">
+<section data-chip="Questions" class="sec"><div class="inner">
   <div class="head reveal"><span class="label">Questions fréquentes</span><h2 class="titre">Bien préparer <span>votre venue</span></h2></div>
   <div class="faq">
   <div class="faq-item reveal"><button class="faq-q" type="button" id="faq-q18" aria-expanded="false" aria-controls="faq-a18"><span class="faq-q-t">Qu'est-ce que « l'entrée au chapeau » ?</span><span class="faq-orn" aria-hidden="true">✦</span></button><div class="faq-a" id="faq-a18" role="region" aria-labelledby="faq-q18"><div class="faq-a-inner"><p>Il n'y a pas de tarif fixe : vous participez librement, à la fin de la représentation, selon vos moyens et votre plaisir. C'est le principe pour toutes les représentations de l'Atelier Théâtre, et c'est ce qui permet aux spectacles de rester accessibles à tous.</p></div></div></div>
@@ -882,7 +926,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   <p class="page-sous">Les prochains rendez-vous de la troupe, et comment réserver vos places.</p>
 </div></section>
 
-<section class="sec"><div class="inner">
+<section data-chip="À venir" class="sec"><div class="inner">
   <div class="agenda-group reveal"><h2>✦ À venir</h2>
     <div data-agenda-upcoming><article class="event-card"><div class="event-body"><h3>La Crèche vivante</h3><p class="event-when">Dimanche 13 décembre 2026</p><p>Séances à 16h, 17h et 18h · Cathédrale Saint-Jean-Baptiste, Bazas · Entrée gratuite</p></div><a class="btn-secondary" href="#creche">En savoir plus</a></article></div>
   </div>
@@ -890,7 +934,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   <noscript><p class="note">Activez JavaScript pour afficher l'agenda complet, ou rendez-vous sur nos pages Facebook et Instagram.</p></noscript>
 </div></section>
 
-<section class="sec alt line"><div class="inner">
+<section data-chip="Billetterie" class="sec alt line"><div class="inner">
   <div class="head reveal"><span class="label">Réserver</span><h2 class="titre">Billetterie &amp; <span>entrées</span></h2></div>
   <div class="grid-2 reveal">
     <div class="bloc-info-box"><h3>✦ Le Chemin des Mémoires</h3>
@@ -915,7 +959,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   </div>
 </div></section>
 
-<section class="sec"><div class="inner">
+<section data-chip="Éditions passées" class="sec"><div class="inner">
   <div class="agenda-group reveal"><h2>✦ Éditions passées</h2><div data-agenda-past></div></div>
 </div></section>
 
@@ -927,7 +971,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
   <p class="page-sous">Depuis l'an 2000, des femmes et des hommes bénévoles font vivre l'histoire du Bazadais à travers des spectacles vivants inoubliables.</p>
 </div></section>
 
-<section class="sec"><div class="inner narrow">
+<section data-chip="Histoire" class="sec"><div class="inner narrow">
   <span class="label reveal">Chronologie</span>
   <h2 class="titre reveal">Au commencement… <span>un groupe d'amis</span></h2>
   <p class="txt reveal" style="margin-bottom:4rem">Les piliers d'une longue aventure collective, née de la passion pour l'histoire et le spectacle vivant dans le Bazadais.</p>
@@ -956,7 +1000,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 </div></section>
 <section class="stats-wrap"><div class="stats"><div class="stat reveal"><div class="stat-n">100</div><div class="stat-l">Bénévoles</div></div><div class="stat reveal"><div class="stat-n">700</div><div class="stat-l">Personnages</div></div><div class="stat reveal"><div class="stat-n">2007</div><div class="stat-l">Association loi 1901</div></div><div class="stat reveal"><div class="stat-n">4</div><div class="stat-l">Spectacles au répertoire</div></div></div></section>
 
-<section class="sec"><div class="inner">
+<section data-chip="Bureau" class="sec"><div class="inner">
   <div class="head reveal"><span class="label">L'équipe dirigeante</span><h2 class="titre">Le Bureau <span>de l'association</span></h2></div>
   <div class="bureau">
     <div class="bureau-card reveal"><div class="bureau-role">Président · Écriture / Mise en scène</div><div class="bureau-nom">Romain Espagnet</div></div>
@@ -964,7 +1008,7 @@ a.hero-badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
     <div class="bureau-card reveal"><div class="bureau-role">Secrétaire</div><div class="bureau-nom">Marie-Hélène Couthures</div><div class="bureau-adj">Adjointe : Nadège Montagne</div></div>
   </div>
 </div></section>
-<section class="sec alt"><div class="inner center reveal">
+<section data-chip="Rejoindre" class="sec alt"><div class="inner center reveal">
   <span class="label">Rejoindre la troupe</span>
   <h2 class="titre">Faites partie de <span>l'aventure</span></h2>
   <p class="txt" style="max-width:600px;margin:0 auto 2.5rem">Les Troubadours du Troisième Millénaire sont une troupe entièrement bénévole. Qu'il s'agisse d'être figurant, technicien, décorateur ou costumier — toutes les bonnes volontés sont les bienvenues.</p>
@@ -1297,6 +1341,73 @@ window.EVENTS = [
     var q = location.search || (location.hash.indexOf('?') > -1 ? location.hash.slice(location.hash.indexOf('?')) : '');
     var k = new URLSearchParams(q).get('spectacle');
     if (k) window.__faqSync(k);
+  })();
+
+  /* ── Mobile : « Lire la suite » sur les longs textes ── */
+  document.querySelectorAll('.two > div:first-child, .bloc-info').forEach(function (box) {
+    var ps = [].filter.call(box.children, function (c) { return c.tagName === 'P'; });
+    if (ps.length < 2) return;
+    var more = ps.slice(1).concat([].filter.call(box.children, function (c) { return c.classList.contains('quote'); }));
+    more.forEach(function (el) { el.classList.add('rm-more'); });
+    var last = more[0];
+    more.forEach(function (el) { if (last.compareDocumentPosition(el) & 4) last = el; });
+    box.classList.add('rm');
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'rm-btn'; btn.setAttribute('aria-expanded', 'false'); btn.textContent = 'Lire la suite';
+    ps[0].insertAdjacentElement('afterend', btn);
+    btn.addEventListener('click', function () {
+      var open = !box.classList.contains('open');
+      box.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? 'Réduire' : 'Lire la suite';
+      (open ? last : ps[0]).insertAdjacentElement('afterend', btn);
+      if (!open) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  /* ── Mobile : sommaire collant des sections ── */
+  (function () {
+    var roots = document.querySelectorAll('.page');
+    if (!roots.length) roots = document.querySelectorAll('main');
+    var spies = [];
+    [].forEach.call(roots, function (root) {
+      var secs = root.querySelectorAll('[data-chip]');
+      if (secs.length < 2) return;
+      var key = root.getAttribute('data-page') || 'p';
+      var bar = document.createElement('nav');
+      bar.className = 'subnav'; bar.setAttribute('aria-label', 'Sections de la page');
+      var inner = document.createElement('div'); inner.className = 'subnav-in'; bar.appendChild(inner);
+      var chips = [];
+      [].forEach.call(secs, function (s, i) {
+        if (!s.id) s.id = 'sec-' + key + '-' + i;
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'subnav-chip'; b.textContent = s.getAttribute('data-chip');
+        b.addEventListener('click', function () { s.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+        inner.appendChild(b); chips.push(b);
+      });
+      var anchor = root.querySelector('.hero, .page-hero');
+      if (anchor) anchor.insertAdjacentElement('afterend', bar); else root.insertBefore(bar, root.firstChild);
+      spies.push({ bar: bar, secs: [].slice.call(secs), chips: chips, cur: -1 });
+    });
+    var ticking = false;
+    function update() {
+      ticking = false;
+      spies.forEach(function (s) {
+        if (!s.bar.offsetParent) return;
+        var idx = -1;
+        s.secs.forEach(function (el, i) { if (el.getBoundingClientRect().top <= 150) idx = i; });
+        if (idx === s.cur) return;
+        s.cur = idx;
+        s.chips.forEach(function (c, i) {
+          var on = i === idx;
+          c.classList.toggle('on', on);
+          if (on) { c.setAttribute('aria-current', 'true'); var box = s.bar.firstChild; box.scrollTo({ left: c.offsetLeft - box.clientWidth / 2 + c.offsetWidth / 2, behavior: 'smooth' }); }
+          else c.removeAttribute('aria-current');
+        });
+      });
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('hashchange', function () { setTimeout(update, 60); });
   })();
 
   /* ── Révélation au scroll ── */
