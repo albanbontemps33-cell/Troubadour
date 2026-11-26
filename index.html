@@ -297,6 +297,22 @@ a.badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 .legal p,.legal li{font-size:1rem;line-height:1.75;opacity:.88;margin-bottom:.7rem}
 .legal ul{padding-left:1.2rem}
 .legal a{color:var(--or2)}
+/* Lieu cliquable + archives */
+.map-link{display:block;color:inherit;text-decoration:none}
+.map-link:hover strong{color:var(--or2)}
+.map-link strong{border-bottom:1px solid rgba(201,161,74,.55);transition:color .3s}
+.map-go{display:block;margin-top:.5rem;font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--or2)}
+.map-inline{color:var(--or2)}
+.arch-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+@media(min-width:700px){.arch-grid{grid-template-columns:repeat(3,1fr);gap:1.3rem}}
+@media(min-width:1100px){.arch-grid{grid-template-columns:repeat(4,1fr)}}
+.arch{display:flex;flex-direction:column;gap:.7rem;margin:0}
+.arch-frame{position:relative;aspect-ratio:3/4;overflow:hidden;border:1px solid rgba(201,161,74,.28);background:linear-gradient(160deg,#1a1208,#0d0a04);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;color:rgba(201,161,74,.55);font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;padding:1rem}
+.arch-frame::before{content:'✦';font-size:1.4rem;color:var(--or)}
+.arch-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0d0a04}
+.arch-an{font-family:'Cinzel Decorative',serif;font-size:1.3rem;font-weight:700;color:var(--or2);line-height:1}
+.arch-t{font-size:1rem;line-height:1.35;color:var(--parch)}
+.arch-t small{display:block;opacity:.7;font-size:.9rem;margin-top:.15rem}
 mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
 
 /* ── Pied de page ── */
@@ -444,6 +460,7 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
     <ul class="nav-links">
       <li><a href="#accueil">Accueil</a></li>
       <li><a href="#spectacles">Spectacles</a></li>
+      <li><a href="#theatre">Atelier Théâtre</a></li>
       <li><a href="#association">L'association</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -461,9 +478,10 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
   <ul>
     <li style="--i:0"><a href="#accueil">Accueil</a></li>
     <li style="--i:1"><a href="#spectacles">Spectacles</a></li>
-    <li style="--i:2"><a href="#association">L'association</a></li>
-    <li style="--i:3"><a href="#faq">FAQ</a></li>
-    <li style="--i:4"><a href="#contact">Contact</a></li>
+    <li style="--i:2"><a href="#theatre">Atelier Théâtre</a></li>
+    <li style="--i:3"><a href="#association">L'association</a></li>
+    <li style="--i:4"><a href="#faq">FAQ</a></li>
+    <li style="--i:5"><a href="#contact">Contact</a></li>
   </ul>
   <a class="btn" href="#agenda">Agenda &amp; billetterie</a>
   <div class="socials">
@@ -540,18 +558,19 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
         <a class="badge" href="#" data-scroll="date-chemin" data-spectacle-badge="chemin"><small>Prochaine date</small><b>À annoncer</b></a>
         <div class="actions"><a class="btn" href="#" data-scroll="date-chemin">Dates &amp; réservation</a></div>
       </div>
-      <div class="hero-visual"><img src="Affiche26.png" alt="Affiche du Chemin des Mémoires 2026"></div>
+      <div class="hero-visual"><img src="Affiche26.png" alt="Affiche du Chemin des Mémoires"></div>
     </div>
   </section>
 
   <section class="sec"><div class="wrap">
-    <p class="intro reveal">Août 1914 : avant de partir à la guerre, Jean demande à sa mère de lui raconter l'histoire du Bazadais. <em>Richard Cœur de Lion</em>, <em>Catherine de Médicis</em>, <em>Louis XIV</em>… <em>100 bénévoles</em>, <em>700 personnages</em>, chevaux et effets pyrotechniques.</p>
+    <p class="intro reveal"><em>Août 1914…</em> La France appelle ses enfants pour défendre la mère patrie. Pour Jean, enfant du pays, meunier du moulin de la Glory, c'est l'heure du départ !</p>
+    <p class="txt reveal" style="max-width:760px;margin:1.2rem auto 0;text-align:center">Au soir des adieux avec sa mère, cette femme de la terre, raconteuse d'histoires… l'instant est aux souvenirs. <em>« Raconte-moi, une dernière fois, l'histoire de ma cité, de mon pays : le Bazadais. »</em> C'est alors qu'ils empruntent ensemble ce long chemin des mémoires. Un chant venu des profondeurs de la terre. <em>Richard Cœur de Lion</em>, <em>Catherine de Médicis</em>, <em>Louis XIV</em> composeront, entre autres, ce voyage dans le temps. Accompagnez-les dans cette quête, entre croisades et guerres de religions, moissons et fêtes des corporations.</p>
     <p class="quote reveal">« Jean, souviens-toi et regarde… »</p>
     <div class="facts reveal" style="margin-top:2.2rem">
       <div class="fact" data-ev="chemin" data-field="date"></div>
       <div class="fact" data-ev="chemin" data-field="place"></div>
       <div class="fact"><div class="fact-l">Durée</div><div class="fact-v"><strong>1h30</strong>Restauration dès 19h</div></div>
-      <div class="fact"><div class="fact-l">Tarifs 2026</div><div class="fact-v"><strong>15 € · 8 €</strong>Gratuit moins de 5 ans</div></div>
+      <div class="fact"><div class="fact-l">Tarifs</div><div class="fact-v"><strong>15 € · 8 €</strong>Gratuit moins de 5 ans</div></div>
     </div>
   </div></section>
 
@@ -598,7 +617,7 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
     <div class="facts reveal" style="margin-top:2.2rem">
       <div class="fact" data-ev="creche" data-field="date"></div>
       <div class="fact" data-ev="creche" data-field="place"></div>
-      <div class="fact"><div class="fact-l">Durée</div><div class="fact-v"><strong>40 à 45 min</strong>par représentation</div></div>
+      <div class="fact"><div class="fact-l">Durée</div><div class="fact-v"><strong>30 min</strong>par représentation</div></div>
       <div class="fact"><div class="fact-l">Entrée</div><div class="fact-v"><strong>Gratuite</strong>Sans réservation</div></div>
     </div>
   </div></section>
@@ -673,6 +692,54 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
   </div></section>
 </div>
 
+<!-- ═════════ LE BANQUET DU PRINCE DE LA LUNE ═════════ -->
+<div class="page" id="page-banquet" data-page="banquet">
+  <section class="hero show split">
+    <div class="hero-frame"></div>
+    <div class="hero-inner">
+      <div class="hero-txt">
+        <span class="hero-sur">En ouverture des Fêtes de la Saint-Jean</span>
+        <h1 class="hero-titre">Le Banquet <em>du Prince de la Lune</em></h1>
+        <p class="hero-sous">Quand le peuple de Bazas avait son prince, le temps d'une nuit.</p>
+        <a class="badge" href="#" data-scroll="date-banquet" data-spectacle-badge="banquet"><small>Prochaine date</small><b>À annoncer</b></a>
+        <div class="actions"><a class="btn" href="#" data-scroll="date-banquet">Date &amp; lieu</a></div>
+      </div>
+      <div class="hero-visual"><img src="afficheprince.jpeg" alt="Affiche du Banquet du Prince de la Lune"></div>
+    </div>
+  </section>
+
+  <section class="sec"><div class="wrap">
+    <p class="intro reveal">Au XVIIIᵉ siècle, mais déjà au XVIᵉ, un grand <em>banquet annuel</em> était offert par la municipalité le jour de la Saint-Jean, dans l'hôtel de ville. À côté des Jurats et des bourgeois, la classe populaire était représentée par un mystérieux personnage : <em>le Prince de la Lune</em>.</p>
+    <div class="facts reveal" style="margin-top:2.2rem">
+      <div class="fact" data-ev="banquet" data-field="date"></div>
+      <div class="fact" data-ev="banquet" data-field="place"></div>
+      <div class="fact"><div class="fact-l">Durée</div><div class="fact-v"><strong>1 heure</strong>environ</div></div>
+      <div class="fact"><div class="fact-l">Entrée</div><div class="fact-v"><strong>Gratuite</strong>Sans réservation</div></div>
+    </div>
+  </div></section>
+
+  <section class="sec alt" id="date-banquet"><div class="wrap">
+    <div class="head reveal"><span class="label">Rendez-vous</span><h2 class="titre">Le <span>Banquet</span></h2></div>
+    <div class="reveal" data-spectacle-status="banquet"></div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="head reveal"><span class="label">Galerie</span><h2 class="titre">Le spectacle <span>en images</span></h2></div>
+    <div class="galerie reveal"><figure class="large"><img src="prince1.jpeg" alt="Le Banquet du Prince de la Lune" loading="lazy" decoding="async"></figure><figure><img src="prince2.jpeg" alt="Le Banquet du Prince de la Lune" loading="lazy" decoding="async"></figure><figure><img src="prince3.jpeg" alt="Le Banquet du Prince de la Lune" loading="lazy" decoding="async"></figure><figure><img src="prince4.jpeg" alt="Le Banquet du Prince de la Lune" loading="lazy" decoding="async"></figure><figure><img src="prince5.jpeg" alt="Le Banquet du Prince de la Lune" loading="lazy" decoding="async"></figure></div>
+  </div></section>
+
+  <section class="sec alt"><div class="wrap">
+    <div class="head reveal"><span class="label">Avant de venir</span><h2 class="titre">Questions <span>clés</span></h2></div>
+    <div class="reveal" data-faq-short="banquet"></div>
+    <p class="faq-more"><a class="btn ghost" href="#faq?spectacle=banquet">Toutes les questions</a></p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="head reveal"><span class="label">À découvrir aussi</span></div>
+    <div class="minis reveal" data-others="banquet"></div>
+  </div></section>
+</div>
+
 <!-- ═════════ ATELIER THÉÂTRE ═════════ -->
 <div class="page" id="page-theatre" data-page="theatre">
   <section class="hero show split">
@@ -720,6 +787,23 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
   </div></section>
 </div>
 
+<!-- ═════════ TOUS NOS SPECTACLES (page non listée dans le menu) ═════════ -->
+<div class="page" id="page-archives" data-page="archives">
+  <section class="page-hero"><span class="label">Depuis l'an 2000</span><h1 class="page-titre">Tous nos <span>spectacles</span></h1><p class="page-sous">Vingt-six ans de créations, à Bazas et dans le Bazadais.</p></section>
+  <section class="sec"><div class="wrap">
+    <div class="head reveal"><span class="label">À Bazas</span><h2 class="titre">Nos <span>créations</span></h2></div>
+    <div class="arch-grid" data-archives="bazas"></div>
+  </div></section>
+  <section class="sec alt"><div class="wrap">
+    <div class="head reveal"><span class="label">Hors de Bazas</span><h2 class="titre">Prestations <span>extérieures</span></h2></div>
+    <div class="arch-grid" data-archives="ext"></div>
+  </div></section>
+  <section class="sec"><div class="wrap center reveal">
+    <p class="txt" style="max-width:560px;margin:0 auto 1.6rem">Une prestation à nous confier ? Nous jouons aussi chez vous, sur demande.</p>
+    <div class="btn-groupe"><a class="btn ghost" href="#association">← L'association</a><a class="btn" href="#contact?sujet=autre">Nous contacter</a></div>
+  </div></section>
+</div>
+
 <!-- ═════════ AGENDA ═════════ -->
 <div class="page" id="page-agenda" data-page="agenda">
   <section class="page-hero"><span class="label">Toutes les dates</span><h1 class="page-titre">Agenda &amp; <span>billetterie</span></h1></section>
@@ -738,7 +822,7 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
           <div class="tarif"><div class="tarif-c">Réduit</div><div class="tarif-p">8 €</div></div>
           <div class="tarif"><div class="tarif-c">Moins de 5 ans</div><div class="tarif-p" style="font-size:1.05rem;padding-top:.3rem">Gratuit</div></div>
         </div>
-        <p class="note" style="margin-bottom:1rem">Réservation en ligne via HelloAsso. Tarifs 2026 indicatifs. Billet non échangeable et non remboursable.</p>
+        <p class="note" style="margin-bottom:1rem">Réservation en ligne via HelloAsso. Tarifs indicatifs. Billet non échangeable et non remboursable.</p>
         <a class="btn ghost" href="#chemin">Page du spectacle</a>
       </div>
       <div class="box"><h3>✦ Entrées libres</h3>
@@ -788,6 +872,7 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
       <div class="timeline-item reveal"><span class="timeline-an">2026 — Dixième anniversaire</span><h3 class="timeline-t">10 ans de féérie</h3>
         <p>Pour la dixième saison du <em>Chemin des Mémoires</em>, les Troubadours ont célébré une décennie d'émerveillement partagé lors de trois soirées exceptionnelles, les <em>7, 8 et 9 août 2026</em>, sur le site de la Brèche.</p></div>
     </div>
+    <div class="center reveal" style="margin-top:3rem"><a class="btn ghost" href="#archives">Voir tous nos spectacles depuis 2000 →</a></div>
   </div></section>
 
   <section class="stats-wrap"><div class="stats four">
@@ -935,21 +1020,33 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
    Un événement passé bascule seul dans « Éditions passées », et le spectacle
    repasse sur « Dates à annoncer » tant qu'aucune nouvelle date n'est saisie.
    ═══════════════════════════════════════════════════════════════ */
+const MAPS = {
+  breche: "https://www.google.com/maps/search/?api=1&query=Site+de+la+Br%C3%A8che+Bazas",
+  cathedrale: "https://www.google.com/maps/search/?api=1&query=Cath%C3%A9drale+Saint-Jean-Baptiste+Bazas",
+  placecathedrale: "https://www.google.com/maps/search/?api=1&query=Place+de+la+Cath%C3%A9drale+Bazas"
+};
 const SPEC = {
   chemin:     { title: "Le Chemin des Mémoires", url: "#chemin",     img: "course.jpg",          tag: "Son et Lumière",    desc: "2 500 ans d'histoire en une nuit." },
   creche:     { title: "La Crèche vivante",      url: "#creche",     img: "crecheimage.png",     tag: "Spectacle de Noël", desc: "Une nativité grandeur nature, avec animaux vivants." },
   patrimoine: { title: "Soirée patrimoine",      url: "#patrimoine", img: "patrimoineimage.png", tag: "Parcours nocturne", desc: "Quand les pierres reprennent vie." },
-  theatre:    { title: "Atelier théâtre",        url: "#theatre",    img: "theatre.png",         tag: "Théâtre amateur",   desc: "Créations originales, entrée au chapeau." }
+  banquet:    { title: "Le Banquet du Prince de la Lune", url: "#banquet", img: "prince1.jpeg", tag: "Fêtes de la Saint-Jean", desc: "Le grand banquet de la Saint-Jean, avec son mystérieux Prince." },
+  theatre:    { title: "Atelier théâtre",        url: "#theatre",    img: "theatre.png",         tag: "Théâtre amateur",   desc: "Créations originales, entrée au chapeau.", atelier: true }
 };
 const EVENTS = [
   { spectacle: "creche", start: "2026-12-13", end: "2026-12-13",
     time: "Trois représentations : 16h, 17h et 18h", sessions: ["16h00", "17h00", "18h00"],
-    place: "Cathédrale Saint-Jean-Baptiste, Bazas", price: "Entrée gratuite · sans réservation" },
+    place: "Cathédrale Saint-Jean-Baptiste, Bazas", map: MAPS.cathedrale, price: "Entrée gratuite · sans réservation" },
   { spectacle: "patrimoine", start: "2026-09-19", end: "2026-09-19",
-    time: "À partir de 21h00", place: "Château de Cazeneuve, Préchac", price: "Entrée gratuite" },
+    time: "À partir de 21h00", place: "Château de Cazeneuve, Préchac", map: "https://www.google.com/maps/search/?api=1&query=Ch%C3%A2teau+de+Cazeneuve+Pr%C3%A9chac", price: "Entrée gratuite" },
   { spectacle: "chemin", start: "2026-08-07", end: "2026-08-09",
-    time: "Animations dès 19h · Spectacle à 22h00", place: "Site de la Brèche, Bazas",
-    price: "Plein tarif 15 € · réduit 8 € · gratuit moins de 5 ans" }
+    time: "Animations dès 19h · Spectacle à 22h00", place: "Site de la Brèche, Bazas", map: MAPS.breche,
+    price: "Plein tarif 15 € · réduit 8 € · gratuit moins de 5 ans" },
+  { spectacle: "chemin", start: "2027-08-06", end: "2027-08-08",
+    time: "Animations dès 19h · Spectacle à 22h00", place: "Site de la Brèche, Bazas", map: MAPS.breche,
+    price: "Plein tarif 15 € · réduit 8 € · gratuit moins de 5 ans" },
+  { spectacle: "banquet", start: "2027-06-23", end: "2027-06-23",
+    time: "21h45 · Ouverture des Fêtes de la Saint-Jean", place: "Place de la Cathédrale, Bazas", map: MAPS.placecathedrale,
+    price: "Entrée gratuite · sans réservation" }
 ];
 
 /* ═══════════════════════════════════════════════════════════════
@@ -960,12 +1057,13 @@ const FAQ_META = {
   chemin: { t: "Le Chemin des Mémoires", u: "#chemin", tab: "Le Chemin" },
   creche: { t: "La Crèche vivante", u: "#creche", tab: "La Crèche" },
   patrimoine: { t: "Soirée patrimoine", u: "#patrimoine", tab: "Patrimoine" },
-  theatre: { t: "Atelier théâtre", u: "#theatre", tab: "Théâtre" },
+  banquet: { t: "Le Banquet du Prince de la Lune", u: "#banquet", tab: "Banquet" },
+  theatre: { t: "Atelier théâtre", u: "#theatre", tab: "Atelier théâtre" },
   general: { t: "L'association & infos pratiques", u: "", tab: "Général" }
 };
 const FAQ = {
   chemin: [
-    ["Que se passe-t-il en cas de pluie ?", "Le spectacle est maintenu même en cas de pluie. Pensez simplement à prévoir une tenue adaptée à la météo du soir."],
+    ["Que se passe-t-il en cas de pluie ?", "Le spectacle est maintenu même en cas de pluie. En revanche, les parapluies sont interdits afin de ne pas gêner la visibilité des autres spectateurs : pensez à prévoir un poncho ou un vêtement de pluie."],
     ["Faut-il réserver à l'avance ?", "C'est fortement conseillé : les places partent vite. La réservation se fait en ligne via HelloAsso, paiement sécurisé, billet envoyé par e-mail."],
     ["Le spectacle convient-il aux jeunes enfants ?", "Oui, en famille, tous âges sont les bienvenus. L'entrée est gratuite pour les moins de 5 ans. Le spectacle débute à 22h et dure 1h30 (fin vers 23h30) : un horaire tardif à prendre en compte pour les tout-petits."],
     ["Où se garer ?", "Il n'y a pas de parking dédié, mais plusieurs parkings sont disponibles à proximité du site de la Brèche."],
@@ -977,8 +1075,8 @@ const FAQ = {
   creche: [
     ["Faut-il réserver ses places ?", "Non, il n'y a pas de réservation. Il suffit de se présenter à l'heure de la séance choisie devant les portes de la cathédrale : une fois celles-ci ouvertes, prenez place à l'intérieur pour profiter du spectacle."],
     ["La cathédrale est-elle accessible aux personnes à mobilité réduite ?", "Oui, la cathédrale de Bazas est accessible aux personnes à mobilité réduite. N'hésitez pas à nous contacter avant votre venue pour toute question spécifique."],
-    ["Le spectacle convient-il aux jeunes enfants ?", "Tout à fait, c'est un spectacle familial pensé pour petits et grands, d'une durée d'environ 40 minutes."],
-    ["Peut-on prendre des photos pendant le spectacle ?", "Oui, les photos sont autorisées. Merci de désactiver le flash pour ne pas gêner les figurants ni les autres spectateurs."]
+    ["Le spectacle convient-il aux jeunes enfants ?", "Tout à fait, c'est un spectacle familial pensé pour petits et grands, d'une durée de 30 minutes environ."],
+    ["Peut-on prendre des photos ou des vidéos pendant le spectacle ?", "Non, les photos et les vidéos ne sont pas autorisées pendant le spectacle, afin de ne pas gêner les figurants ni les autres spectateurs."]
   ],
   patrimoine: [
     ["Faut-il réserver ses places ?", "Non, l'entrée est libre et gratuite, sans réservation, dans la limite des places disponibles le long du parcours."],
@@ -987,6 +1085,11 @@ const FAQ = {
     ["Combien de temps dure le parcours ?", "La durée varie d'une édition à l'autre selon le nombre de scénettes et le rythme du groupe. Prévoyez votre soirée sans contrainte horaire stricte, et suivez le parcours à votre rythme."],
     ["Peut-on venir en famille, avec des enfants ?", "Oui, c'est une sortie familiale appréciée de tous les âges. Comptez simplement sur l'endurance des plus petits pour la durée du parcours."]
   ],
+  banquet: [
+    ["Faut-il réserver ?", "Non, l'entrée est gratuite et sans réservation. Rendez-vous place de la Cathédrale à Bazas pour 21h45."],
+    ["Qui est le Prince de la Lune ?", "Au XVIᵉ comme au XVIIIᵉ siècle, la municipalité offrait chaque année un grand banquet le jour de la Saint-Jean, dans l'hôtel de ville. À côté des Jurats et des bourgeois, la classe populaire y était représentée par un mystérieux personnage : le Prince de la Lune."],
+    ["Quand et où a lieu le Banquet ?", "Le mercredi 23 juin 2027 à 21h45, place de la Cathédrale à Bazas, en ouverture des Fêtes de la Saint-Jean. Le spectacle dure environ 1 heure."]
+  ],
   theatre: [
     ["Qu'est-ce que « l'entrée au chapeau » ?", "Il n'y a pas de tarif fixe : vous participez librement, à la fin de la représentation, selon vos moyens et votre plaisir. C'est le principe pour toutes les représentations de l'Atelier Théâtre, et c'est ce qui permet aux spectacles de rester accessibles à tous."],
     ["Le spectacle convient-il à tous les âges ?", "Cela dépend des créations de la saison : certaines pièces conviennent à toute la famille, d'autres s'adressent à un public plus adulte. N'hésitez pas à nous contacter pour connaître le public conseillé de la prochaine représentation."],
@@ -994,8 +1097,8 @@ const FAQ = {
     ["Comment se passe l'accès aux places ?", "Il n'y a pas de réservation. Pour les représentations en salle, il est conseillé d'arriver un peu en avance, les places étant généralement libres et limitées à la capacité de la salle."]
   ],
   general: [
-    ["Qui sont les Troubadours du Troisième Millénaire ?", `Une association loi 1901 fondée en 2007 à Bazas, entièrement composée de bénévoles. Elle crée et joue des spectacles vivants — le Chemin des Mémoires, la Crèche vivante, la Soirée patrimoine et l'Atelier théâtre — pour faire vivre l'histoire du Bazadais. <a href="#association">Découvrir notre histoire</a>.`],
-    ["Les spectacles sont-ils payants ?", "Cela dépend du spectacle : le Chemin des Mémoires est payant (plein tarif 15 €, réduit 8 €, gratuit pour les moins de 5 ans — tarifs de l'édition 2026), la Crèche vivante et la Soirée patrimoine sont gratuites, et l'Atelier théâtre fonctionne à l'entrée au chapeau (prix libre)."],
+    ["Qui sont les Troubadours du Troisième Millénaire ?", `Une association loi 1901 fondée en 2007 à Bazas, entièrement composée de bénévoles. Elle crée et joue des spectacles vivants — le Chemin des Mémoires, la Crèche vivante, la Soirée patrimoine, le Banquet du Prince de la Lune et l'Atelier théâtre — pour faire vivre l'histoire du Bazadais. <a href="#association">Découvrir notre histoire</a>.`],
+    ["Les spectacles sont-ils payants ?", "Cela dépend du spectacle : le Chemin des Mémoires est payant (plein tarif 15 €, réduit 8 €, gratuit pour les moins de 5 ans), la Crèche vivante et la Soirée patrimoine sont gratuites, et l'Atelier théâtre fonctionne à l'entrée au chapeau (prix libre)."],
     ["Comment connaître les prochaines dates ?", `Toutes les dates sont réunies sur la page <a href="#agenda">Agenda &amp; billetterie</a>, mise à jour à chaque nouvelle édition. Vous pouvez aussi nous suivre sur Facebook et Instagram.`],
     ["Comment rejoindre la troupe ?", `Toutes les bonnes volontés sont les bienvenues : figurants, techniciens, décorateurs, costumiers, comédiens… sans condition d'expérience. Écrivez-nous via le <a href="#contact?sujet=rejoindre">formulaire de contact</a> en choisissant « Rejoindre la troupe ».`],
     ["Peut-on faire venir un spectacle dans notre commune ou notre structure ?", `Certains spectacles, comme la Crèche vivante, peuvent être joués ailleurs à la demande. Contactez-nous via le <a href="#contact?sujet=autre">formulaire de contact</a> pour en discuter.`],
@@ -1079,7 +1182,7 @@ const FAQ = {
     el.innerHTML = upcoming.length ? upcoming.map(e => card(e, false)).join('') : '<p class="note">Aucune date programmée pour le moment.</p>';
   });
   $$('[data-agenda-tbd]').forEach(el => {
-    const withDate = upcoming.map(e => e.spectacle), keys = Object.keys(SPEC).filter(k => !withDate.includes(k));
+    const withDate = upcoming.map(e => e.spectacle), keys = Object.keys(SPEC).filter(k => !withDate.includes(k) && !SPEC[k].atelier);
     el.innerHTML = keys.map(k => `<a class="tbd" href="${SPEC[k].url}"><span>${SPEC[k].title}</span><em>Dates à annoncer</em><i>→</i></a>`).join('');
     if (!keys.length) el.closest('.agenda-group').hidden = true;
   });
@@ -1101,6 +1204,7 @@ const FAQ = {
       l = up ? 'Lieu' : pa ? 'Dernier lieu' : 'Lieu';
       const p = ev ? ev.place.split(', ') : null;
       v = p ? `<strong>${p[0]}</strong>${p.slice(1).join(', ')}` : '<strong>À annoncer</strong>';
+      if (p && ev.map) v = `<a class="map-link" href="${ev.map}" target="_blank" rel="noopener" aria-label="Voir ${ev.place} sur la carte (nouvel onglet)">${v}<span class="map-go">📍 Voir sur la carte ↗</span></a>`;
     }
     el.innerHTML = `<div class="fact-l">${l}</div><div class="fact-v">${v}</div>`;
   });
@@ -1114,19 +1218,19 @@ const FAQ = {
     el.innerHTML = evs.map(ev => {
       const ses = ev.sessions ? '<div class="seances">' + ev.sessions.map((h, i) => `<div class="seance"><div class="seance-h">${h.replace('h00', 'h')}</div><div class="seance-l">Séance ${i + 1}</div></div>`).join('') + '</div>' : '';
       const cta = ev.cta ? `<div class="actions"><a class="btn" href="${ev.cta.url}" target="_blank" rel="noopener">${ev.cta.label}</a></div>` : '';
-      return `<div class="status"><span class="status-label">Prochaine date</span><h3>${when(ev)}</h3><p>${ev.time}<br>${ev.place}<br><em>${ev.price}</em></p>${ses}${cta}</div>`;
+      return `<div class="status"><span class="status-label">Prochaine date</span><h3>${when(ev)}</h3><p>${ev.time}<br>${ev.map ? `<a class="map-inline" href="${ev.map}" target="_blank" rel="noopener">${ev.place} ↗</a>` : ev.place}<br><em>${ev.price}</em></p>${ses}${cta}</div>`;
     }).join('');
   });
 
   /* ── Cartes photo des spectacles + vignettes « à découvrir aussi » ── */
   $$('[data-cards]').forEach(el => {
-    el.innerHTML = Object.keys(SPEC).map(k => {
-      const s = SPEC[k], pos = k === 'chemin' ? 'style="object-position:70% center"' : k === 'theatre' ? 'style="object-position:center top"' : '';
+    el.innerHTML = Object.keys(SPEC).filter(k => !SPEC[k].atelier).map(k => {
+      const s = SPEC[k], pos = k === 'chemin' ? 'style="object-position:70% center"' : k === 'theatre' ? 'style="object-position:center top"' : k === 'banquet' ? 'style="object-position:center 30%"' : '';
       return `<a class="card reveal" href="${s.url}"><img src="${s.img}" alt="" loading="lazy" ${pos}><span class="card-body"><span class="card-tag">${s.tag}</span><h3 class="card-t">${s.title}</h3><p class="card-d">${s.desc}</p><span class="card-go">Découvrir →</span></span></a>`;
     }).join('');
   });
   $$('[data-others]').forEach(el => {
-    el.innerHTML = Object.keys(SPEC).filter(k => k !== el.dataset.others).map(k =>
+    el.innerHTML = Object.keys(SPEC).filter(k => k !== el.dataset.others && !SPEC[k].atelier).map(k =>
       `<a class="mini" href="${SPEC[k].url}"><img src="${SPEC[k].img}" alt="" loading="lazy"><span>${SPEC[k].title}</span></a>`).join('');
   });
 
@@ -1157,6 +1261,46 @@ const FAQ = {
     });
   };
   $$('.faq-tab').forEach(t => t.addEventListener('click', () => faqSync(t.dataset.tab)));
+
+  /* ── Tous nos spectacles : la liste des affiches ──
+     Pour ajouter une affiche : déposez le fichier dans le dépôt et indiquez son nom dans img
+     (par défaut le site cherche « affiche-ANNÉE.jpg » ; sans fichier, un cadre « Affiche à venir » s'affiche). */
+  const ARCH = {
+    bazas: [
+      { y: "2026", t: "Le Chemin des Mémoires", s: "10 ans de féérie", img: "Affiche26.png" },
+      { y: "2024" }, { y: "2023" }, { y: "2022" }, { y: "2021" },
+      { y: "2020", s: "Spectacle d'été" }, { y: "2019" },
+      { y: "2018", t: "Le Chemin des Mémoires" }, { y: "2017", t: "Le Chemin des Mémoires" }, { y: "2016", t: "Le Chemin des Mémoires" },
+      { y: "2015", t: "Minuit dans la Cité" },
+      { y: "2014", t: "Minuit dans la cité, le chant de l'histoire", s: "8, 9 et 10 août" },
+      { y: "2014", t: "Soirées du patrimoine", k: "2014-patrimoine" },
+      { y: "2013", t: "Minuit dans la cité, le chant de l'histoire", s: "9 et 10 août" },
+      { y: "2013", t: "Lumière sur l'Histoire, le quartier Saint-Jean", s: "Soirée du Patrimoine · 14 septembre", k: "2013-patrimoine" },
+      { y: "2006", t: "Les gens de champagne" },
+      { y: "2005", t: "Laure Carême et les souvenirs de la grande guerre" },
+      { y: "2004", t: "1576 : Les sœurs Montoises contre la grande réforme de l'Histoire", s: "Bazas & Château de Villandraut" },
+      { y: "2003", t: "Catherine de Pontallec sous les tourbillons de la Révolution", s: "Bazas & Château de la Trave, Préchac" },
+      { y: "2002", t: "Les plaisirs de l'île enchantée" },
+      { y: "2000", t: "La légende de St Velzer" }
+    ],
+    ext: [
+      { y: "2012", t: "900 ans à toute volée !", s: "Verdelais · 7 juillet" },
+      { y: "2010", t: "Veillée 1900", s: "Saint-Martin de Sescas · 11 juin" },
+      { y: "2009", t: "Le champ de l'Histoire", s: "Saint-Martin de Sescas · 13 juin" },
+      { y: "2009–2010", t: "Les enfants de 40…", s: "Bernos-Beaulac · Journées du Ciron", k: "2009-2010-ciron" },
+      { y: "2008", t: "Réjouissances chez les Blayac", s: "Bernos-Beaulac · Journées du Ciron", k: "2008-ciron" },
+      { y: "2007", t: "Veillée à Bacourey", s: "Bernos-Beaulac · Journées du Ciron", k: "2007-ciron" },
+      { y: "2006", t: "Ces gens de la terre", s: "Bernos-Beaulac · Journées du Ciron", k: "2006-ciron" },
+      { y: "2006", t: "Des pierres d'or et de sang", s: "Roquetaillade · 700 ans du château", k: "2006-roquetaillade" }
+    ]
+  };
+  $$('[data-archives]').forEach(el => {
+    el.innerHTML = ARCH[el.dataset.archives].map((a, i) => {
+      const f = a.img || ('affiche-' + (a.k || a.y) + '.jpg');
+      return `<figure class="arch reveal"><div class="arch-frame"><span>Affiche à venir</span><img src="${f}" alt="Affiche ${a.t ? a.t + ' ' : ''}${a.y}" loading="lazy" decoding="async" onerror="this.remove()"></div>` +
+        `<figcaption><div class="arch-an">${a.y}</div>${a.t || a.s ? `<div class="arch-t">${a.t || ''}${a.s ? `<small>${a.s}</small>` : ''}</div>` : ''}</figcaption></figure>`;
+    }).join('');
+  });
 
   /* ── Carrousel d'affiches : glisser à la souris ── */
   $$('.carousel').forEach(c => {
@@ -1256,6 +1400,8 @@ const FAQ = {
     chemin: ["Le Chemin des Mémoires — Spectacle Son et Lumière | Troubadours de Bazas", "Le Chemin des Mémoires : 2 500 ans d'histoire du Bazadais en 1h30 de Son et Lumière, avec 100 bénévoles et plus de 700 personnages, sur le site de la Brèche à Bazas."],
     creche: ["La Crèche Vivante — Spectacle de Noël à Bazas | Troubadours", "La Crèche Vivante : une nativité grandeur nature dans la cathédrale de Bazas, dimanche 13 décembre 2026 à 16h, 17h et 18h. Spectacle féerique et gratuit."],
     patrimoine: ["Soirée Patrimoine — Parcours nocturne dans le Bazadais | Troubadours", "Soirée Patrimoine : parcours nocturne et scénettes historiques jouées par les Troubadours dans un lieu patrimonial du Bazadais. Entrée gratuite."],
+    banquet: ["Le Banquet du Prince de la Lune — Fêtes de la Saint-Jean à Bazas | Troubadours", "Le Banquet du Prince de la Lune : mercredi 23 juin 2027 à 21h45, place de la Cathédrale à Bazas, en ouverture des Fêtes de la Saint-Jean. Gratuit, sans réservation."],
+    archives: ["Tous nos spectacles depuis 2000 — Troubadours du Troisième Millénaire, Bazas", "Les spectacles des Troubadours du Troisième Millénaire depuis 2000 à Bazas, et leurs prestations extérieures dans le Bazadais et le Sud-Gironde."],
     theatre: ["Atelier Théâtre — Troubadours du Troisième Millénaire, Bazas", "L'Atelier Théâtre des Troubadours du Troisième Millénaire : une vingtaine de comédiens bénévoles, des créations originales et une entrée au chapeau à Bazas."],
     agenda: ["Agenda & billetterie — Troubadours du Troisième Millénaire, Bazas", "Toutes les dates à venir des Troubadours du Troisième Millénaire à Bazas : Crèche vivante, Chemin des Mémoires, Soirée patrimoine, Atelier théâtre — et comment réserver."],
     association: ["L'association — Histoire et bureau | Troubadours du Troisième Millénaire", "L'histoire de l'association Troubadours du Troisième Millénaire (premiers spectacles en 2000, association loi 1901 depuis 2007), son bureau et comment rejoindre la troupe bénévole de Bazas."],
@@ -1280,7 +1426,7 @@ const FAQ = {
     document.body.dataset.page = name;
     $$('.site-header nav a, .menu li a').forEach(a => {
       const t = (a.getAttribute('href') || '').split('?')[0].slice(1);
-      const on = t === name || (t === 'spectacles' && SPECS.includes(name));
+      const on = t === name || (t === 'spectacles' && SPECS.includes(name) && !SPEC[name].atelier);
       if (on && !a.classList.contains('btn-nav')) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     const m = PM[name], url = name === 'accueil' ? BASE : BASE + '#' + name;
