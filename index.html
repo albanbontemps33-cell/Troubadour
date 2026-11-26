@@ -410,6 +410,17 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
 .stat{transition:background .4s}
 .stat:hover{background:rgba(201,161,74,.05)}
 
+/* ── Écran d'accueil « Entrer » (lance l'ambiance sonore) ── */
+.porte{position:fixed;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center;padding:2rem;text-align:center;background:radial-gradient(ellipse at 50% 40%,#2a1608 0%,#120a04 55%,#070402 100%);transition:opacity .9s ease,visibility .9s}
+.porte.out{opacity:0;visibility:hidden;pointer-events:none}
+.porte-in{display:flex;flex-direction:column;align-items:center;gap:1.4rem;animation:porteIn 1.2s ease both}
+@keyframes porteIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.porte-nom{font-family:'Cinzel Decorative',serif;font-weight:900;font-size:clamp(1.9rem,8vw,3.6rem);line-height:1.1;text-shadow:0 0 80px rgba(201,161,74,.25)}
+.porte-nom span{display:inline-block;margin-top:.5rem;font-family:'Cinzel',serif;font-weight:600;font-size:.4em;letter-spacing:.3em;text-transform:uppercase;color:var(--or2)}
+.porte-actions{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-top:.8rem}
+.porte-mute{background:none;border:0;color:rgba(245,234,214,.7);font-family:'Cinzel',serif;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;padding:.7rem 1rem;min-height:44px;text-decoration:underline;text-underline-offset:4px}
+.porte-mute:hover,.porte-mute:focus-visible{color:var(--or2)}
+
 /* ── Visionneuse de photos ── */
 .galerie figure{cursor:zoom-in}
 .galerie figure:focus-visible{outline:2px solid var(--or2);outline-offset:3px}
@@ -1663,18 +1674,37 @@ const FAQ = {
       return c.state === 'running';
     };
 
-    // Les navigateurs interdisent le son avant une première action du visiteur :
-    // on tente à l'ouverture, sinon on joue dès le premier clic, toucher ou touche du clavier.
-    const events = ['pointerup', 'touchend', 'keydown', 'click'];
-    const onGesture = e => {
-      if (e.target.closest && e.target.closest('[data-sound-toggle]')) return;
-      if (e.type === 'keydown' && ['Shift', 'Control', 'Alt', 'Meta'].indexOf(e.key) > -1) return;
-      tryPlay();
-      if (store.get(sessionStorage, SEEN) || !enabled()) events.forEach(n => removeEventListener(n, onGesture, true));
-    };
+    // Les navigateurs interdisent tout son avant une première action du visiteur (clic ou toucher).
+    // Pour que l'ambiance se joue vraiment à l'ouverture, on affiche donc un écran d'accueil « Entrer » :
+    // le clic sur ce bouton lance les notes au moment où le site apparaît.
     if (enabled() && !store.get(sessionStorage, SEEN)) {
-      events.forEach(n => addEventListener(n, onGesture, true));
-      setTimeout(() => { try { getCtx().state === 'running' && tryPlay(); } catch (e) {} }, 500);
+      const porte = document.createElement('div');
+      porte.className = 'porte';
+      porte.setAttribute('role', 'dialog');
+      porte.setAttribute('aria-modal', 'true');
+      porte.setAttribute('aria-label', 'Bienvenue');
+      porte.innerHTML = '<div class="porte-in"><span class="label">Bienvenue</span>' +
+        '<div class="porte-nom">Troubadours<br><span>du Troisième Millénaire</span></div>' +
+        '<div class="porte-actions"><button type="button" class="btn" data-porte="son">Entrer</button>' +
+        '<button type="button" class="porte-mute" data-porte="muet">Entrer sans le son</button></div></div>';
+      document.body.appendChild(porte);
+      document.documentElement.style.overflow = 'hidden';
+      const enter = withSound => {
+        if (!porte.parentNode) return;
+        if (withSound) tryPlay(); else store.set(sessionStorage, SEEN, '1');
+        document.documentElement.style.overflow = '';
+        porte.classList.add('out');
+        setTimeout(() => porte.remove(), 900);
+      };
+      porte.addEventListener('click', e => {
+        const b = e.target.closest('[data-porte]');
+        if (b) enter(b.dataset.porte === 'son');
+      });
+      porte.addEventListener('keydown', e => { if (e.key === 'Escape') enter(false); });
+      const mainBtn = $('[data-porte="son"]', porte);
+      mainBtn.focus();
+      // Si le navigateur autorise déjà le son (visiteur habitué), on joue tout de suite sans écran d'accueil
+      setTimeout(() => { try { if (getCtx().state === 'running') enter(true); } catch (e) {} }, 300);
     }
 
     if (toggle) toggle.addEventListener('click', e => {
