@@ -30,7 +30,9 @@ body[data-page="patrimoine"]{--glow:rgba(20,60,30,.35);--hero-a:#0a180c;--hero-b
 body[data-page="theatre"]{--glow:rgba(80,10,60,.45);--hero-a:#1a0520;--hero-b:#280830;--bg1:#0d0514;--bg2:#1a0520}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:'EB Garamond',Georgia,serif;background:var(--noir);color:var(--parch);font-size:18px;line-height:1.6;overflow-x:hidden}
+body{font-family:'EB Garamond',Georgia,serif;background:var(--noir);color:var(--parch);font-size:18px;line-height:1.6;overflow-x:hidden;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+main{flex:1 0 auto;width:100%}
+.site-footer{flex-shrink:0}
 body.no-scroll{overflow:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -967,8 +969,19 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
   <section class="page-hero"><span class="label">Billetterie</span><h1 class="page-titre">Pas encore <span>disponible</span></h1></section>
   <section class="sec"><div class="wrap center">
     <p class="intro">La billetterie pour la soirée du <em data-resa-date>Chemin des Mémoires</em> n'est pas encore ouverte.</p>
-    <p class="txt" style="max-width:640px;margin:1.2rem auto 2rem">Les réservations seront annoncées ici, sur le site, et sur nos réseaux sociaux dès qu'elles seront ouvertes. Merci de votre patience !</p>
+    <p class="txt" style="max-width:640px;margin:1.2rem auto 2.2rem">Les réservations seront annoncées ici, sur le site, et sur nos réseaux sociaux dès qu'elles seront ouvertes. Merci de votre patience !</p>
+    <div class="facts" style="max-width:760px;margin:0 auto 2.4rem;text-align:left">
+      <div class="fact" data-ev="chemin" data-field="date"></div>
+      <div class="fact" data-ev="chemin" data-field="place"></div>
+      <div class="fact"><div class="fact-l">Tarifs</div><div class="fact-v"><strong>15 € · 8 €</strong>Gratuit moins de 5 ans</div></div>
+      <div class="fact"><div class="fact-l">Horaires</div><div class="fact-v"><strong>Dès 19h</strong>Spectacle à 22h</div></div>
+    </div>
     <div class="actions"><a class="btn" href="#chemin">Retour au Chemin des Mémoires</a><a class="btn ghost" href="#agenda">Voir l'agenda</a></div>
+    <p class="note" style="margin-top:2.6rem">Pour être prévenu dès l'ouverture, suivez-nous :</p>
+    <div class="socials">
+      <a href="https://www.instagram.com/troubadours_bazas/" target="_blank" rel="noopener" aria-label="Instagram des Troubadours"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+      <a href="https://www.facebook.com/troubadours3" target="_blank" rel="noopener" aria-label="Facebook des Troubadours"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+    </div>
   </div></section>
 </div>
 
