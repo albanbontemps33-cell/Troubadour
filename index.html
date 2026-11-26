@@ -298,10 +298,7 @@ a.badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 .legal ul{padding-left:1.2rem}
 .legal a{color:var(--or2)}
 /* Lieu cliquable + archives */
-.map-link{display:block;color:inherit;text-decoration:none}
-.map-link:hover strong{color:var(--or2)}
-.map-link strong{border-bottom:1px solid rgba(201,161,74,.55);transition:color .3s}
-.map-go{display:block;margin-top:.5rem;font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--or2)}
+.fact[data-map]{cursor:pointer}
 .map-inline{color:var(--or2)}
 .arch-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
 @media(min-width:700px){.arch-grid{grid-template-columns:repeat(3,1fr);gap:1.3rem}}
@@ -652,7 +649,7 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
       <div class="hero-txt">
         <span class="hero-sur">Une nuit au cœur du Bazadais</span>
         <h1 class="hero-titre">Soirée <em>Patrimoine</em></h1>
-        <p class="hero-sous">Un parcours nocturne ponctué de scénettes jouées au fil des siècles.</p>
+        <p class="hero-sous">« 1890, Bazas une Belle Époque »</p>
         <a class="badge" href="#" data-scroll="date-patrimoine" data-spectacle-badge="patrimoine"><small>Prochaine date</small><b>À annoncer</b></a>
         <div class="actions"><a class="btn" href="#" data-scroll="date-patrimoine">Prochaine date</a></div>
       </div>
@@ -661,7 +658,7 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
   </section>
 
   <section class="sec"><div class="wrap">
-    <p class="intro reveal">Chaque année, un lieu patrimonial du Bazadais s'anime la nuit : une <em>déambulation</em> de scénette en scénette, jouées par des comédiens en costumes d'époque. Quand les pierres reprennent vie.</p>
+    <p class="intro reveal">Rendez-vous à <em>21 h</em> devant la <em>Demi-Lune</em>, où un premier spectacle plonge les spectateurs dans le quotidien de la place en <em>1890</em>. À travers le regard de deux jeunes frères, <em>Victor et Paul</em>, accompagnés de leur grand-mère, le public suit leurs aventures tout au long du parcours.</p>
     <div class="facts reveal" style="margin-top:2.2rem">
       <div class="fact" data-ev="patrimoine" data-field="date"></div>
       <div class="fact" data-ev="patrimoine" data-field="place"></div>
@@ -1026,10 +1023,10 @@ const MAPS = {
   placecathedrale: "https://www.google.com/maps/search/?api=1&query=Place+de+la+Cath%C3%A9drale+Bazas"
 };
 const SPEC = {
-  chemin:     { title: "Le Chemin des Mémoires", url: "#chemin",     img: "course.jpg",          tag: "Son et Lumière",    desc: "2 500 ans d'histoire en une nuit." },
-  creche:     { title: "La Crèche vivante",      url: "#creche",     img: "crecheimage.png",     tag: "Spectacle de Noël", desc: "Une nativité grandeur nature, avec animaux vivants." },
-  patrimoine: { title: "Soirée patrimoine",      url: "#patrimoine", img: "patrimoineimage.png", tag: "Parcours nocturne", desc: "Quand les pierres reprennent vie." },
   banquet:    { title: "Le Banquet du Prince de la Lune", url: "#banquet", img: "prince1.jpeg", tag: "Fêtes de la Saint-Jean", desc: "Le grand banquet de la Saint-Jean, avec son mystérieux Prince." },
+  chemin:     { title: "Le Chemin des Mémoires", url: "#chemin",     img: "course.jpg",          tag: "Son et Lumière",    desc: "2 500 ans d'histoire en une nuit." },
+  patrimoine: { title: "Soirée patrimoine",      url: "#patrimoine", img: "patrimoineimage.png", tag: "Parcours nocturne", desc: "« 1890, Bazas une Belle Époque »" },
+  creche:     { title: "La Crèche vivante",      url: "#creche",     img: "crecheimage.png",     tag: "Spectacle de Noël", desc: "Une nativité grandeur nature, avec animaux vivants." },
   theatre:    { title: "Atelier théâtre",        url: "#theatre",    img: "theatre.png",         tag: "Théâtre amateur",   desc: "Créations originales, entrée au chapeau.", atelier: true }
 };
 const EVENTS = [
@@ -1038,6 +1035,8 @@ const EVENTS = [
     place: "Cathédrale Saint-Jean-Baptiste, Bazas", map: MAPS.cathedrale, price: "Entrée gratuite · sans réservation" },
   { spectacle: "patrimoine", start: "2026-09-19", end: "2026-09-19",
     time: "À partir de 21h00", place: "Château de Cazeneuve, Préchac", map: "https://www.google.com/maps/search/?api=1&query=Ch%C3%A2teau+de+Cazeneuve+Pr%C3%A9chac", price: "Entrée gratuite" },
+  { spectacle: "patrimoine", start: "2027-09-18", end: "2027-09-18", theme: "1890, Bazas une Belle Époque",
+    time: "Rendez-vous à 21h", place: "Devant la Demi-Lune, Bazas", map: "https://www.google.com/maps/search/?api=1&query=Demi-Lune+Bazas", price: "Entrée gratuite" },
   { spectacle: "chemin", start: "2026-08-07", end: "2026-08-09",
     time: "Animations dès 19h · Spectacle à 22h00", place: "Site de la Brèche, Bazas", map: MAPS.breche,
     price: "Plein tarif 15 € · réduit 8 € · gratuit moins de 5 ans" },
@@ -1054,10 +1053,10 @@ const EVENTS = [
    sur sa page ; toutes apparaissent sur la page FAQ.
    ═══════════════════════════════════════════════════════════════ */
 const FAQ_META = {
-  chemin: { t: "Le Chemin des Mémoires", u: "#chemin", tab: "Le Chemin" },
-  creche: { t: "La Crèche vivante", u: "#creche", tab: "La Crèche" },
-  patrimoine: { t: "Soirée patrimoine", u: "#patrimoine", tab: "Patrimoine" },
   banquet: { t: "Le Banquet du Prince de la Lune", u: "#banquet", tab: "Banquet" },
+  chemin: { t: "Le Chemin des Mémoires", u: "#chemin", tab: "Le Chemin" },
+  patrimoine: { t: "Soirée patrimoine", u: "#patrimoine", tab: "Patrimoine" },
+  creche: { t: "La Crèche vivante", u: "#creche", tab: "La Crèche" },
   theatre: { t: "Atelier théâtre", u: "#theatre", tab: "Atelier théâtre" },
   general: { t: "L'association & infos pratiques", u: "", tab: "Général" }
 };
@@ -1097,7 +1096,7 @@ const FAQ = {
     ["Comment se passe l'accès aux places ?", "Il n'y a pas de réservation. Pour les représentations en salle, il est conseillé d'arriver un peu en avance, les places étant généralement libres et limitées à la capacité de la salle."]
   ],
   general: [
-    ["Qui sont les Troubadours du Troisième Millénaire ?", `Une association loi 1901 fondée en 2007 à Bazas, entièrement composée de bénévoles. Elle crée et joue des spectacles vivants — le Chemin des Mémoires, la Crèche vivante, la Soirée patrimoine, le Banquet du Prince de la Lune et l'Atelier théâtre — pour faire vivre l'histoire du Bazadais. <a href="#association">Découvrir notre histoire</a>.`],
+    ["Qui sont les Troubadours du Troisième Millénaire ?", `Une association loi 1901 fondée en 2007 à Bazas, entièrement composée de bénévoles. Elle crée et joue des spectacles vivants — le Banquet du Prince de la Lune, le Chemin des Mémoires, la Soirée patrimoine, la Crèche vivante et l'Atelier théâtre — pour faire vivre l'histoire du Bazadais. <a href="#association">Découvrir notre histoire</a>.`],
     ["Les spectacles sont-ils payants ?", "Cela dépend du spectacle : le Chemin des Mémoires est payant (plein tarif 15 €, réduit 8 €, gratuit pour les moins de 5 ans), la Crèche vivante et la Soirée patrimoine sont gratuites, et l'Atelier théâtre fonctionne à l'entrée au chapeau (prix libre)."],
     ["Comment connaître les prochaines dates ?", `Toutes les dates sont réunies sur la page <a href="#agenda">Agenda &amp; billetterie</a>, mise à jour à chaque nouvelle édition. Vous pouvez aussi nous suivre sur Facebook et Instagram.`],
     ["Comment rejoindre la troupe ?", `Toutes les bonnes volontés sont les bienvenues : figurants, techniciens, décorateurs, costumiers, comédiens… sans condition d'expérience. Écrivez-nous via le <a href="#contact?sujet=rejoindre">formulaire de contact</a> en choisissant « Rejoindre la troupe ».`],
@@ -1141,14 +1140,18 @@ const FAQ = {
   const when = ev => {
     const a = parse(ev.start), b = parse(ev.end || ev.start);
     if (+a === +b) return `${cap(D[a.getDay()])} ${dn(a)} ${M[a.getMonth()]} ${a.getFullYear()}`;
+    const days = Math.round((b - a) / 864e5);
+    if (days <= 3 && a.getMonth() === b.getMonth()) { const l = []; for (let i = 0; i <= days; i++) { const x = new Date(+a + i * 864e5 + 36e5); l.push(`${D[x.getDay()]} ${dn(x)}`); } return cap(l.slice(0, -1).join(', ') + ' et ' + l[l.length - 1]) + ` ${M[b.getMonth()]} ${b.getFullYear()}`; }
     return `Du ${D[a.getDay()]} ${dn(a)}${a.getMonth() !== b.getMonth() ? ' ' + M[a.getMonth()] : ''} au ${D[b.getDay()]} ${dn(b)} ${M[b.getMonth()]} ${b.getFullYear()}`;
   };
   const shortDate = ev => {
     const a = parse(ev.start), b = parse(ev.end || ev.start);
     if (+a === +b) return `${dn(a)} ${M[a.getMonth()]} ${a.getFullYear()}`;
+    const days = Math.round((b - a) / 864e5);
+    if (days <= 3 && a.getMonth() === b.getMonth()) { const l = []; for (let i = 0; i <= days; i++) l.push(a.getDate() + i); return `${l.join(' - ')} ${M[b.getMonth()]} ${b.getFullYear()}`; }
     return `${a.getDate()}${a.getMonth() !== b.getMonth() ? ' ' + M[a.getMonth()] : ''}–${dn(b)} ${M[b.getMonth()]} ${b.getFullYear()}`;
   };
-  const dayLabel = ev => { const a = parse(ev.start), b = parse(ev.end || ev.start); return +a === +b ? String(a.getDate()) : a.getDate() + '–' + b.getDate(); };
+  const dayLabel = ev => { const a = parse(ev.start), b = parse(ev.end || ev.start); if (+a === +b) return String(a.getDate()); const days = Math.round((b - a) / 864e5); if (days <= 3) { const l = []; for (let i = 0; i <= days; i++) l.push(a.getDate() + i); return l.join('-'); } return a.getDate() + '–' + b.getDate(); };
   const monthLabel = ev => { const b = parse(ev.end || ev.start); return M[b.getMonth()] + ' ' + b.getFullYear(); };
   const isUp = ev => parse(ev.end || ev.start) >= today;
   const upcoming = EVENTS.filter(isUp).sort((x, y) => parse(x.start) - parse(y.start));
@@ -1161,7 +1164,7 @@ const FAQ = {
       ? `<a class="btn" href="${ev.cta.url}" target="_blank" rel="noopener">${ev.cta.label}</a>`
       : `<a class="btn ghost" href="${s.url}">${isPast ? 'Revoir l\'édition' : 'En savoir plus'}</a>`;
     return `<article class="event${isPast ? ' past' : ''}"><div class="ev-date"><b>${dayLabel(ev)}</b><span>${monthLabel(ev)}</span></div>` +
-      `<div class="ev-body">${isPast ? '<em class="ev-badge">Terminé</em>' : ''}<h3>${s.title}</h3><p class="ev-when">${when(ev)}</p>` +
+      `<div class="ev-body">${isPast ? '<em class="ev-badge">Terminé</em>' : ''}<h3>${s.title}</h3>${ev.theme ? `<p><em>« ${ev.theme} »</em></p>` : ''}<p class="ev-when">${when(ev)}</p>` +
       `<p>${ev.time} · ${ev.place}</p><p class="ev-price">${ev.price}</p></div>${btn}</article>`;
   };
 
@@ -1204,7 +1207,7 @@ const FAQ = {
       l = up ? 'Lieu' : pa ? 'Dernier lieu' : 'Lieu';
       const p = ev ? ev.place.split(', ') : null;
       v = p ? `<strong>${p[0]}</strong>${p.slice(1).join(', ')}` : '<strong>À annoncer</strong>';
-      if (p && ev.map) v = `<a class="map-link" href="${ev.map}" target="_blank" rel="noopener" aria-label="Voir ${ev.place} sur la carte (nouvel onglet)">${v}<span class="map-go">📍 Voir sur la carte ↗</span></a>`;
+      if (p && ev.map) { el.dataset.map = ev.map; el.setAttribute('role', 'link'); el.tabIndex = 0; el.setAttribute('aria-label', 'Voir ' + ev.place + ' sur la carte (nouvel onglet)'); }
     }
     el.innerHTML = `<div class="fact-l">${l}</div><div class="fact-v">${v}</div>`;
   });
@@ -1218,7 +1221,7 @@ const FAQ = {
     el.innerHTML = evs.map(ev => {
       const ses = ev.sessions ? '<div class="seances">' + ev.sessions.map((h, i) => `<div class="seance"><div class="seance-h">${h.replace('h00', 'h')}</div><div class="seance-l">Séance ${i + 1}</div></div>`).join('') + '</div>' : '';
       const cta = ev.cta ? `<div class="actions"><a class="btn" href="${ev.cta.url}" target="_blank" rel="noopener">${ev.cta.label}</a></div>` : '';
-      return `<div class="status"><span class="status-label">Prochaine date</span><h3>${when(ev)}</h3><p>${ev.time}<br>${ev.map ? `<a class="map-inline" href="${ev.map}" target="_blank" rel="noopener">${ev.place} ↗</a>` : ev.place}<br><em>${ev.price}</em></p>${ses}${cta}</div>`;
+      return `<div class="status"><span class="status-label">Prochaine date</span><h3>${when(ev)}</h3>${ev.theme ? `<p><em>« ${ev.theme} »</em></p>` : ''}<p>${ev.time}<br>${ev.map ? `<a class="map-inline" href="${ev.map}" target="_blank" rel="noopener">${ev.place} ↗</a>` : ev.place}<br><em>${ev.price}</em></p>${ses}${cta}</div>`;
     }).join('');
   });
 
@@ -1261,6 +1264,11 @@ const FAQ = {
     });
   };
   $$('.faq-tab').forEach(t => t.addEventListener('click', () => faqSync(t.dataset.tab)));
+
+  /* ── Carte « Lieu » : un clic ouvre la carte dans un nouvel onglet ── */
+  const openMap = el => window.open(el.dataset.map, '_blank', 'noopener');
+  document.addEventListener('click', e => { const f = e.target.closest('.fact[data-map]'); if (f) openMap(f); });
+  document.addEventListener('keydown', e => { const f = e.target.closest && e.target.closest('.fact[data-map]'); if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openMap(f); } });
 
   /* ── Tous nos spectacles : la liste des affiches ──
      Pour ajouter une affiche : déposez le fichier dans le dépôt et indiquez son nom dans img
@@ -1399,7 +1407,7 @@ const FAQ = {
     spectacles: ["Nos Spectacles — Troubadours du Troisième Millénaire, Bazas", "Découvrez tous les spectacles des Troubadours du Troisième Millénaire : Le Chemin des Mémoires, la Crèche Vivante, la Soirée Patrimoine et l'Atelier Théâtre."],
     chemin: ["Le Chemin des Mémoires — Spectacle Son et Lumière | Troubadours de Bazas", "Le Chemin des Mémoires : 2 500 ans d'histoire du Bazadais en 1h30 de Son et Lumière, avec 100 bénévoles et plus de 700 personnages, sur le site de la Brèche à Bazas."],
     creche: ["La Crèche Vivante — Spectacle de Noël à Bazas | Troubadours", "La Crèche Vivante : une nativité grandeur nature dans la cathédrale de Bazas, dimanche 13 décembre 2026 à 16h, 17h et 18h. Spectacle féerique et gratuit."],
-    patrimoine: ["Soirée Patrimoine — Parcours nocturne dans le Bazadais | Troubadours", "Soirée Patrimoine : parcours nocturne et scénettes historiques jouées par les Troubadours dans un lieu patrimonial du Bazadais. Entrée gratuite."],
+    patrimoine: ["Soirée Patrimoine — Parcours nocturne dans le Bazadais | Troubadours", "Soirée Patrimoine « 1890, Bazas une Belle Époque » : parcours nocturne et scénettes historiques jouées par les Troubadours, le 18 septembre 2027 à 21h à Bazas. Entrée gratuite."],
     banquet: ["Le Banquet du Prince de la Lune — Fêtes de la Saint-Jean à Bazas | Troubadours", "Le Banquet du Prince de la Lune : mercredi 23 juin 2027 à 21h45, place de la Cathédrale à Bazas, en ouverture des Fêtes de la Saint-Jean. Gratuit, sans réservation."],
     archives: ["Tous nos spectacles depuis 2000 — Troubadours du Troisième Millénaire, Bazas", "Les spectacles des Troubadours du Troisième Millénaire depuis 2000 à Bazas, et leurs prestations extérieures dans le Bazadais et le Sud-Gironde."],
     theatre: ["Atelier Théâtre — Troubadours du Troisième Millénaire, Bazas", "L'Atelier Théâtre des Troubadours du Troisième Millénaire : une vingtaine de comédiens bénévoles, des créations originales et une entrée au chapeau à Bazas."],
