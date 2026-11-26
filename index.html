@@ -795,7 +795,11 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
     <div class="head reveal"><span class="label">Hors de Bazas</span><h2 class="titre">Prestations <span>extérieures</span></h2></div>
     <div class="arch-grid" data-archives="ext"></div>
   </div></section>
-  <section class="sec"><div class="wrap center reveal">
+  <section class="sec"><div class="wrap">
+    <div class="head reveal"><span class="label">Noël</span><h2 class="titre">Les crèches <span>vivantes</span></h2></div>
+    <div class="arch-grid" data-archives="creche"></div>
+  </div></section>
+  <section class="sec alt"><div class="wrap center reveal">
     <p class="txt" style="max-width:560px;margin:0 auto 1.6rem">Une prestation à nous confier ? Nous jouons aussi chez vous, sur demande.</p>
     <div class="btn-groupe"><a class="btn ghost" href="#association">← L'association</a><a class="btn" href="#contact?sujet=autre">Nous contacter</a></div>
   </div></section>
@@ -1285,6 +1289,14 @@ const FAQ = {
       { y: "", t: "Jour J en Bazadais", img: "joursj.jpeg" },
       { y: "2013", t: "Minuit dans la cité, le chant de l'histoire", s: "9 et 10 août", img: "2013.jpeg" },
       { y: "2013", t: "Lumière sur l'Histoire, le quartier Saint-Jean", s: "Soirée du Patrimoine · 14 septembre", img: "2013_2.jpeg" },
+      { y: "2012", t: "Nuit des souvenirs… un vent de libération" },
+      { y: "2012", t: "Lumière sur l'histoire… le quartier des marchands", s: "Soirée du Patrimoine" },
+      { y: "2011", t: "Nuit des souvenirs" },
+      { y: "2010", t: "Un soir d'été… Renaissance d'une cité" },
+      { y: "2009", t: "Renaissance d'une cité" },
+      { y: "2008", t: "Une cité aux portes du Moyen-Âge" },
+      { y: "2007", t: "La quête d'un trésor oublié" },
+      { y: "2006", t: "Un vent d'histoire dans la vallée du Bazadais" },
       { y: "2006", t: "Les gens de champagne" },
       { y: "2005", t: "Laure Carême et les souvenirs de la grande guerre" },
       { y: "2004", t: "1576 : Les sœurs Montoises contre la grande réforme de l'Histoire", s: "Bazas & Château de Villandraut" },
@@ -1299,6 +1311,10 @@ const FAQ = {
       { y: "2009", t: "Le champ de l'Histoire", s: "Saint-Martin de Sescas · 13 juin", img: "sescas2009.jpeg" },
       { y: "2006 – 2010", t: "Journées du Ciron", s: "Bernos-Beaulac · Ces gens de la terre, Veillée à Bacourey, Réjouissances chez les Blayac, Les enfants de 40…", img: "ciron.jpeg" },
       { y: "2006", t: "Des pierres d'or et de sang", s: "Roquetaillade · 700 ans du château", img: "700ans.jpeg" }
+    ],
+    creche: [
+      { y: "2012", t: "L'enfant roi", s: "Origne" },
+      { y: "2008 – 2013", t: "L'enfant roi", s: "Crèche vivante · Bazas" }
     ]
   };
   $$('[data-archives]').forEach(el => {
