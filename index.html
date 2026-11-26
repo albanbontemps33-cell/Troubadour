@@ -998,7 +998,7 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
     <a href="https://www.facebook.com/troubadours3" target="_blank" rel="noopener" aria-label="Facebook des Troubadours"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
   </div>
   <p class="footer-copy">© 2026 Association Troubadours du Troisième Millénaire · Bazas · Gironde</p>
-  <p class="footer-copy"><a href="#mentions">Mentions légales &amp; confidentialité</a> · <a href="#" data-cookie-manage>Gérer les cookies</a></p>
+  <p class="footer-copy"><a href="#mentions">Mentions légales &amp; confidentialité</a> · <a href="#" data-cookie-manage>Gérer les cookies</a> · <a href="#" data-sound-toggle role="switch" aria-checked="true">Son : activé</a></p>
   <p class="footer-copy">Site internet créé par <a class="credit" href="https://www.instagram.com/alban_btps/" target="_blank" rel="noopener">Alban BONTEMPS</a></p>
 </footer>
 
@@ -1561,6 +1561,97 @@ const FAQ = {
       x0 = null;
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? 1 : -1);
     }, { passive: true });
+  })();
+
+  /* ── Ambiance sonore à l'ouverture : quelques notes pincées (type luth), synthétisées, sans fichier audio ── */
+  (() => {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    const toggle = $('[data-sound-toggle]');
+    if (!AC) { if (toggle) toggle.hidden = true; return; }
+    const PREF = 'troubadours_sound', SEEN = 'troubadours_sound_played';
+    const store = {
+      get: (st, k) => { try { return st.getItem(k); } catch (e) { return null; } },
+      set: (st, k, v) => { try { st.setItem(k, v); } catch (e) {} }
+    };
+    const enabled = () => store.get(localStorage, PREF) !== 'off';
+    const label = () => {
+      if (!toggle) return;
+      toggle.textContent = enabled() ? 'Son : activé' : 'Son : coupé';
+      toggle.setAttribute('aria-checked', enabled() ? 'true' : 'false');
+    };
+    label();
+
+    let ctx = null;
+    const getCtx = () => ctx || (ctx = new AC());
+
+    // Petite réverbération (église / pierre), générée à partir de bruit qui s'éteint
+    const reverb = c => {
+      const len = Math.floor(c.sampleRate * 2.4), buf = c.createBuffer(2, len, c.sampleRate);
+      for (let ch = 0; ch < 2; ch++) {
+        const d = buf.getChannelData(ch);
+        for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6);
+      }
+      const conv = c.createConvolver(); conv.buffer = buf; return conv;
+    };
+
+    // Une note pincée : attaque vive, extinction douce, son qui s'adoucit en s'éteignant
+    const pluck = (c, out, freq, t, vol, dur) => {
+      const g = c.createGain(), f = c.createBiquadFilter();
+      f.type = 'lowpass';
+      f.frequency.setValueAtTime(3200, t);
+      f.frequency.exponentialRampToValueAtTime(700, t + dur);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      [['triangle', 1, 1], ['sine', 2, 0.28], ['sine', 3, 0.1]].forEach(([type, mult, lvl]) => {
+        const o = c.createOscillator(), og = c.createGain();
+        o.type = type; o.frequency.value = freq * mult; og.gain.value = lvl;
+        o.connect(og); og.connect(g); o.start(t); o.stop(t + dur + 0.1);
+      });
+      g.connect(f); f.connect(out);
+    };
+
+    const play = () => {
+      const c = getCtx(), t = c.currentTime + 0.05;
+      const master = c.createGain(), dry = c.createGain(), wet = c.createGain(), rv = reverb(c);
+      master.gain.value = 0.55; dry.gain.value = 0.8; wet.gain.value = 0.45;
+      dry.connect(master); wet.connect(rv); rv.connect(master); master.connect(c.destination);
+      const mix = c.createGain(); mix.connect(dry); mix.connect(wet);
+      // Arpège ouvert en ré (sonorité modale), qui se pose doucement
+      [[146.83, 0.00, 0.20, 2.6], [293.66, 0.12, 0.16, 2.2], [440.00, 0.34, 0.14, 2.2],
+       [587.33, 0.58, 0.12, 2.4], [880.00, 0.95, 0.06, 2.6]]
+        .forEach(([fq, dt, v, d]) => pluck(c, mix, fq, t + dt, v, d));
+      store.set(sessionStorage, SEEN, '1');
+    };
+
+    const tryPlay = () => {
+      if (!enabled() || store.get(sessionStorage, SEEN)) return true;
+      const c = getCtx();
+      if (c.state === 'running') { play(); return true; }
+      c.resume().then(() => { if (c.state === 'running' && !store.get(sessionStorage, SEEN)) play(); }).catch(() => {});
+      return c.state === 'running';
+    };
+
+    // Les navigateurs interdisent le son avant une première action du visiteur :
+    // on tente à l'ouverture, sinon on joue dès le premier clic, toucher ou touche du clavier.
+    const events = ['pointerup', 'touchend', 'keydown', 'click'];
+    const onGesture = e => {
+      if (e.target.closest && e.target.closest('[data-sound-toggle]')) return;
+      if (e.type === 'keydown' && ['Shift', 'Control', 'Alt', 'Meta'].indexOf(e.key) > -1) return;
+      tryPlay();
+      if (store.get(sessionStorage, SEEN) || !enabled()) events.forEach(n => removeEventListener(n, onGesture, true));
+    };
+    if (enabled() && !store.get(sessionStorage, SEEN)) {
+      events.forEach(n => addEventListener(n, onGesture, true));
+      setTimeout(() => { try { getCtx().state === 'running' && tryPlay(); } catch (e) {} }, 500);
+    }
+
+    if (toggle) toggle.addEventListener('click', e => {
+      e.preventDefault();
+      if (enabled()) { store.set(localStorage, PREF, 'off'); }
+      else { store.set(localStorage, PREF, 'on'); sessionStorage.removeItem(SEEN); tryPlay(); }
+      label();
+    });
   })();
   addEventListener('hashchange', show);
   show();
