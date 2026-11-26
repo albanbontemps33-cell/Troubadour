@@ -245,7 +245,9 @@ a.badge:hover{background:rgba(201,161,74,.1);border-color:var(--or)}
 .ev-body .ev-when{color:var(--or2);opacity:1}
 .ev-price{font-style:italic}
 .ev-badge{display:inline-block;font-family:'Cinzel',serif;font-size:.52rem;font-style:normal;letter-spacing:.15em;text-transform:uppercase;background:var(--rouge);padding:.2rem .6rem;margin-bottom:.4rem}
-@media(min-width:760px){.event{grid-template-columns:120px 1fr auto;padding:1.5rem 2rem}.event .btn{grid-column:auto}}
+.ev-tickets{grid-column:1/-1;display:flex;flex-direction:column;gap:.6rem}
+.ev-tickets .btn{width:100%;text-align:center}
+@media(min-width:760px){.event{grid-template-columns:120px 1fr auto;padding:1.5rem 2rem}.event .btn{grid-column:auto}.ev-tickets{grid-column:auto;min-width:290px}}
 .agenda-group{margin-bottom:2.6rem}
 .agenda-group h2{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.4em;text-transform:uppercase;color:var(--or);margin-bottom:1.1rem}
 .tbd{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(201,161,74,.15);text-decoration:none}
@@ -949,6 +951,16 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
 </div>
 
 <!-- ═════════ MENTIONS LÉGALES & CONFIDENTIALITÉ ═════════ -->
+<!-- ═════════ PAGE CACHÉE : BILLETTERIE PAS ENCORE DISPONIBLE (hors menu) ═════════ -->
+<div class="page" id="page-reservation-indisponible" data-page="reservation-indisponible">
+  <section class="page-hero"><span class="label">Billetterie</span><h1 class="page-titre">Pas encore <span>disponible</span></h1></section>
+  <section class="sec"><div class="wrap center">
+    <p class="intro">La billetterie pour la soirée du <em data-resa-date>Chemin des Mémoires</em> n'est pas encore ouverte.</p>
+    <p class="txt" style="max-width:640px;margin:1.2rem auto 2rem">Les réservations seront annoncées ici, sur le site, et sur nos réseaux sociaux dès qu'elles seront ouvertes. Merci de votre patience !</p>
+    <div class="actions"><a class="btn" href="#chemin">Retour au Chemin des Mémoires</a><a class="btn ghost" href="#agenda">Voir l'agenda</a></div>
+  </div></section>
+</div>
+
 <div class="page" id="page-mentions" data-page="mentions">
   <section class="page-hero"><span class="label">Informations légales</span><h1 class="page-titre">Mentions légales <span>&amp; confidentialité</span></h1></section>
   <section class="sec"><div class="wrap"><div class="legal">
@@ -1022,7 +1034,7 @@ mark.todo{background:var(--or2);color:#1a1208;padding:0 .35em;font-style:normal}
    repasse sur « Dates à annoncer » tant qu'aucune nouvelle date n'est saisie.
    ═══════════════════════════════════════════════════════════════ */
 const MAPS = {
-  breche: "https://www.google.com/maps/search/?api=1&query=Site+de+la+Br%C3%A8che+Bazas",
+  breche: "https://maps.app.goo.gl/XxLYoB1zy2tGA3kr9",
   cathedrale: "https://www.google.com/maps/search/?api=1&query=Cath%C3%A9drale+Saint-Jean-Baptiste+Bazas",
   placecathedrale: "https://www.google.com/maps/search/?api=1&query=Place+de+la+Cath%C3%A9drale+Bazas"
 };
@@ -1046,7 +1058,14 @@ const EVENTS = [
     price: "Plein tarif 15 € · réduit 8 € · gratuit moins de 5 ans" },
   { spectacle: "chemin", start: "2027-08-06", end: "2027-08-08",
     time: "Animations dès 19h · Spectacle à 22h00", place: "Site de la Brèche, Bazas", map: MAPS.breche,
-    price: "Plein tarif 15 € · réduit 8 € · gratuit moins de 5 ans" },
+    price: "Plein tarif 15 € · réduit 8 € · gratuit moins de 5 ans",
+    // Un bouton par soirée. Quand la billetterie ouvre : coller le lien dans "url" (ex. url: "https://www.helloasso.com/…").
+    // Tant que "url" est vide, le bouton mène à la page « billetterie pas encore disponible ».
+    tickets: [
+      { date: "2027-08-06", url: "" },
+      { date: "2027-08-07", url: "" },
+      { date: "2027-08-08", url: "" }
+    ] },
   { spectacle: "banquet", start: "2027-06-23", end: "2027-06-23",
     time: "21h45 · Ouverture des Fêtes de la Saint-Jean", place: "Place de la Cathédrale, Bazas", map: MAPS.placecathedrale,
     price: "Entrée gratuite · sans réservation" }
@@ -1162,9 +1181,15 @@ const FAQ = {
   const past = EVENTS.filter(e => !isUp(e)).sort((x, y) => parse(y.start) - parse(x.start));
   const hours = ev => ev.sessions ? ev.sessions.join(' · ').replace(/h00/g, 'h') : '';
 
-  const card = (ev, isPast) => {
+  const ticketBtns = ev => (ev.tickets || []).map(t => {
+    const d = parse(t.date), url = t.url || '#reservation-indisponible?date=' + t.date, ext = /^https?:/.test(url);
+    return `<a class="btn" href="${url}"${ext ? ' target="_blank" rel="noopener"' : ''}>Réserver – ${D[d.getDay()]} ${dn(d)} ${M[d.getMonth()]}</a>`;
+  }).join('');
+  const card = (ev, isPast, withTickets) => {
     const s = SPEC[ev.spectacle] || { title: ev.spectacle, url: '#' };
-    const btn = ev.cta && !isPast
+    const btn = withTickets && ev.tickets && !isPast
+      ? `<div class="ev-tickets">${ticketBtns(ev)}</div>`
+      : ev.cta && !isPast
       ? `<a class="btn" href="${ev.cta.url}" target="_blank" rel="noopener">${ev.cta.label}</a>`
       : `<a class="btn ghost" href="${s.url}">${isPast ? 'Revoir l\'édition' : 'En savoir plus'}</a>`;
     return `<article class="event${isPast ? ' past' : ''}"><div class="ev-date"><b>${dayLabel(ev)}</b><span>${monthLabel(ev)}</span></div>` +
@@ -1186,7 +1211,7 @@ const FAQ = {
       : '<div class="status"><span class="status-label">Agenda</span><h3>Prochaines dates à annoncer</h3><p>Suivez-nous sur Facebook et Instagram.</p></div>';
   });
   $$('[data-agenda-upcoming]').forEach(el => {
-    el.innerHTML = upcoming.length ? upcoming.map(e => card(e, false)).join('') : '<p class="note">Aucune date programmée pour le moment.</p>';
+    el.innerHTML = upcoming.length ? upcoming.map(e => card(e, false, true)).join('') : '<p class="note">Aucune date programmée pour le moment.</p>';
   });
   $$('[data-agenda-tbd]').forEach(el => {
     const withDate = upcoming.map(e => e.spectacle), keys = Object.keys(SPEC).filter(k => !withDate.includes(k) && !SPEC[k].atelier);
@@ -1224,7 +1249,8 @@ const FAQ = {
     }
     el.innerHTML = evs.map(ev => {
       const ses = ev.sessions ? '<div class="seances">' + ev.sessions.map((h, i) => `<div class="seance"><div class="seance-h">${h.replace('h00', 'h')}</div><div class="seance-l">Séance ${i + 1}</div></div>`).join('') + '</div>' : '';
-      const cta = ev.cta ? `<div class="actions"><a class="btn" href="${ev.cta.url}" target="_blank" rel="noopener">${ev.cta.label}</a></div>` : '';
+      const cta = ev.tickets ? `<div class="actions">${ticketBtns(ev)}</div>`
+        : ev.cta ? `<div class="actions"><a class="btn" href="${ev.cta.url}" target="_blank" rel="noopener">${ev.cta.label}</a></div>` : '';
       return `<div class="status"><span class="status-label">Prochaine date</span><h3>${when(ev)}</h3>${ev.theme ? `<p><em>« ${ev.theme} »</em></p>` : ''}<p>${ev.time}<br>${ev.map ? `<a class="map-inline" href="${ev.map}" target="_blank" rel="noopener">${ev.place} ↗</a>` : ev.place}<br><em>${ev.price}</em></p>${ses}${cta}</div>`;
     }).join('');
   });
@@ -1430,6 +1456,7 @@ const FAQ = {
     association: ["L'association — Histoire et bureau | Troubadours du Troisième Millénaire", "L'histoire de l'association Troubadours du Troisième Millénaire (premiers spectacles en 2000, association loi 1901 depuis 2007), son bureau et comment rejoindre la troupe bénévole de Bazas."],
     faq: ["FAQ — Questions fréquentes | Troubadours du Troisième Millénaire", "Toutes les réponses à vos questions sur les spectacles des Troubadours du Troisième Millénaire à Bazas : pluie, parking, accessibilité, tarifs, réservation, photos, rejoindre la troupe."],
     contact: ["Contact — Troubadours du Troisième Millénaire, Bazas", "Contactez les Troubadours du Troisième Millénaire, rejoignez la troupe bénévole de Bazas ou organisez un événement avec nous."],
+    "reservation-indisponible": ["Billetterie pas encore disponible — Troubadours du Troisième Millénaire", "La billetterie pour cette date n'est pas encore ouverte. Les réservations seront annoncées sur le site et nos réseaux sociaux."],
     mentions: ["Mentions légales & confidentialité — Troubadours du Troisième Millénaire", "Mentions légales, politique de confidentialité et gestion des cookies du site des Troubadours du Troisième Millénaire."]
   };
   const ALIAS = { historique: 'association', billetterie: 'agenda' };
@@ -1461,6 +1488,10 @@ const FAQ = {
     setAttr('meta[property="og:url"]', 'content', url);
     setAttr('meta[name="twitter:title"]', 'content', m[0]);
     setAttr('meta[name="twitter:description"]', 'content', m[1]);
+    if (name === 'reservation-indisponible') {
+      const q = r.query.get('date'), el = $('[data-resa-date]');
+      if (el && /^\d{4}-\d{2}-\d{2}$/.test(q || '')) { const d = parse(q); el.textContent = `${D[d.getDay()]} ${dn(d)} ${M[d.getMonth()]} ${d.getFullYear()}`; }
+    }
     if (name === 'faq') faqSync(r.query.get('spectacle') || 'tous');
     if (name === 'contact' && r.query.get('sujet')) {
       const sel = $('#sujet'), v = r.query.get('sujet');
