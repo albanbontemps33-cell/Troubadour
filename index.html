@@ -1656,12 +1656,14 @@ const FAQ = {
     const play = () => {
       const c = getCtx(), t = c.currentTime + 0.05;
       const master = c.createGain(), dry = c.createGain(), wet = c.createGain(), rv = reverb(c);
-      master.gain.value = 0.55; dry.gain.value = 0.8; wet.gain.value = 0.45;
+      master.gain.value = 0.5; dry.gain.value = 0.8; wet.gain.value = 0.45;
       dry.connect(master); wet.connect(rv); rv.connect(master); master.connect(c.destination);
       const mix = c.createGain(); mix.connect(dry); mix.connect(wet);
-      // Arpège ouvert en ré (sonorité modale), qui se pose doucement
-      [[146.83, 0.00, 0.20, 2.6], [293.66, 0.12, 0.16, 2.2], [440.00, 0.34, 0.14, 2.2],
-       [587.33, 0.58, 0.12, 2.4], [880.00, 0.95, 0.06, 2.6]]
+      // Phrase en ré (mode doré) : arpège d'ouverture, petite mélodie qui monte puis redescend, accord final qui se pose
+      [[146.83, 0.00, 0.20, 2.6], [293.66, 0.12, 0.16, 2.2], [440.00, 0.34, 0.14, 2.2], [587.33, 0.58, 0.12, 2.4],
+       [440.00, 1.15, 0.12, 2.0], [523.25, 1.55, 0.11, 2.0], [587.33, 1.95, 0.12, 2.2], [659.25, 2.40, 0.11, 2.2],
+       [587.33, 2.85, 0.10, 2.0], [523.25, 3.25, 0.09, 2.0], [440.00, 3.65, 0.11, 2.2],
+       [146.83, 4.20, 0.16, 3.4], [293.66, 4.30, 0.13, 3.2], [349.23, 4.50, 0.08, 3.0], [440.00, 4.70, 0.09, 3.0], [587.33, 4.95, 0.07, 3.0]]
         .forEach(([fq, dt, v, d]) => pluck(c, mix, fq, t + dt, v, d));
       store.set(sessionStorage, SEEN, '1');
     };
